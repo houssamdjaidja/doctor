@@ -1,0 +1,223 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ChevronDown,
+  Calendar,
+  Clock,
+  CreditCard,
+  Phone,
+  HelpCircle,
+} from "lucide-react";
+import { Card } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
+import { Link } from "react-router-dom";
+
+const faqCategories = [
+  { id: "appointments", name: "Rendez-vous", icon: Calendar },
+  { id: "practical", name: "Pratique", icon: Clock },
+  { id: "payment", name: "Paiement", icon: CreditCard },
+];
+
+const faqData = [
+  {
+    category: "appointments",
+    questions: [
+      {
+        question: "Comment prendre rendez-vous ?",
+        answer: "Vous pouvez prendre rendez-vous de plusieurs façons : en ligne via notre formulaire de prise de rendez-vous, par téléphone au +213 21 23 45 67, ou directement au cabinet. La prise de rendez-vous en ligne est disponible 24h/24.",
+      },
+      {
+        question: "Quels sont les délais pour obtenir un rendez-vous ?",
+        answer: "Nous nous efforçons de vous proposer un rendez-vous dans les meilleurs délais. En général, un rendez-vous est disponible sous 24 à 48 heures pour les consultations non urgentes. Pour les urgences, contactez-nous par téléphone.",
+      },
+      {
+        question: "Puis-je modifier ou annuler mon rendez-vous ?",
+        answer: "Oui, vous pouvez modifier ou annuler votre rendez-vous jusqu'à 24 heures avant l'heure prévue sans frais. Au-delà, une indemnité pourra être demandée. Vous pouvez le faire en ligne depuis votre espace patient ou par téléphone.",
+      },
+      {
+        question: "Dois-je arriver en avance pour mon rendez-vous ?",
+        answer: "Oui, nous vous recommandons d'arriver 10 à 15 minutes avant votre rendez-vous pour compléter les formalités administratives si nécessaire, surtout si c'est votre première consultation.",
+      },
+    ],
+  },
+  {
+    category: "practical",
+    questions: [
+      {
+        question: "Quels sont les horaires d'ouverture du cabinet ?",
+        answer: "Le cabinet est ouvert du lundi au vendredi de 8h00 à 18h00, et le samedi de 9h00 à 12h00. Nous sommes fermés le dimanche et les jours fériés.",
+      },
+      {
+        question: "Quels documents dois-je apporter pour ma consultation ?",
+        answer: "Pensez à apporter votre carte Chifa, votre carte de complémentaire santé (si vous en avez une), une pièce d'identité, et tous les documents médicaux pertinents (résultats d'analyses, ordonnances, comptes-rendus d'examens...).",
+      },
+      {
+        question: "Comment accéder au cabinet ?",
+        answer: "Le cabinet est situé au 24 Rue Didouche Mourad, 16000 Alger. Il est accessible en métro, tramway, bus et taxi. Le cabinet est accessible aux personnes à mobilité réduite.",
+      },
+      {
+        question: "Y a-t-il un parking à proximité ?",
+        answer: "Oui, un parking public se trouve à 2 minutes à pied du cabinet. Il est payant. Nous recommandons les transports en commun pour faciliter votre accès.",
+      },
+    ],
+  },
+  {
+    category: "payment",
+    questions: [
+      {
+        question: "Quels moyens de paiement sont acceptés ?",
+        answer: "Nous acceptons les paiements par carte bancaire, chèque, espèces et virement. Le paiement sans contact est disponible. Nous n'acceptons pas les paiements en plusieurs fois.",
+      },
+      {
+        question: "Acceptez-vous la carte Chifa et les complémentaires santé ?",
+        answer: "Oui, nous acceptons la carte Chifa et les cartes de complémentaire santé pour le tiers payant. Vous ne payez que la part non remboursée. Pensez à mettre à jour votre carte Chifa régulièrement.",
+      },
+      {
+        question: "Quels sont les tarifs des consultations ?",
+        answer: "Les tarifs varient selon le type de consultation : 2 500 DA pour une consultation générale, 3 000 DA pour un suivi, 5 000 DA pour un bilan de santé complet. Ces tarifs sont conformes aux conventions et sont partiellement remboursés par la CNAS.",
+      },
+      {
+        question: "Proposez-vous des facilités de paiement ?",
+        answer: "Pour les patients en difficulté financière, nous pouvons étudier des solutions de paiement adaptées. N'hésitez pas à en parler lors de votre consultation. Nous acceptons également les dispositifs sociaux disponibles.",
+      },
+    ],
+  },
+];
+
+export function FAQPage() {
+  const [selectedCategory, setSelectedCategory] = useState("appointments");
+  const [openQuestion, setOpenQuestion] = useState<string | null>(null);
+
+  const currentCategory = faqData.find((cat) => cat.category === selectedCategory);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      {/* Hero Section */}
+      <section className="relative py-24 bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <Badge variant="success" className="mb-4">FAQ</Badge>
+            <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
+              Questions{" "}
+              <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                Fréquentes
+              </span>
+            </h1>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Retrouvez les réponses aux questions les plus courantes. Si vous ne trouvez pas votre réponse, n'hésitez pas à nous contacter.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FAQ Content */}
+      <section className="py-16">
+        <div className="max-w-4xl mx-auto px-4">
+          {/* Category Tabs */}
+          <div className="flex flex-wrap gap-2 justify-center mb-12">
+            {faqCategories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => {
+                  setSelectedCategory(cat.id);
+                  setOpenQuestion(null);
+                }}
+                className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all duration-200 ${
+                  selectedCategory === cat.id
+                    ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200"
+                    : "bg-white border border-slate-200 text-slate-600 hover:border-emerald-300 hover:text-emerald-700"
+                }`}
+              >
+                <cat.icon className="w-5 h-5" />
+                {cat.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Questions */}
+          <div className="space-y-4">
+            {currentCategory?.questions.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+              >
+                <Card
+                  variant="glass"
+                  hover={false}
+                  className="cursor-pointer"
+                  onClick={() => setOpenQuestion(openQuestion === `${selectedCategory}-${index}` ? null : `${selectedCategory}-${index}`)}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <HelpCircle className="w-4 h-4 text-emerald-600" />
+                      </div>
+                      <h3 className="font-semibold text-slate-800">{item.question}</h3>
+                    </div>
+                    <ChevronDown
+                      className={`w-5 h-5 text-slate-400 flex-shrink-0 transition-transform duration-200 ${
+                        openQuestion === `${selectedCategory}-${index}` ? "rotate-180" : ""
+                      }`}
+                    />
+                  </div>
+                  <AnimatePresence>
+                    {openQuestion === `${selectedCategory}-${index}` && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="overflow-hidden"
+                      >
+                        <p className="text-slate-600 mt-4 pl-11">{item.answer}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Contact CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-12"
+          >
+            <Card variant="elevated" className="text-center">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mx-auto mb-4">
+                <Phone className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-slate-800 mb-2">
+                Vous n'avez pas trouvé votre réponse ?
+              </h3>
+              <p className="text-slate-600 mb-6">
+                Notre équipe est disponible pour répondre à toutes vos questions.
+              </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link to="/contact">
+                  <Button>
+                    Nous contacter
+                  </Button>
+                </Link>
+                <a href="tel:+21321234567">
+                  <Button variant="secondary">
+                    <Phone className="w-4 h-4" />
+                    +213 21 23 45 67
+                  </Button>
+                </a>
+              </div>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}

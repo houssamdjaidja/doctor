@@ -28,15 +28,19 @@ export async function sendVerificationCode(email: string, code: string): Promise
   const message = `Bonjour,\n\nVotre code de vérification est : ${code}\n\nCe code expire dans 15 minutes.\n\nCordialement,\nDr. Amine Benali`;
 
   if (t) {
-    await t.sendMail({
-      from: FROM_ADDRESS,
-      to: email,
-      subject: 'Vérification de votre email - Dr. Benali',
-      text: message,
-    });
-  } else {
-    console.log(`[EMAIL] Verification code for ${email}: ${code}`);
+    try {
+      await t.sendMail({
+        from: FROM_ADDRESS,
+        to: email,
+        subject: 'Vérification de votre email - Dr. Benali',
+        text: message,
+      });
+      return;
+    } catch (err: any) {
+      console.error('[EMAIL] SMTP error:', err?.message);
+    }
   }
+  console.log(`[EMAIL] Verification code for ${email}: ${code}`);
 }
 
 export async function sendResetCode(email: string, code: string): Promise<void> {
@@ -44,13 +48,17 @@ export async function sendResetCode(email: string, code: string): Promise<void> 
   const message = `Bonjour,\n\nVotre code de réinitialisation de mot de passe est : ${code}\n\nCe code expire dans 15 minutes.\n\nSi vous n'avez pas demandé cette réinitialisation, ignorez cet email.\n\nCordialement,\nDr. Amine Benali`;
 
   if (t) {
-    await t.sendMail({
-      from: FROM_ADDRESS,
-      to: email,
-      subject: 'Réinitialisation de mot de passe - Dr. Benali',
-      text: message,
-    });
-  } else {
-    console.log(`[EMAIL] Reset code for ${email}: ${code}`);
+    try {
+      await t.sendMail({
+        from: FROM_ADDRESS,
+        to: email,
+        subject: 'Réinitialisation de mot de passe - Dr. Benali',
+        text: message,
+      });
+      return;
+    } catch (err: any) {
+      console.error('[EMAIL] SMTP error:', err?.message);
+    }
   }
+  console.log(`[EMAIL] Reset code for ${email}: ${code}`);
 }

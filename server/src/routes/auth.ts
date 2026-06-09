@@ -32,7 +32,7 @@ router.post('/register', async (req: AuthRequest, res: Response) => {
     const code = generateCode();
     await run('UPDATE patients SET first_name=?, last_name=?, phone=?, password_hash=?, verification_code=? WHERE email=?',
       firstName, lastName, phone, await bcrypt.hash(password, 12), code, email);
-    await sendVerificationCode(email, code);
+    sendVerificationCode(email, code).catch(err => console.error('[EMAIL] Failed to send:', err?.message));
     res.json({ message: 'Code de vérification envoyé', email });
     return;
   }
@@ -44,7 +44,7 @@ router.post('/register', async (req: AuthRequest, res: Response) => {
     firstName, lastName, email, phone, hash, code
   );
 
-  await sendVerificationCode(email, code);
+  sendVerificationCode(email, code).catch(err => console.error('[EMAIL] Failed to send:', err?.message));
 
   res.status(201).json({ message: 'Code de vérification envoyé', email });
 });
@@ -106,7 +106,7 @@ router.post('/resend-code', async (req: AuthRequest, res: Response) => {
 
   const code = generateCode();
   await run('UPDATE patients SET verification_code = ? WHERE id = ?', code, patient.id);
-  await sendVerificationCode(email, code);
+  sendVerificationCode(email, code).catch(err => console.error('[EMAIL] Failed to send:', err?.message));
   res.json({ message: 'Code de vérification renvoyé' });
 });
 
@@ -125,7 +125,7 @@ router.post('/forgot-password', async (req: AuthRequest, res: Response) => {
 
   const code = generateCode();
   await run('UPDATE patients SET reset_code = ?, reset_code_expires = NOW() + INTERVAL \'15 minutes\' WHERE id = ?', code, patient.id);
-  await sendResetCode(email, code);
+  sendResetCode(email, code).catch(err => console.error('[EMAIL] Failed to send:', err?.message));
 
   res.json({ message: 'Si cet email existe, un code de réinitialisation a été envoyé' });
 });

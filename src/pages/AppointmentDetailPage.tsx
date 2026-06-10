@@ -180,7 +180,7 @@ export function AppointmentDetailPage() {
           </div>
 
           {isPending && (
-            <div className="flex justify-between">
+            <div className="flex flex-wrap justify-between gap-4">
               <Link to="/patient/dashboard">
                 <Button variant="secondary"><ArrowLeft className="w-4 h-4" /> Retour</Button>
               </Link>

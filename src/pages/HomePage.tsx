@@ -95,7 +95,7 @@ export function HomePage() {
                 <img
                   src="/doctor.png"
                   alt="Dr. Djaidja - Médecin Généraliste"
-                  className="w-full h-[500px] object-cover"
+                  className="w-full h-[300px] md:h-[500px] object-cover"
                   onError={(e) => {
                     // Fallback if image fails to load
                     (e.target as HTMLImageElement).src = "https://placehold.co/800x600/10b981/white?text=Dr.+Djaidja";
@@ -108,7 +108,7 @@ export function HomePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
-                className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-4 shadow-xl shadow-slate-200/50 border border-slate-100"
+                className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 bg-white rounded-2xl p-3 sm:p-4 shadow-xl shadow-slate-200/50 border border-slate-100"
               >
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">

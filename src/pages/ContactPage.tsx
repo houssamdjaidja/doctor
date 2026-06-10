@@ -234,7 +234,7 @@ export function ContactPage() {
             <h2 className="text-2xl font-bold text-slate-800">Où nous trouver ?</h2>
           </motion.div>
           <Card variant="glass" className="overflow-hidden p-0">
-            <div className="h-96">
+            <div className="h-64 md:h-96">
               <iframe src="https://www.google.com/maps?q=24%20Rue%20Didouche%20Mourad%2C%20Alger%2C%20Alg%C3%A9rie&output=embed"
                 width="100%" height="100%" style={{ border: 0 }} allowFullScreen loading="lazy"
                 title="Localisation du cabinet" />

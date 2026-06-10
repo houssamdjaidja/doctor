@@ -127,7 +127,7 @@ export function AboutPage() {
                 Fort de plus de 20 ans d'expérience, je m'engage à offrir des soins médicaux de qualité,
                 alliant expertise scientifique et approche humaine. Ma priorité : votre santé et votre bien-être.
               </p>
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-4">
                 <Link to="/appointment">
                   <Button>
                     <Calendar className="w-4 h-4" />
@@ -135,7 +135,9 @@ export function AboutPage() {
                   </Button>
                 </Link>
                 <Link to="/contact">
-                  <Button variant="secondary">Me contacter</Button>
+                  <Button variant="secondary">
+                    Me contacter
+                  </Button>
                 </Link>
               </div>
             </motion.div>
@@ -150,7 +152,7 @@ export function AboutPage() {
                 <img
                   src="/doctor.png"
                   alt="Dr. Djaidja"
-                  className="w-full h-[500px] object-cover"
+                  className="w-full h-[300px] md:h-[500px] object-cover"
                 />
               </div>
               {/* Stats Overlay */}

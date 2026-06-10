@@ -252,7 +252,7 @@ export function AppointmentPage() {
               ) : loadingSlots ? (
                 <p className="text-slate-400 text-center py-4">Chargement des créneaux...</p>
               ) : (
-                <div className="grid grid-cols-4 md:grid-cols-8 gap-3">
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-8 gap-2 md:gap-3">
                   {timeSlots.map((time) => {
                     const isAvailable = availableSlots.includes(time);
                     return (

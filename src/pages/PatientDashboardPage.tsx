@@ -482,7 +482,7 @@ export function PatientDashboardPage() {
                 {detailApt.status === "completed" ? "Terminé" : detailApt.status === "confirmed" ? "Confirmé" : detailApt.status === "cancelled" ? "Annulé" : "En attente"}
               </Badge>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50">
                 <Calendar className="w-4 h-4 text-emerald-600" />
                 <div><p className="text-xs text-slate-500">Date</p><p className="text-sm font-medium">{detailApt.date}</p></div>
@@ -496,7 +496,7 @@ export function PatientDashboardPage() {
               <p className="text-xs text-slate-500 mb-1">Patient</p>
               <p className="text-sm font-medium">{detailApt.first_name} {detailApt.last_name}</p>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50">
                 <Phone className="w-4 h-4 text-emerald-600" />
                 <div><p className="text-xs text-slate-500">Téléphone</p><p className="text-sm font-medium">{detailApt.phone}</p></div>

@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 
+const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
 const SMTP_HOST = process.env.SMTP_HOST || '';
 const SMTP_PORT = parseInt(process.env.SMTP_PORT || '587', 10);
 const SMTP_USER = process.env.SMTP_USER || '';
@@ -9,9 +10,7 @@ const FROM_ADDRESS = process.env.SMTP_FROM || 'noreply@dr-benali.dz';
 let transporter: nodemailer.Transporter | null = null;
 
 function getTransporter(): nodemailer.Transporter | null {
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) {
-    return null;
-  }
+  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) return null;
   if (!transporter) {
     transporter = nodemailer.createTransport({
       host: SMTP_HOST,
@@ -23,42 +22,53 @@ function getTransporter(): nodemailer.Transporter | null {
   return transporter;
 }
 
-export async function sendVerificationCode(email: string, code: string): Promise<void> {
-  const t = getTransporter();
-  const message = `Bonjour,\n\nVotre code de vérification est : ${code}\n\nCe code expire dans 15 minutes.\n\nCordialement,\nDr. Amine Benali`;
-
-  if (t) {
-    try {
-      await t.sendMail({
-        from: FROM_ADDRESS,
-        to: email,
-        subject: 'Vérification de votre email - Dr. Benali',
-        text: message,
-      });
-      return;
-    } catch (err: any) {
-      console.error('[EMAIL] SMTP error:', err?.message);
+async function sendViaResend(to: string, subject: string, text: string): Promise<boolean> {
+  if (!RESEND_API_KEY) return false;
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ from: FROM_ADDRESS, to, subject, text }),
+    });
+    if (!res.ok) {
+      const body = await res.text();
+      console.error('[EMAIL] Resend API error:', res.status, body);
+      return false;
     }
+    return true;
+  } catch (err: any) {
+    console.error('[EMAIL] Resend HTTP error:', err?.message);
+    return false;
   }
-  console.log(`[EMAIL] Verification code for ${email}: ${code}`);
+}
+
+async function sendViaSMTP(to: string, subject: string, text: string): Promise<boolean> {
+  const t = getTransporter();
+  if (!t) return false;
+  try {
+    await t.sendMail({ from: FROM_ADDRESS, to, subject, text });
+    return true;
+  } catch (err: any) {
+    console.error('[EMAIL] SMTP error:', err?.message);
+    return false;
+  }
+}
+
+async function sendEmail(to: string, subject: string, text: string): Promise<void> {
+  if (await sendViaResend(to, subject, text)) return;
+  if (await sendViaSMTP(to, subject, text)) return;
+  console.log(`[EMAIL] ${subject} pour ${to}: ${text.match(/\d{6}/)?.[0] || '(code non trouvé)'}`);
+}
+
+export async function sendVerificationCode(email: string, code: string): Promise<void> {
+  await sendEmail(email, 'Vérification de votre email - Dr. Benali',
+    `Bonjour,\n\nVotre code de vérification est : ${code}\n\nCe code expire dans 15 minutes.\n\nCordialement,\nDr. Amine Benali`);
 }
 
 export async function sendResetCode(email: string, code: string): Promise<void> {
-  const t = getTransporter();
-  const message = `Bonjour,\n\nVotre code de réinitialisation de mot de passe est : ${code}\n\nCe code expire dans 15 minutes.\n\nSi vous n'avez pas demandé cette réinitialisation, ignorez cet email.\n\nCordialement,\nDr. Amine Benali`;
-
-  if (t) {
-    try {
-      await t.sendMail({
-        from: FROM_ADDRESS,
-        to: email,
-        subject: 'Réinitialisation de mot de passe - Dr. Benali',
-        text: message,
-      });
-      return;
-    } catch (err: any) {
-      console.error('[EMAIL] SMTP error:', err?.message);
-    }
-  }
-  console.log(`[EMAIL] Reset code for ${email}: ${code}`);
+  await sendEmail(email, 'Réinitialisation de mot de passe - Dr. Benali',
+    `Bonjour,\n\nVotre code de réinitialisation de mot de passe est : ${code}\n\nCe code expire dans 15 minutes.\n\nSi vous n'avez pas demandé cette réinitialisation, ignorez cet email.\n\nCordialement,\nDr. Amine Benali`);
 }

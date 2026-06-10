@@ -1,11 +1,12 @@
 import nodemailer from 'nodemailer';
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
+const RESEND_FROM = process.env.RESEND_FROM || 'onboarding@resend.dev';
 const SMTP_HOST = process.env.SMTP_HOST || '';
 const SMTP_PORT = parseInt(process.env.SMTP_PORT || '587', 10);
 const SMTP_USER = process.env.SMTP_USER || '';
 const SMTP_PASS = process.env.SMTP_PASS || '';
-const FROM_ADDRESS = process.env.SMTP_FROM || 'noreply@dr-djaidja.dz';
+const SMTP_FROM = process.env.SMTP_FROM || 'noreply@dr-djaidja.dz';
 
 let transporter: nodemailer.Transporter | null = null;
 
@@ -31,7 +32,7 @@ async function sendViaResend(to: string, subject: string, text: string): Promise
         'Authorization': `Bearer ${RESEND_API_KEY}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ from: FROM_ADDRESS, to, subject, text }),
+      body: JSON.stringify({ from: RESEND_FROM, to, subject, text }),
     });
     if (!res.ok) {
       const body = await res.text();
@@ -49,7 +50,7 @@ async function sendViaSMTP(to: string, subject: string, text: string): Promise<b
   const t = getTransporter();
   if (!t) return false;
   try {
-    await t.sendMail({ from: FROM_ADDRESS, to, subject, text });
+    await t.sendMail({ from: SMTP_FROM, to, subject, text });
     return true;
   } catch (err: any) {
     console.error('[EMAIL] SMTP error:', err?.message);

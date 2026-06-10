@@ -14,8 +14,6 @@ export function EmailVerificationPage() {
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState("");
-  const debugCodeFromUrl = searchParams.get("debug_code") || "";
-  const [debugCode, setDebugCode] = useState(debugCodeFromUrl);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -42,9 +40,8 @@ export function EmailVerificationPage() {
     setError("");
     setMessage("");
     try {
-      const res = await api.resendCode(email);
+      await api.resendCode(email);
       setMessage("Nouveau code envoyé");
-      if (res.debug_code) setDebugCode(res.debug_code);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -94,7 +91,6 @@ export function EmailVerificationPage() {
 
               {error && <p className="text-red-500 text-sm text-center">{error}</p>}
               {message && <p className="text-emerald-600 text-sm text-center">{message}</p>}
-              {debugCode && <p className="text-amber-600 text-sm text-center bg-amber-50 rounded-lg p-2 border border-amber-200">Code de démo : <strong className="text-lg tracking-widest">{debugCode}</strong></p>}
 
               <Button type="submit" className="w-full" disabled={submitting || code.length !== 6}>
                 {submitting ? "Vérification..." : "Vérifier mon email"}

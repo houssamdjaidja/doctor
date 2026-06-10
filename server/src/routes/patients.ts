@@ -12,7 +12,7 @@ router.get('/', requireAdmin, async (_req: AuthRequest, res: Response) => {
 router.get('/me', requirePatient, async (req: AuthRequest, res: Response) => {
   const patient = await get('SELECT id, first_name, last_name, email, phone, created_at, updated_at FROM patients WHERE id = ?', req.userId);
   if (!patient) {
-    res.status(404).json({ error: 'Patient non trouvأ©' });
+    res.status(404).json({ error: 'Patient non trouvé' });
     return;
   }
   res.json(patient);
@@ -21,7 +21,7 @@ router.get('/me', requirePatient, async (req: AuthRequest, res: Response) => {
 router.get('/:id', requireAdmin, async (req: AuthRequest, res: Response) => {
   const patient = await get('SELECT id, first_name, last_name, email, phone, created_at, updated_at FROM patients WHERE id = ?', req.params.id);
   if (!patient) {
-    res.status(404).json({ error: 'Patient non trouvأ©' });
+    res.status(404).json({ error: 'Patient non trouvé' });
     return;
   }
   res.json(patient);
@@ -48,7 +48,7 @@ router.put('/:id', requireAdmin, async (req: AuthRequest, res: Response) => {
 
   const existing = await get('SELECT * FROM patients WHERE id = ?', req.params.id);
   if (!existing) {
-    res.status(404).json({ error: 'Patient non trouvأ©' });
+    res.status(404).json({ error: 'Patient non trouvé' });
     return;
   }
 
@@ -69,7 +69,7 @@ router.put('/:id', requireAdmin, async (req: AuthRequest, res: Response) => {
 router.delete('/:id', requireAdmin, async (req: AuthRequest, res: Response) => {
   const result = await run('DELETE FROM patients WHERE id = ? RETURNING id', req.params.id);
   if (result.rowCount === 0) {
-    res.status(404).json({ error: 'Patient non trouvأ©' });
+    res.status(404).json({ error: 'Patient non trouvé' });
     return;
   }
   res.json({ success: true });

@@ -18,8 +18,8 @@ import { Badge } from "@/components/ui/Badge";
 
 const stats = [
   { icon: Users, value: "15,000+", label: "Patients satisfaits" },
-  { icon: Award, value: "20+", label: "Annأ©es d'expأ©rience" },
-  { icon: Heart, value: "50,000+", label: "Consultations rأ©alisأ©es" },
+  { icon: Award, value: "20+", label: "Années d'expérience" },
+  { icon: Heart, value: "50,000+", label: "Consultations réalisées" },
   { icon: Star, value: "4.9/5", label: "Note moyenne" },
 ];
 
@@ -29,7 +29,7 @@ const workingHours = [
     { day: "Mardi", hours: "8h00 - 18h00" },
     { day: "Mercredi", hours: "8h00 - 18h00" },
     { day: "Jeudi", hours: "8h00 - 18h00" },
-    { day: "Vendredi", hours: "Fermأ©" },
+    { day: "Vendredi", hours: "Fermé" },
     { day: "Samedi", hours: "9h00 - 12h00" },
   ];
 
@@ -51,17 +51,17 @@ export function HomePage() {
               transition={{ duration: 0.6 }}
             >
               <Badge variant="success" className="mb-6">
-                âœ¨ Cabinet moderne & accueillant
+                ✨ Cabinet moderne & accueillant
               </Badge>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-800 leading-tight mb-6">
-                Votre santأ©, notre{" "}
+                Votre santé, notre{" "}
                 <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                  prioritأ© absolue
+                  priorité absolue
                 </span>
               </h1>
               <p className="text-lg text-slate-600 mb-8 leading-relaxed max-w-xl">
                 Le Dr. Djaidja vous accueille dans un cabinet moderne et chaleureux pour vous offrir
-                des soins mأ©dicaux de qualitأ©. Prenez rendez-vous en ligne en quelques clics.
+                des soins médicaux de qualité. Prenez rendez-vous en ligne en quelques clics.
               </p>
               <div className="flex flex-wrap gap-4 mb-8">
                 <Link to="/appointment">
@@ -75,7 +75,7 @@ export function HomePage() {
               <div className="flex items-center gap-6 text-sm text-slate-600">
                 <div className="flex items-center gap-2">
                   <Shield className="w-5 h-5 text-emerald-600" />
-                  Paiement sأ©curisأ©
+                  Paiement sécurisé
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="w-5 h-5 text-emerald-600" />
@@ -94,11 +94,11 @@ export function HomePage() {
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-emerald-200">
                 <img
                   src="/doctor.png"
-                  alt="Dr. Djaidja - Mأ©decin Gأ©nأ©raliste"
+                  alt="Dr. Djaidja - Médecin Généraliste"
                   className="w-full h-[500px] object-cover"
                   onError={(e) => {
                     // Fallback if image fails to load
-                    (e.target as HTMLImageElement).src = "https://placehold.co/800x600/10b981/white?text=Dr.+Benali";
+                    (e.target as HTMLImageElement).src = "https://placehold.co/800x600/10b981/white?text=Dr.+Djaidja";
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent" />
@@ -116,7 +116,7 @@ export function HomePage() {
                   </div>
                   <div>
                     <p className="font-semibold text-slate-800">Dr. Djaidja</p>
-                    <p className="text-sm text-slate-500">Mأ©decin Gأ©nأ©raliste</p>
+                    <p className="text-sm text-slate-500">Médecin Généraliste</p>
                   </div>
                 </div>
               </motion.div>
@@ -170,7 +170,7 @@ export function HomePage() {
                       className="flex justify-between items-center py-2 border-b border-slate-100 last:border-0"
                     >
                       <span className="font-medium text-slate-700">{item.day}</span>
-                      <span className={item.hours === "Fermأ©" ? "text-red-500" : "text-slate-600"}>
+                      <span className={item.hours === "Fermé" ? "text-red-500" : "text-slate-600"}>
                         {item.hours}
                       </span>
                     </div>
@@ -201,7 +201,7 @@ export function HomePage() {
             >
               <Badge variant="success" className="mb-4">Localisation</Badge>
               <h2 className="text-3xl font-bold text-slate-800 mb-6">
-                Oأ¹ nous trouver ?
+                Où nous trouver ?
               </h2>
               <Card variant="glass" className="overflow-hidden p-0">
                 <div className="h-64 bg-slate-200 relative">
@@ -226,7 +226,7 @@ export function HomePage() {
                   <div className="flex items-center gap-3">
                     <Phone className="w-5 h-5 text-emerald-600" />
                     <div>
-                      <p className="font-semibold text-slate-800">Tأ©lأ©phone</p>
+                      <p className="font-semibold text-slate-800">Téléphone</p>
                       <a href="tel:+21321234567" className="text-emerald-600 hover:underline">
                         +213 21 23 45 67
                       </a>
@@ -249,10 +249,10 @@ export function HomePage() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Prأھt أ  prendre soin de votre santأ© ?
+              Prêt à prendre soin de votre santé ?
             </h2>
             <p className="text-emerald-100 text-lg mb-8 max-w-2xl mx-auto">
-              Prenez rendez-vous en ligne en quelques clics. Notre أ©quipe vous accueille dans les meilleures conditions.
+              Prenez rendez-vous en ligne en quelques clics. Notre équipe vous accueille dans les meilleures conditions.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link to="/appointment">

@@ -38,7 +38,7 @@ router.put('/:id/reply', requireAdmin, async (req: AuthRequest, res: Response) =
   const { reply } = req.body;
   const existing = await get('SELECT * FROM patient_messages WHERE id = ?', req.params.id);
   if (!existing) {
-    res.status(404).json({ error: 'Message non trouvأ©' });
+    res.status(404).json({ error: 'Message non trouvé' });
     return;
   }
   await run(
@@ -52,7 +52,7 @@ router.put('/:id/reply', requireAdmin, async (req: AuthRequest, res: Response) =
 router.put('/:id/read', requirePatient, async (req: AuthRequest, res: Response) => {
   const existing: any = await get('SELECT * FROM patient_messages WHERE id = ?', req.params.id);
   if (!existing || existing.patient_id !== req.userId) {
-    res.status(404).json({ error: 'Message non trouvأ©' });
+    res.status(404).json({ error: 'Message non trouvé' });
     return;
   }
   await run('UPDATE patient_messages SET read_by_patient = TRUE WHERE id = ?', req.params.id);

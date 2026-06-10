@@ -14,7 +14,7 @@ import {
 
 const quickLinks = [
   { name: "Accueil", href: "/" },
-  { name: "A Propos", href: "/about" },
+  { name: "À Propos", href: "/about" },
   { name: "Rendez-vous", href: "/appointment" },
   { name: "Blog Santé", href: "/blog" },
   { name: "Contact", href: "/contact" },

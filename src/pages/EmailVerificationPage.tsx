@@ -41,7 +41,7 @@ export function EmailVerificationPage() {
     setMessage("");
     try {
       await api.resendCode(email);
-      setMessage("Nouveau code envoyأ©");
+      setMessage("Nouveau code envoyé");
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -62,15 +62,15 @@ export function EmailVerificationPage() {
             </div>
             <div className="text-left">
               <span className="text-xl font-bold text-slate-800">Dr. Djaidja</span>
-              <p className="text-xs text-slate-500">Vأ©rification</p>
+              <p className="text-xs text-slate-500">Vérification</p>
             </div>
           </Link>
           <div className="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-4">
             <Mail className="w-8 h-8 text-emerald-600" />
           </div>
-          <h1 className="text-2xl font-bold text-slate-800 mb-2">Vأ©rifiez votre email</h1>
+          <h1 className="text-2xl font-bold text-slate-800 mb-2">Vérifiez votre email</h1>
           <p className="text-slate-600">
-            Un code de vأ©rification أ  6 chiffres a أ©tأ© envoyأ© أ <br />
+            Un code de vérification à 6 chiffres a été envoyé à<br />
             <span className="font-medium text-slate-800">{email}</span>
           </p>
         </motion.div>
@@ -79,7 +79,7 @@ export function EmailVerificationPage() {
           <Card variant="elevated">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Code de vأ©rification</label>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Code de vérification</label>
                 <Input
                   placeholder="000000"
                   value={code}
@@ -93,7 +93,7 @@ export function EmailVerificationPage() {
               {message && <p className="text-emerald-600 text-sm text-center">{message}</p>}
 
               <Button type="submit" className="w-full" disabled={submitting || code.length !== 6}>
-                {submitting ? "Vأ©rification..." : "Vأ©rifier mon email"}
+                {submitting ? "Vérification..." : "Vérifier mon email"}
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </form>
@@ -102,7 +102,7 @@ export function EmailVerificationPage() {
 
         <div className="text-center mt-6">
           <p className="text-sm text-slate-500">
-            Vous n'avez pas reأ§u le code ?{" "}
+            Vous n'avez pas reçu le code ?{" "}
             <button onClick={handleResend} disabled={submitting}
               className="text-emerald-600 hover:text-emerald-700 font-medium inline-flex items-center gap-1">
               <RefreshCw className="w-3 h-3" /> Renvoyer

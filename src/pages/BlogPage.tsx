@@ -22,12 +22,12 @@ import { api } from "@/lib/api";
 
 const categories = [
   { id: "all", name: "Tous", icon: Sparkles },
-  { id: "prevention", name: "Prأ©vention", icon: Shield },
+  { id: "prevention", name: "Prévention", icon: Shield },
   { id: "nutrition", name: "Nutrition", icon: Apple },
-  { id: "general", name: "Santأ© gأ©nأ©rale", icon: Heart },
-  { id: "news", name: "Actualitأ©s", icon: Newspaper },
-  { id: "advice", name: "Conseils santأ©", icon: Activity },
-  { id: "wellness", name: "Bien-أھtre", icon: Brain },
+  { id: "general", name: "Santé générale", icon: Heart },
+  { id: "news", name: "Actualités", icon: Newspaper },
+  { id: "advice", name: "Conseils santé", icon: Activity },
+  { id: "wellness", name: "Bien-être", icon: Brain },
 ];
 
 export function BlogPage() {
@@ -58,15 +58,15 @@ export function BlogPage() {
       <section className="relative py-24 bg-gradient-to-br from-emerald-50 via-white to-teal-50">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <Badge variant="success" className="mb-4">Blog Santأ©</Badge>
+            <Badge variant="success" className="mb-4">Blog Santé</Badge>
             <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
-              Actualitأ©s &{" "}
+              Actualités &{" "}
               <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                Conseils Santأ©
+                Conseils Santé
               </span>
             </h1>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
-              Retrouvez nos articles sur la santأ©, la prأ©vention et le bien-أھtre pour prendre soin de vous au quotidien.
+              Retrouvez nos articles sur la santé, la prévention et le bien-être pour prendre soin de vous au quotidien.
             </p>
             <div className="max-w-xl mx-auto relative">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
@@ -99,7 +99,7 @@ export function BlogPage() {
           {selectedCategory === "all" && !searchQuery && (
             <section className="py-12">
               <div className="max-w-7xl mx-auto px-4">
-                <h2 className="text-2xl font-bold text-slate-800 mb-6">Articles أ  la une</h2>
+                <h2 className="text-2xl font-bold text-slate-800 mb-6">Articles à la une</h2>
                 <div className="grid md:grid-cols-2 gap-6">
                   {featuredArticles.map((article, index) => (
                     <motion.div key={article.id} initial={{ opacity: 0, y: 20 }}
@@ -110,7 +110,7 @@ export function BlogPage() {
                             <div className="relative h-48 md:h-full">
                               <img src={article.image_url} alt={article.title}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                              <Badge variant="success" className="absolute top-4 left-4">أ€ la une</Badge>
+                              <Badge variant="success" className="absolute top-4 left-4">À la une</Badge>
                             </div>
                             <div className="p-6 flex flex-col justify-center">
                               <Badge variant="info" className="w-fit mb-3">
@@ -167,7 +167,7 @@ export function BlogPage() {
                 ))}
               </div>
               {filteredArticles.length === 0 && (
-                <div className="text-center py-12"><p className="text-slate-500">Aucun article trouvأ© pour votre recherche.</p></div>
+                <div className="text-center py-12"><p className="text-slate-500">Aucun article trouvé pour votre recherche.</p></div>
               )}
             </div>
           </section>

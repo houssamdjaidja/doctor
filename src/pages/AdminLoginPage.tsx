@@ -58,7 +58,7 @@ export function AdminLoginPage() {
             </div>
           </Link>
           <h1 className="text-2xl font-bold text-slate-800 mb-2">Administration</h1>
-          <p className="text-slate-600">Accأ¨s rأ©servأ© aux administrateurs</p>
+          <p className="text-slate-600">Accès réservé aux administrateurs</p>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
@@ -79,7 +79,7 @@ export function AdminLoginPage() {
                 <label className="block text-sm font-medium text-slate-700 mb-1">Mot de passe</label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <Input type={showPassword ? "text" : "password"} placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
+                  <Input type={showPassword ? "text" : "password"} placeholder="••••••••"
                     className="pl-10 pr-10"
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })} />

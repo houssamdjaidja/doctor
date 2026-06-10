@@ -16,8 +16,8 @@ const statusStyles: Record<string, "success" | "info" | "warning" | "default"> =
 };
 
 const statusLabels: Record<string, string> = {
-  completed: "Terminأ©", confirmed: "Confirmأ©", "in-progress": "En cours",
-  pending: "En attente", cancelled: "Annulأ©",
+  completed: "Terminé", confirmed: "Confirmé", "in-progress": "En cours",
+  pending: "En attente", cancelled: "Annulé",
 };
 
 export function AppointmentDetailPage() {
@@ -57,7 +57,7 @@ export function AppointmentDetailPage() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white flex items-center justify-center">
         <div className="text-center">
-          <p className="text-slate-500 mb-4">{error || "Rendez-vous non trouvأ©"}</p>
+          <p className="text-slate-500 mb-4">{error || "Rendez-vous non trouvé"}</p>
           <Link to="/patient/dashboard"><Button variant="secondary"><ArrowLeft className="w-4 h-4" /> Retour au tableau de bord</Button></Link>
         </div>
       </div>
@@ -77,7 +77,7 @@ export function AppointmentDetailPage() {
               <ArrowLeft className="w-5 h-5 text-slate-600" />
             </button>
             <div>
-              <h1 className="text-lg font-semibold text-slate-800">Dأ©tail du rendez-vous</h1>
+              <h1 className="text-lg font-semibold text-slate-800">Détail du rendez-vous</h1>
               <p className="text-xs text-slate-500">#{appointment.id}</p>
             </div>
             <div className="ml-auto">
@@ -128,7 +128,7 @@ export function AppointmentDetailPage() {
               <div className="flex items-center gap-3 p-3 rounded-xl bg-slate-50">
                 <Phone className="w-5 h-5 text-emerald-600 flex-shrink-0" />
                 <div>
-                  <p className="text-sm text-slate-500">Tأ©lأ©phone</p>
+                  <p className="text-sm text-slate-500">Téléphone</p>
                   <p className="font-medium text-slate-800">{appointment.phone}</p>
                 </div>
               </div>
@@ -174,7 +174,7 @@ export function AppointmentDetailPage() {
               <AlertCircle className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
               <div className="text-sm text-emerald-800">
                 <p className="font-medium mb-1">Important</p>
-                <p>Merci d'arriver 10 minutes avant l'heure prأ©vue. En cas d'empأھchement, veuillez annuler votre rendez-vous au moins 24h أ  l'avance.</p>
+                <p>Merci d'arriver 10 minutes avant l'heure prévue. En cas d'empêchement, veuillez annuler votre rendez-vous au moins 24h à l'avance.</p>
               </div>
             </div>
           </div>

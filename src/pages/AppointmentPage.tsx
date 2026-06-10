@@ -28,15 +28,15 @@ const timeSlots = [
 ];
 
 const motifs = [
-  "Consultation gأ©nأ©rale",
-  "Suivi mأ©dical",
+  "Consultation générale",
+  "Suivi médical",
   "Vaccination",
-  "Contrأ´le de santأ©",
+  "Contrôle de santé",
   "Renouvellement ordonnance",
   "Autre",
 ];
 
-const isLettersOnly = (str: string) => /^[A-Za-zأ€-أ؟\s\-']+$/.test(str);
+const isLettersOnly = (str: string) => /^[A-Za-zÀ-ÿ\s\-']+$/.test(str);
 const isPhoneValid = (phone: string) => /^\d{10,11}$/.test(phone);
 
 export function AppointmentPage() {
@@ -91,10 +91,10 @@ export function AppointmentPage() {
     let isValid = true;
     const newErrors = { firstName: "", lastName: "", phone: "" };
     if (!formData.firstName.trim()) {
-      newErrors.firstName = "Le prأ©nom est requis";
+      newErrors.firstName = "Le prénom est requis";
       isValid = false;
     } else if (!isLettersOnly(formData.firstName)) {
-      newErrors.firstName = "Le prأ©nom ne doit contenir que des lettres";
+      newErrors.firstName = "Le prénom ne doit contenir que des lettres";
       isValid = false;
     }
     if (!formData.lastName.trim()) {
@@ -105,10 +105,10 @@ export function AppointmentPage() {
       isValid = false;
     }
     if (!formData.phone.trim()) {
-      newErrors.phone = "Le tأ©lأ©phone est requis";
+      newErrors.phone = "Le téléphone est requis";
       isValid = false;
     } else if (!isPhoneValid(formData.phone)) {
-      newErrors.phone = "Le tأ©lأ©phone doit contenir 10 ou 11 chiffres";
+      newErrors.phone = "Le téléphone doit contenir 10 ou 11 chiffres";
       isValid = false;
     }
     setErrors(newErrors);
@@ -159,11 +159,11 @@ export function AppointmentPage() {
               <CheckCircle className="w-10 h-10 text-emerald-600" />
             </div>
             <h2 className="text-2xl font-bold text-slate-800 mb-4">
-              Rendez-vous confirmأ© !
+              Rendez-vous confirmé !
             </h2>
             <p className="text-slate-600 mb-6">
-              Votre rendez-vous a أ©tأ© enregistrأ© avec succأ¨s. Vous recevrez un email de confirmation
-              avec tous les dأ©tails.
+              Votre rendez-vous a été enregistré avec succès. Vous recevrez un email de confirmation
+              avec tous les détails.
             </p>
             <div className="bg-slate-50 rounded-xl p-4 mb-6 text-left">
               <div className="flex items-center gap-3 mb-2">
@@ -176,7 +176,7 @@ export function AppointmentPage() {
               </div>
               <div className="flex items-center gap-3">
                 <MapPin className="w-5 h-5 text-emerald-600" />
-                <span>Cabinet mأ©dical</span>
+                <span>Cabinet médical</span>
               </div>
             </div>
             <Button onClick={() => { setSubmitted(false); setStep(1); setSelectedDate(null); setSelectedTime(null); setFormData({ firstName: "", lastName: "", phone: "", email: "", motif: "", notes: "" }); }} className="w-full">
@@ -204,7 +204,7 @@ export function AppointmentPage() {
               </span>
             </h1>
             <p className="text-lg text-slate-600 max-w-xl mx-auto">
-              Rأ©servez votre consultation en quelques clics. Choisissez la date, l'heure et le motif de consultation.
+              Réservez votre consultation en quelques clics. Choisissez la date, l'heure et le motif de consultation.
             </p>
           </motion.div>
         </div>
@@ -248,9 +248,9 @@ export function AppointmentPage() {
                 <Clock className="w-5 h-5 text-emerald-600" /> Choisissez une heure
               </h2>
               {!selectedDate ? (
-                <p className="text-slate-400 text-center py-4">Sأ©lectionnez d'abord une date</p>
+                <p className="text-slate-400 text-center py-4">Sélectionnez d'abord une date</p>
               ) : loadingSlots ? (
-                <p className="text-slate-400 text-center py-4">Chargement des crأ©neaux...</p>
+                <p className="text-slate-400 text-center py-4">Chargement des créneaux...</p>
               ) : (
                 <div className="grid grid-cols-4 md:grid-cols-8 gap-3">
                   {timeSlots.map((time) => {
@@ -282,8 +282,8 @@ export function AppointmentPage() {
               <form className="space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Prأ©nom *</label>
-                    <Input placeholder="Votre prأ©nom" value={formData.firstName}
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Prénom *</label>
+                    <Input placeholder="Votre prénom" value={formData.firstName}
                       onChange={(e) => { setFormData({ ...formData, firstName: e.target.value }); if (errors.firstName) setErrors({ ...errors, firstName: "" }); }}
                       className={errors.firstName ? "border-red-500" : ""} />
                     {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>}
@@ -298,7 +298,7 @@ export function AppointmentPage() {
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Tأ©lأ©phone *</label>
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Téléphone *</label>
                     <Input type="tel" placeholder="06 12 34 56 78" value={formData.phone}
                       onChange={(e) => { setFormData({ ...formData, phone: e.target.value }); if (errors.phone) setErrors({ ...errors, phone: "" }); }}
                       className={errors.phone ? "border-red-500" : ""} />
@@ -313,13 +313,13 @@ export function AppointmentPage() {
                   <label className="block text-sm font-medium text-slate-700 mb-1">Motif de consultation</label>
                   <select className="flex h-12 w-full rounded-xl border border-slate-200 bg-white/80 backdrop-blur-sm px-4 py-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400"
                     value={formData.motif} onChange={(e) => setFormData({ ...formData, motif: e.target.value })}>
-                    <option value="">-- Sأ©lectionnez ou laissez vide --</option>
+                    <option value="">-- Sélectionnez ou laissez vide --</option>
                     {motifs.map((motif) => <option key={motif} value={motif}>{motif}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Notes complأ©mentaires</label>
-                  <Textarea placeholder="Dأ©crivez briأ¨vement vos symptأ´mes ou questions..." value={formData.notes}
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Notes complémentaires</label>
+                  <Textarea placeholder="Décrivez brièvement vos symptômes ou questions..." value={formData.notes}
                     onChange={(e) => setFormData({ ...formData, notes: e.target.value })} />
                 </div>
               </form>
@@ -335,11 +335,11 @@ export function AppointmentPage() {
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
             <Card variant="glass">
               <h2 className="text-xl font-semibold text-slate-800 mb-6 flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-emerald-600" /> Rأ©capitulatif
+                <CheckCircle className="w-5 h-5 text-emerald-600" /> Récapitulatif
               </h2>
               <div className="space-y-4 mb-6">
                 <div className="bg-slate-50 rounded-xl p-4">
-                  <h3 className="font-medium text-slate-800 mb-3">Dأ©tails du rendez-vous</h3>
+                  <h3 className="font-medium text-slate-800 mb-3">Détails du rendez-vous</h3>
                   <div className="grid md:grid-cols-2 gap-4 text-sm">
                     <div className="flex items-center gap-2 text-slate-600">
                       <Calendar className="w-4 h-4 text-emerald-600" /><span>{selectedDate}</span>
@@ -348,7 +348,7 @@ export function AppointmentPage() {
                       <Clock className="w-4 h-4 text-emerald-600" /><span>{selectedTime}</span>
                     </div>
                     <div className="flex items-center gap-2 text-slate-600 md:col-span-2">
-                      <MapPin className="w-4 h-4 text-emerald-600" /><span>Cabinet mأ©dical - 24 Rue Didouche Mourad, 16000 Alger</span>
+                      <MapPin className="w-4 h-4 text-emerald-600" /><span>Cabinet médical - 24 Rue Didouche Mourad, 16000 Alger</span>
                     </div>
                   </div>
                 </div>
@@ -356,7 +356,7 @@ export function AppointmentPage() {
                   <h3 className="font-medium text-slate-800 mb-3">Vos informations</h3>
                   <div className="grid md:grid-cols-2 gap-2 text-sm text-slate-600">
                     <p><strong>Nom:</strong> {formData.firstName} {formData.lastName}</p>
-                    <p><strong>Tأ©lأ©phone:</strong> {formData.phone}</p>
+                    <p><strong>Téléphone:</strong> {formData.phone}</p>
                     {formData.email && <p><strong>Email:</strong> {formData.email}</p>}
                     {formData.motif && <p><strong>Motif:</strong> {formData.motif}</p>}
                   </div>
@@ -369,7 +369,7 @@ export function AppointmentPage() {
                   <AlertCircle className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
                   <div className="text-sm text-emerald-800">
                     <p className="font-medium mb-1">Important</p>
-                    <p>En confirmant ce rendez-vous, vous acceptez notre politique d'annulation. Merci d'arriver 10 minutes avant l'heure prأ©vue.</p>
+                    <p>En confirmant ce rendez-vous, vous acceptez notre politique d'annulation. Merci d'arriver 10 minutes avant l'heure prévue.</p>
                   </div>
                 </div>
               </div>

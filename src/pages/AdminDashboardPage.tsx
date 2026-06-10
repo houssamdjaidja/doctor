@@ -14,12 +14,12 @@ import { Input } from "@/components/ui/Input";
 import { api } from "@/lib/api";
 
 const categories = [
-  { value: "prevention", label: "Prأ©vention" },
+  { value: "prevention", label: "Prévention" },
   { value: "nutrition", label: "Nutrition" },
-  { value: "general", label: "Santأ© gأ©nأ©rale" },
-  { value: "news", label: "Actualitأ©s" },
-  { value: "advice", label: "Conseils santأ©" },
-  { value: "wellness", label: "Bien-أھtre" },
+  { value: "general", label: "Santé générale" },
+  { value: "news", label: "Actualités" },
+  { value: "advice", label: "Conseils santé" },
+  { value: "wellness", label: "Bien-être" },
 ];
 
 const statusColors: Record<string, "success" | "info" | "warning" | "default"> = {
@@ -27,8 +27,8 @@ const statusColors: Record<string, "success" | "info" | "warning" | "default"> =
   pending: "warning", cancelled: "default",
 };
 const statusLabels: Record<string, string> = {
-  completed: "Terminأ©", confirmed: "Confirmأ©", "in-progress": "En cours",
-  pending: "En attente", cancelled: "Annulأ©",
+  completed: "Terminé", confirmed: "Confirmé", "in-progress": "En cours",
+  pending: "En attente", cancelled: "Annulé",
 };
 
 function Modal({ open, onClose, title, children }: { open: boolean; onClose: () => void; title: string; children: React.ReactNode }) {
@@ -132,7 +132,7 @@ export function AdminDashboardPage() {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a"); a.href = url; a.download = d.name; a.click();
       URL.revokeObjectURL(url);
-    }).catch(() => alert("Erreur lors du tأ©lأ©chargement"));
+    }).catch(() => alert("Erreur lors du téléchargement"));
   }
 
   const handleLogout = () => {
@@ -175,7 +175,7 @@ export function AdminDashboardPage() {
     try {
       const updated = await api.updateSettings(settingsForm);
       setSettings(updated);
-      alert("Paramأ¨tres enregistrأ©s");
+      alert("Paramètres enregistrés");
     } catch (e: any) { alert(e.message); }
     finally { setSaving(false); }
   }
@@ -207,11 +207,11 @@ export function AdminDashboardPage() {
 
   async function changeAdminPassword() {
     if (pwNew !== pwConfirm) { alert("Les mots de passe ne correspondent pas"); return; }
-    if (pwNew.length < 8) { alert("Le mot de passe doit contenir au moins 8 caractأ¨res"); return; }
+    if (pwNew.length < 8) { alert("Le mot de passe doit contenir au moins 8 caractères"); return; }
     setSaving(true);
     try {
       await api.changeAdminPassword(pwCurrent, pwNew);
-      alert("Mot de passe modifiأ© avec succأ¨s");
+      alert("Mot de passe modifié avec succès");
       setShowPassword(false); setPwCurrent(""); setPwNew(""); setPwConfirm("");
     } catch (e: any) { alert(e.message); }
     finally { setSaving(false); }
@@ -238,7 +238,7 @@ export function AdminDashboardPage() {
     { id: "patients", label: "Patients", icon: Users },
     { id: "blog", label: "Blog", icon: FileText },
     { id: "messages", label: "Messages", icon: Send },
-    { id: "settings", label: "Paramأ¨tres", icon: Settings },
+    { id: "settings", label: "Paramètres", icon: Settings },
   ];
 
   return (
@@ -261,7 +261,7 @@ export function AdminDashboardPage() {
         <div className="absolute bottom-4 left-4 right-4">
           <button onClick={handleLogout}
             className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all w-full">
-            <LogOut className="w-5 h-5" /> Dأ©connexion
+            <LogOut className="w-5 h-5" /> Déconnexion
           </button>
         </div>
       </aside>
@@ -292,7 +292,7 @@ export function AdminDashboardPage() {
                       {stats?.todayAppointments?.length > 0 && stats.todayAppointments.map((apt: any) => (
                         <div key={`n-${apt.id}`} className="px-3 py-2 hover:bg-slate-50 text-sm flex items-center gap-2">
                           <Calendar className="w-4 h-4 text-emerald-500" />
-                          <span className="text-slate-600">Rendez-vous: {apt.patient} أ  {apt.time}</span>
+                          <span className="text-slate-600">Rendez-vous: {apt.patient} à {apt.time}</span>
                         </div>
                       ))}
                       {patientMsgs.filter((m: any) => !m.read_by_admin).map((msg: any) => (
@@ -372,7 +372,7 @@ export function AdminDashboardPage() {
                 </Card>
                 <Card variant="elevated" hover={false}>
                   <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-semibold text-slate-800">Patients rأ©cents</h2>
+                    <h2 className="text-lg font-semibold text-slate-800">Patients récents</h2>
                     <Button variant="ghost" size="sm" onClick={() => setActiveTab("patients")}>Voir tout</Button>
                   </div>
                   {patients.length === 0 ? <p className="text-slate-500 text-sm py-4 text-center">Aucun patient</p> : (
@@ -430,10 +430,10 @@ export function AdminDashboardPage() {
                             <select value={apt.status} onChange={(e) => { e.stopPropagation(); updateAppointmentStatus(apt.id, e.target.value); }}
                               className="rounded-lg border border-slate-200 px-2 py-1 text-sm bg-white">
                               <option value="pending">En attente</option>
-                              <option value="confirmed">Confirmأ©</option>
+                              <option value="confirmed">Confirmé</option>
                               <option value="in-progress">En cours</option>
-                              <option value="completed">Terminأ©</option>
-                              <option value="cancelled">Annulأ©</option>
+                              <option value="completed">Terminé</option>
+                              <option value="cancelled">Annulé</option>
                             </select>
                           </td>
                           <td className="py-3 px-4">
@@ -472,7 +472,7 @@ export function AdminDashboardPage() {
                     URL.revokeObjectURL(url);
                   } catch { alert('Erreur lors de l\'export'); }
                 }}>
-                  Tأ©lأ©charger
+                  Télécharger
                 </Button>
               </div>
               <Card variant="elevated" hover={false}>
@@ -482,7 +482,7 @@ export function AdminDashboardPage() {
                       <tr className="border-b border-slate-100">
                         <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600">Patient</th>
                         <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600">Email</th>
-                        <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600">Tأ©lأ©phone</th>
+                        <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600">Téléphone</th>
                         <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600">Inscrit le</th>
                       </tr>
                     </thead>
@@ -525,7 +525,7 @@ export function AdminDashboardPage() {
                     <thead>
                       <tr className="border-b border-slate-100">
                         <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600">Titre</th>
-                        <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600">Catأ©gorie</th>
+                        <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600">Catégorie</th>
                         <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600">Statut</th>
                         <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600">Actions</th>
                       </tr>
@@ -536,7 +536,7 @@ export function AdminDashboardPage() {
                           <td className="py-3 px-4 font-medium">{article.title}</td>
                           <td className="py-3 px-4 text-slate-600">{categories.find((c) => c.value === article.category)?.label || article.category}</td>
                           <td className="py-3 px-4">
-                            <Badge variant={article.published ? "success" : "warning"}>{article.published ? "Publiأ©" : "Brouillon"}</Badge>
+                            <Badge variant={article.published ? "success" : "warning"}>{article.published ? "Publié" : "Brouillon"}</Badge>
                           </td>
                           <td className="py-3 px-4">
                             <div className="flex items-center gap-2">
@@ -580,7 +580,7 @@ export function AdminDashboardPage() {
                         <tr key={msg.id} className={`border-b border-slate-100 hover:bg-slate-50 ${!msg.read ? "bg-blue-50/50" : ""}`}>
                           <td className="py-3 px-4"><span className={`font-medium ${!msg.read ? "text-slate-800" : "text-slate-600"}`}>{msg.name}</span></td>
                           <td className="py-3 px-4 text-slate-600">{msg.email}</td>
-                          <td className="py-3 px-4 text-slate-600">{msg.subject || "â€”"}</td>
+                          <td className="py-3 px-4 text-slate-600">{msg.subject || "—"}</td>
                           <td className="py-3 px-4 text-slate-600">{msg.created_at?.split(" ")[0]}</td>
                           <td className="py-3 px-4">
                             <div className="flex items-center gap-2">
@@ -623,7 +623,7 @@ export function AdminDashboardPage() {
                         <p className="text-sm text-slate-600 p-3 rounded-lg bg-white border border-slate-100">{msg.message}</p>
                         {msg.reply && (
                           <div className="mt-2 p-3 rounded-lg bg-emerald-50 border border-emerald-200">
-                            <p className="text-xs text-emerald-600 font-medium mb-1">Votre rأ©ponse ({msg.reply_at?.split(" ")[0]})</p>
+                            <p className="text-xs text-emerald-600 font-medium mb-1">Votre réponse ({msg.reply_at?.split(" ")[0]})</p>
                             <p className="text-sm text-slate-700">{msg.reply}</p>
                           </div>
                         )}
@@ -640,7 +640,7 @@ export function AdminDashboardPage() {
         {activeTab === "settings" && (
           <div className="p-6">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <h1 className="text-2xl font-bold text-slate-800 mb-6">Paramأ¨tres</h1>
+              <h1 className="text-2xl font-bold text-slate-800 mb-6">Paramètres</h1>
               <Card variant="elevated" hover={false}>
                 <div className="space-y-4">
                   <div>
@@ -653,7 +653,7 @@ export function AdminDashboardPage() {
                       <Input value={settingsForm.email || ""} onChange={(e) => setSettingsForm({ ...settingsForm, email: e.target.value })} />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-slate-700 mb-1">Tأ©lأ©phone</label>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">Téléphone</label>
                       <Input value={settingsForm.phone || ""} onChange={(e) => setSettingsForm({ ...settingsForm, phone: e.target.value })} />
                     </div>
                   </div>
@@ -669,7 +669,7 @@ export function AdminDashboardPage() {
                   <h2 className="text-lg font-semibold text-slate-800">Mot de passe administrateur</h2>
                   <Button variant="secondary" size="sm" onClick={() => setShowPassword(true)}><Lock className="w-4 h-4" /> Modifier</Button>
                 </div>
-                <p className="text-sm text-slate-500">Le mot de passe doit contenir au moins 8 caractأ¨res.</p>
+                <p className="text-sm text-slate-500">Le mot de passe doit contenir au moins 8 caractères.</p>
               </Card>
             </motion.div>
           </div>
@@ -684,7 +684,7 @@ export function AdminDashboardPage() {
 
       {/* Delete confirmation */}
       <Modal open={!!deleteId} onClose={() => setDeleteId(null)} title="Confirmer la suppression">
-        <p className="text-slate-600 mb-6">أٹtes-vous sأ»r de vouloir supprimer cet article ? Cette action est irrأ©versible.</p>
+        <p className="text-slate-600 mb-6">Êtes-vous sûr de vouloir supprimer cet article ? Cette action est irréversible.</p>
         <div className="flex gap-3 justify-end">
           <Button variant="secondary" onClick={() => setDeleteId(null)}>Annuler</Button>
           <Button onClick={() => deleteId && deleteArticle(deleteId)} className="bg-red-600 hover:bg-red-700">Supprimer</Button>
@@ -692,11 +692,11 @@ export function AdminDashboardPage() {
       </Modal>
 
       {/* Reply modal */}
-      <Modal open={!!replyModal} onClose={() => { setReplyModal(null); setReplyText(""); }} title={`Rأ©pondre أ  ${replyModal?.patientName || ""}`}>
+      <Modal open={!!replyModal} onClose={() => { setReplyModal(null); setReplyText(""); }} title={`Répondre à ${replyModal?.patientName || ""}`}>
         <div className="space-y-4">
-          <div><label className="block text-sm font-medium text-slate-700 mb-1">Votre rأ©ponse</label>
+          <div><label className="block text-sm font-medium text-slate-700 mb-1">Votre réponse</label>
             <textarea value={replyText} onChange={(e) => setReplyText(e.target.value)} rows={5}
-              className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white resize-none" placeholder="أ‰crivez votre rأ©ponse..." />
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white resize-none" placeholder="Écrivez votre réponse..." />
           </div>
           <div className="flex justify-end">
             <Button onClick={() => replyModal && replyToPatient(replyModal.id)} disabled={saving || !replyText}>
@@ -707,12 +707,12 @@ export function AdminDashboardPage() {
       </Modal>
 
       {/* Appointment Detail Modal */}
-      <Modal open={!!selectedApt} onClose={() => setSelectedApt(null)} title="Dأ©tails du rendez-vous">
+      <Modal open={!!selectedApt} onClose={() => setSelectedApt(null)} title="Détails du rendez-vous">
         {selectedApt && (
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
               <div><p className="text-sm text-slate-500">Patient</p><p className="font-medium">{selectedApt.first_name} {selectedApt.last_name}</p></div>
-              <div><p className="text-sm text-slate-500">Tأ©lأ©phone</p><p className="font-medium">{selectedApt.phone || "â€”"}</p></div>
+              <div><p className="text-sm text-slate-500">Téléphone</p><p className="font-medium">{selectedApt.phone || "—"}</p></div>
               <div><p className="text-sm text-slate-500">Date</p><p className="font-medium">{selectedApt.date}</p></div>
               <div><p className="text-sm text-slate-500">Heure</p><p className="font-medium">{selectedApt.time_slot}</p></div>
               <div><p className="text-sm text-slate-500">Motif</p><p className="font-medium">{selectedApt.motif || "Consultation"}</p></div>
@@ -724,7 +724,7 @@ export function AdminDashboardPage() {
             <div className="border-t border-slate-100 pt-4">
               <h3 className="font-semibold text-slate-800 mb-3">Documents du patient</h3>
               {!selectedApt.patient_id ? (
-                <p className="text-sm text-slate-400">Aucun compte patient liأ© أ  ce rendez-vous.</p>
+                <p className="text-sm text-slate-400">Aucun compte patient lié à ce rendez-vous.</p>
               ) : loadingDocs ? (
                 <p className="text-sm text-slate-400">Chargement...</p>
               ) : patientDocs.length === 0 ? (
@@ -735,7 +735,7 @@ export function AdminDashboardPage() {
                     <div key={doc.id} className="flex items-center justify-between p-3 rounded-xl bg-slate-50">
                       <div>
                         <p className="text-sm font-medium text-slate-700">{doc.name}</p>
-                        <p className="text-xs text-slate-400">{doc.file_type} â€” {Math.ceil(doc.file_size / 1024)} Ko</p>
+                        <p className="text-xs text-slate-400">{doc.file_type} — {Math.ceil(doc.file_size / 1024)} Ko</p>
                       </div>
                       <button onClick={() => downloadPatientDoc(doc)}
                         className="p-2 rounded-lg hover:bg-slate-200 text-blue-600">
@@ -781,7 +781,7 @@ function BlogForm({ article, onSave, saving }: { article?: any; onSave: (data: a
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div><label className="block text-sm font-medium text-slate-700 mb-1">Titre *</label><Input value={title} onChange={(e) => setTitle(e.target.value)} required /></div>
-      <div><label className="block text-sm font-medium text-slate-700 mb-1">Catأ©gorie</label>
+      <div><label className="block text-sm font-medium text-slate-700 mb-1">Catégorie</label>
         <select value={category} onChange={(e) => setCategory(e.target.value)} className="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white">
           {categories.map((c) => <option key={c.value} value={c.value}>{c.label}</option>)}
         </select>
@@ -797,8 +797,8 @@ function BlogForm({ article, onSave, saving }: { article?: any; onSave: (data: a
         <div><label className="block text-sm font-medium text-slate-700 mb-1">Image URL</label><Input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} /></div>
       </div>
       <div className="flex items-center gap-6">
-        <label className="flex items-center gap-2 text-sm text-slate-700"><input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="rounded" /> Publiأ©</label>
-        <label className="flex items-center gap-2 text-sm text-slate-700"><input type="checkbox" checked={featured} onChange={(e) => setFeatured(e.target.checked)} className="rounded" /> أ€ la une</label>
+        <label className="flex items-center gap-2 text-sm text-slate-700"><input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="rounded" /> Publié</label>
+        <label className="flex items-center gap-2 text-sm text-slate-700"><input type="checkbox" checked={featured} onChange={(e) => setFeatured(e.target.checked)} className="rounded" /> À la une</label>
       </div>
       <div className="flex gap-3 justify-end pt-2">
         <Button type="submit" disabled={saving}>{saving ? "Enregistrement..." : article ? "Enregistrer" : "Publier"}</Button>

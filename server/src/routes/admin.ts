@@ -19,7 +19,7 @@ router.get('/patients/export', requireAdmin, async (_req: AuthRequest, res: Resp
     FROM patients p ORDER BY p.created_at DESC
   `);
 
-  const header = 'ID;Prأ©nom;Nom;Email;Tأ©lأ©phone;Inscrit le;Total RDV;RDV effectuأ©s;RDV annulأ©s;RDV en attente;Dernier RDV (date);Dernier RDV (heure);Dernier RDV (statut)';
+  const header = 'ID;Prénom;Nom;Email;Téléphone;Inscrit le;Total RDV;RDV effectués;RDV annulés;RDV en attente;Dernier RDV (date);Dernier RDV (heure);Dernier RDV (statut)';
   const rows = patients.map(p =>
     `${p.id};${p.first_name};${p.last_name};${p.email};${p.phone};${new Date(p.created_at).toLocaleDateString('fr-FR')};${p.total_rdv};${p.completed_rdv};${p.cancelled_rdv};${p.pending_rdv};${p.last_rdv_date || ''};${p.last_rdv_time || ''};${p.last_rdv_status || ''}`
   );

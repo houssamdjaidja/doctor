@@ -35,7 +35,7 @@ app.use(express.json({ limit: '50mb' }));
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 10,
-  message: { error: 'Trop de tentatives, rأ©essayez dans 15 minutes' },
+  message: { error: 'Trop de tentatives, réessayez dans 15 minutes' },
   standardHeaders: true,
   legacyHeaders: false,
 });

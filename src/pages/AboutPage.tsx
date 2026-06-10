@@ -84,7 +84,7 @@ const values = [
   {
     icon: Heart,
     title: "Bienveillance",
-    description: "Ecoute attentive et prise en charge personnalisée de chaque patient.",
+    description: "Écoute attentive et prise en charge personnalisée de chaque patient.",
   },
   {
     icon: Users,
@@ -98,7 +98,7 @@ const values = [
   },
   {
     icon: Stethoscope,
-    title: "Ethique",
+    title: "Éthique",
     description: "Respect du secret médical et des principes déontologiques.",
   },
 ];
@@ -115,7 +115,7 @@ export function AboutPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <Badge variant="success" className="mb-4">A Propos</Badge>
+              <Badge variant="success" className="mb-4">À Propos</Badge>
               <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
                 Dr. Amine{" "}
                 <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">

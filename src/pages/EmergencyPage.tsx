@@ -15,7 +15,7 @@ const emergencyNumbers = [
   {
     number: "15",
     name: "SAMU",
-    description: "Urgences mأ©dicales graves",
+    description: "Urgences médicales graves",
     icon: Ambulance,
     color: "red",
   },
@@ -29,7 +29,7 @@ const emergencyNumbers = [
   {
     number: "112",
     name: "Urgences Europe",
-    description: "Numأ©ro d'urgence europأ©en",
+    description: "Numéro d'urgence européen",
     icon: Phone,
     color: "blue",
   },
@@ -46,41 +46,41 @@ const procedures = [
   {
     title: "En cas d'urgence vitale",
     steps: [
-      "Appelez immأ©diatement le 15 (SAMU) ou le 112",
-      "Dأ©crivez prأ©cisأ©ment la situation et la localisation",
-      "Ne raccrochez pas avant que l'opأ©rateur vous le demande",
-      "Suivez les instructions donnأ©es par les secours",
+      "Appelez immédiatement le 15 (SAMU) ou le 112",
+      "Décrivez précisément la situation et la localisation",
+      "Ne raccrochez pas avant que l'opérateur vous le demande",
+      "Suivez les instructions données par les secours",
       "Si possible, envoyez quelqu'un attendre les secours",
     ],
   },
   {
-    title: "En cas de malaise lأ©ger",
+    title: "En cas de malaise léger",
     steps: [
       "Asseyez-vous ou allongez-vous dans un endroit calme",
       "Buvez de l'eau si possible",
-      "Appelez notre cabinet pour un conseil mأ©dical",
-      "Si les symptأ´mes persistent, consultez un mأ©decin",
-      "En cas de doute, n'hأ©sitez pas أ  appeler le 15",
+      "Appelez notre cabinet pour un conseil médical",
+      "Si les symptômes persistent, consultez un médecin",
+      "En cas de doute, n'hésitez pas à appeler le 15",
     ],
   },
   {
     title: "En cas d'accident domestique",
     steps: [
-      "Sأ©curisez les lieux pour أ©viter tout suraccident",
-      "أ‰valuez l'أ©tat de la victime (conscience, respiration)",
-      "Appelez les secours si nأ©cessaire (15 ou 112)",
-      "Pratiquez les premiers gestes si vous أھtes formأ©",
-      "Attendez les secours en restant auprأ¨s de la victime",
+      "Sécurisez les lieux pour éviter tout suraccident",
+      "Évaluez l'état de la victime (conscience, respiration)",
+      "Appelez les secours si nécessaire (15 ou 112)",
+      "Pratiquez les premiers gestes si vous êtes formé",
+      "Attendez les secours en restant auprès de la victime",
     ],
   },
 ];
 
 const importantInfo = [
-  "Gardez votre dossier mأ©dical أ  jour et accessible",
+  "Gardez votre dossier médical à jour et accessible",
   "Notez vos allergies et traitements en cours",
   "Ayez toujours une carte vitale sur vous",
-  "Programmez les numأ©ros d'urgence dans votre tأ©lأ©phone",
-  "Connaأ®tre l'adresse exacte de votre domicile",
+  "Programmez les numéros d'urgence dans votre téléphone",
+  "Connaître l'adresse exacte de votre domicile",
 ];
 
 export function EmergencyPage() {
@@ -98,10 +98,10 @@ export function EmergencyPage() {
               <AlertTriangle className="w-10 h-10 text-white" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Urgences Mأ©dicales
+              Urgences Médicales
             </h1>
             <p className="text-xl text-red-100 max-w-2xl mx-auto">
-              En cas d'urgence, agissez rapidement. Voici les numأ©ros أ  connaأ®tre et les procأ©dures أ  suivre.
+              En cas d'urgence, agissez rapidement. Voici les numéros à connaître et les procédures à suivre.
             </p>
           </motion.div>
         </div>
@@ -116,9 +116,9 @@ export function EmergencyPage() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <Badge variant="warning" className="mb-4">Numأ©ros d'urgence</Badge>
+            <Badge variant="warning" className="mb-4">Numéros d'urgence</Badge>
             <h2 className="text-3xl font-bold text-slate-800">
-              Appelez immأ©diatement en cas d'urgence
+              Appelez immédiatement en cas d'urgence
             </h2>
           </motion.div>
 
@@ -190,7 +190,7 @@ export function EmergencyPage() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <Badge variant="info" className="mb-4">Procأ©dures</Badge>
+            <Badge variant="info" className="mb-4">Procédures</Badge>
             <h2 className="text-3xl font-bold text-slate-800">
               Que faire en cas d'urgence ?
             </h2>

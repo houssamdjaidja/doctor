@@ -58,7 +58,7 @@ router.put('/:id', requireAdmin, async (req: Request, res: Response) => {
   const { question, answer } = req.body;
   const existing = await get('SELECT * FROM faq_items WHERE id = ?', req.params.id);
   if (!existing) {
-    res.status(404).json({ error: 'Question non trouvأ©e' });
+    res.status(404).json({ error: 'Question non trouvée' });
     return;
   }
 
@@ -72,7 +72,7 @@ router.put('/:id', requireAdmin, async (req: Request, res: Response) => {
 router.delete('/:id', requireAdmin, async (req: Request, res: Response) => {
   const result = await run('DELETE FROM faq_items WHERE id = ? RETURNING id', req.params.id);
   if (result.rowCount === 0) {
-    res.status(404).json({ error: 'Question non trouvأ©e' });
+    res.status(404).json({ error: 'Question non trouvée' });
     return;
   }
   res.json({ success: true });

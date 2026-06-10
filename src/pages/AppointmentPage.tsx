@@ -231,7 +231,7 @@ export function AppointmentPage() {
               <div className="grid grid-cols-3 md:grid-cols-7 gap-3">
                 {dates.map((date) => {
                   const dateStr = date.toLocaleDateString("fr-FR", { weekday: "short", day: "numeric", month: "short" });
-                  const isWeekend = date.getDay() === 0;
+                  const isWeekend = date.getDay() === 5;
                   const dateValue = date.toISOString().split("T")[0];
                   return (
                     <button key={dateValue} onClick={() => { if (!isWeekend) { setSelectedDate(dateStr); fetchAvailableSlots(dateStr, dateValue); } }} disabled={isWeekend}

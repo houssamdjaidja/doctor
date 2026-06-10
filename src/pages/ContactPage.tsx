@@ -27,7 +27,7 @@ const contactInfo = [
     title: "Téléphone",
     content: "+213 21 23 45 67",
     link: "tel:+21321234567",
-    description: "Lun-Ven: 8h-18h, Sam: 9h-12h",
+    description: "Dim-Jeu: 8h-18h, Sam: 9h-12h",
   },
   {
     icon: Mail,
@@ -46,14 +46,14 @@ const contactInfo = [
 ];
 
 const workingHours = [
-  { day: "Lundi", hours: "8h00 - 18h00" },
-  { day: "Mardi", hours: "8h00 - 18h00" },
-  { day: "Mercredi", hours: "8h00 - 18h00" },
-  { day: "Jeudi", hours: "8h00 - 18h00" },
-  { day: "Vendredi", hours: "8h00 - 18h00" },
-  { day: "Samedi", hours: "9h00 - 12h00" },
-  { day: "Dimanche", hours: "Fermé" },
-];
+    { day: "Dimanche", hours: "8h00 - 18h00" },
+    { day: "Lundi", hours: "8h00 - 18h00" },
+    { day: "Mardi", hours: "8h00 - 18h00" },
+    { day: "Mercredi", hours: "8h00 - 18h00" },
+    { day: "Jeudi", hours: "8h00 - 18h00" },
+    { day: "Vendredi", hours: "Fermé" },
+    { day: "Samedi", hours: "9h00 - 12h00" },
+  ];
 
 const socialLinks = [
   { icon: Facebook, href: "#", label: "Facebook" },

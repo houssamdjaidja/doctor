@@ -46,7 +46,7 @@ const faqData = [
     questions: [
       {
         question: "Quels sont les horaires d'ouverture du cabinet ?",
-        answer: "Le cabinet est ouvert du lundi au vendredi de 8h00 à 18h00, et le samedi de 9h00 à 12h00. Nous sommes fermés le dimanche et les jours fériés.",
+        answer: "Le cabinet est ouvert du dimanche au jeudi de 8h00 à 18h00, et le samedi de 9h00 à 12h00. Nous sommes fermés le vendredi et les jours fériés.",
       },
       {
         question: "Quels documents dois-je apporter pour ma consultation ?",

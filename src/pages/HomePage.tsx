@@ -24,14 +24,14 @@ const stats = [
 ];
 
 const workingHours = [
-  { day: "Lundi", hours: "8h00 - 18h00" },
-  { day: "Mardi", hours: "8h00 - 18h00" },
-  { day: "Mercredi", hours: "8h00 - 18h00" },
-  { day: "Jeudi", hours: "8h00 - 18h00" },
-  { day: "Vendredi", hours: "8h00 - 18h00" },
-  { day: "Samedi", hours: "9h00 - 12h00" },
-  { day: "Dimanche", hours: "Fermé" },
-];
+    { day: "Dimanche", hours: "8h00 - 18h00" },
+    { day: "Lundi", hours: "8h00 - 18h00" },
+    { day: "Mardi", hours: "8h00 - 18h00" },
+    { day: "Mercredi", hours: "8h00 - 18h00" },
+    { day: "Jeudi", hours: "8h00 - 18h00" },
+    { day: "Vendredi", hours: "Fermé" },
+    { day: "Samedi", hours: "9h00 - 12h00" },
+  ];
 
 export function HomePage() {
   return (

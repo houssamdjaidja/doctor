@@ -5,7 +5,6 @@ import {
   Users,
   Award,
   Heart,
-  Shield,
   Clock,
   Phone,
   MapPin,
@@ -73,10 +72,6 @@ export function HomePage() {
                 </Link>
               </div>
               <div className="flex items-center gap-6 text-sm text-slate-600">
-                <div className="flex items-center gap-2">
-                  <Shield className="w-5 h-5 text-emerald-600" />
-                  Paiement sécurisé
-                </div>
                 <div className="flex items-center gap-2">
                   <Clock className="w-5 h-5 text-emerald-600" />
                   RDV en 24h

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Calendar, Users, FileText, BarChart3, Settings, Bell, Search,
+  Calendar, Users, FileText, BarChart3, Settings, Bell,
   ChevronRight, TrendingUp, TrendingDown, Stethoscope, LogOut,
   Plus, Edit3, Trash2, X, Send, Reply, Lock, ArrowLeft, Eye, Download,
 } from "lucide-react";
@@ -68,7 +68,6 @@ export function AdminDashboardPage() {
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
   const [settingsForm, setSettingsForm] = useState<Record<string, string>>({});
-  const [searchQuery, setSearchQuery] = useState("");
   const [showNotifications, setShowNotifications] = useState(false);
   const [patientMsgs, setPatientMsgs] = useState<any[]>([]);
   const [replyModal, setReplyModal] = useState<{ id: number; patientName: string } | null>(null);
@@ -287,10 +286,6 @@ export function AdminDashboardPage() {
               <Link to="/" className="p-3 sm:p-2 rounded-xl hover:bg-slate-100 transition-colors">
                 <ArrowLeft className="w-5 h-5 text-slate-600" />
               </Link>
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                <Input placeholder="Rechercher..." className="pl-10 w-40 md:w-64" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-              </div>
             </div>
             <div className="flex items-center gap-4">
               <div className="relative">
@@ -429,7 +424,7 @@ export function AdminDashboardPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {appointments.filter((a) => !searchQuery || `${a.first_name} ${a.last_name} ${a.motif || ""} ${a.date}`.toLowerCase().includes(searchQuery.toLowerCase())).map((apt) => (
+                      {appointments.map((apt) => (
                         <tr key={apt.id} className="border-b border-slate-100 hover:bg-slate-50 cursor-pointer"
                           onClick={() => viewAppointmentDetail(apt)}>
                           <td className="py-3 px-4">
@@ -459,7 +454,7 @@ export function AdminDashboardPage() {
                           </td>
                         </tr>
                       ))}
-                      {appointments.filter((a) => !searchQuery || `${a.first_name} ${a.last_name} ${a.motif || ""} ${a.date}`.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 && (
+                      {appointments.length === 0 && (
                         <tr><td colSpan={5} className="py-8 text-center text-slate-500">Aucun rendez-vous</td></tr>
                       )}
                     </tbody>
@@ -589,7 +584,7 @@ export function AdminDashboardPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {messages.filter((m) => !searchQuery || m.name?.toLowerCase().includes(searchQuery.toLowerCase())).map((msg) => (
+                      {messages.map((msg) => (
                         <tr key={msg.id} className={`border-b border-slate-100 hover:bg-slate-50 ${!msg.read ? "bg-blue-50/50" : ""}`}>
                           <td className="py-3 px-4"><span className={`font-medium ${!msg.read ? "text-slate-800" : "text-slate-600"}`}>{msg.name}</span></td>
                           <td className="py-3 px-4 text-slate-600">{msg.email}</td>
@@ -616,7 +611,7 @@ export function AdminDashboardPage() {
                   <p className="text-slate-500 text-sm py-4 text-center">Aucun message de patient</p>
                 ) : (
                   <div className="space-y-4">
-                    {patientMsgs.filter((m) => !searchQuery || m.subject?.toLowerCase().includes(searchQuery.toLowerCase()) || m.first_name?.toLowerCase().includes(searchQuery.toLowerCase())).map((msg) => (
+                    {patientMsgs.map((msg) => (
                       <div key={msg.id} className={`p-4 rounded-xl border ${!msg.read_by_admin ? "border-blue-200 bg-blue-50/50" : "border-slate-100"}`}>
                         <div className="flex items-start justify-between mb-2">
                           <div>

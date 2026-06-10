@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  Search,
   Calendar,
   Clock,
   ArrowRight,
@@ -31,7 +30,6 @@ const categories = [
 ];
 
 export function BlogPage() {
-  const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [articles, setArticles] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -43,13 +41,7 @@ export function BlogPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  const filteredArticles = articles.filter((article) => {
-    const matchesSearch =
-      article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      article.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === "all" || article.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const filteredArticles = selectedCategory === "all" ? articles : articles.filter((article) => article.category === selectedCategory);
 
   const featuredArticles = articles.filter((article) => article.featured);
 
@@ -68,11 +60,7 @@ export function BlogPage() {
             <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
               Retrouvez nos articles sur la santé, la prévention et le bien-être pour prendre soin de vous au quotidien.
             </p>
-            <div className="max-w-xl mx-auto relative">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-              <Input placeholder="Rechercher un article..." className="pl-12"
-                value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-            </div>
+            
           </motion.div>
         </div>
       </section>
@@ -96,7 +84,7 @@ export function BlogPage() {
         </section>
       ) : (
         <>
-          {selectedCategory === "all" && !searchQuery && (
+          {selectedCategory === "all" && (
             <section className="py-12">
               <div className="max-w-7xl mx-auto px-4">
                 <h2 className="text-2xl font-bold text-slate-800 mb-6">Articles à la une</h2>

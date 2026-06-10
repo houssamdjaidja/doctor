@@ -61,7 +61,7 @@ export function PatientLoginPage() {
     }
 
     if (formData.password.length < 8) {
-      setPasswordError("Le mot de passe doit contenir au moins 8 caractères");
+      setPasswordError("Le mot de passe doit contenir au moins 8 caractأ¨res");
       setSubmitting(false);
       return;
     }
@@ -69,12 +69,12 @@ export function PatientLoginPage() {
 
     if (!isLogin) {
       if (!formData.phone.trim()) {
-        setPhoneError("Le téléphone est requis");
+        setPhoneError("Le tأ©lأ©phone est requis");
         setSubmitting(false);
         return;
       }
       if (!isPhoneValid(formData.phone)) {
-        setPhoneError("Le téléphone doit contenir 10 ou 11 chiffres");
+        setPhoneError("Le tأ©lأ©phone doit contenir 10 ou 11 chiffres");
         setSubmitting(false);
         return;
       }
@@ -88,7 +88,7 @@ export function PatientLoginPage() {
           localStorage.setItem("token", res.token);
           navigate("/patient/dashboard");
         } catch (err: any) {
-          if (err.message?.includes("EMAIL_NOT_VERIFIED") || err.message?.includes("Veuillez vérifier")) {
+          if (err.message?.includes("EMAIL_NOT_VERIFIED") || err.message?.includes("Veuillez vأ©rifier")) {
             navigate(`/verify-email?email=${encodeURIComponent(formData.email)}`);
             return;
           }
@@ -138,10 +138,10 @@ export function PatientLoginPage() {
             </div>
           </Link>
           <h1 className="text-2xl font-bold text-slate-800 mb-2">
-            {isAdmin ? "Administration" : isLogin ? "Connexion" : "Créer un compte"}
+            {isAdmin ? "Administration" : isLogin ? "Connexion" : "Crأ©er un compte"}
           </h1>
           <p className="text-slate-600">
-            {isAdmin ? "Accès réservé aux administrateurs" : isLogin ? "Accédez à votre espace patient personnel" : "Inscrivez-vous pour gérer vos rendez-vous"}
+            {isAdmin ? "Accأ¨s rأ©servأ© aux administrateurs" : isLogin ? "Accأ©dez أ  votre espace patient personnel" : "Inscrivez-vous pour gأ©rer vos rendez-vous"}
           </p>
         </motion.div>
 
@@ -164,8 +164,8 @@ export function PatientLoginPage() {
               {!isLogin && !isAdmin && (
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 mb-1">Prénom</label>
-                    <Input placeholder="Prénom" value={formData.firstName}
+                    <label className="block text-sm font-medium text-slate-700 mb-1">Prأ©nom</label>
+                    <Input placeholder="Prأ©nom" value={formData.firstName}
                       onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} />
                   </div>
                   <div>
@@ -196,7 +196,7 @@ export function PatientLoginPage() {
 
               {!isLogin && !isAdmin && (
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">Téléphone *</label>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Tأ©lأ©phone *</label>
                   <Input type="tel" placeholder="06 12 34 56 78" value={formData.phone}
                     onChange={handlePhoneChange} className={phoneError ? "border-red-500" : ""} />
                   {phoneError && <p className="text-red-500 text-xs mt-1">{phoneError}</p>}
@@ -208,7 +208,7 @@ export function PatientLoginPage() {
                 <label className="block text-sm font-medium text-slate-700 mb-1">Mot de passe *</label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <Input type={showPassword ? "text" : "password"} placeholder="••••••••"
+                  <Input type={showPassword ? "text" : "password"} placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
                     className={`pl-10 pr-10 ${passwordError ? "border-red-500" : ""}`}
                     value={formData.password} onChange={handlePasswordChange} />
                   <button type="button" onClick={() => setShowPassword(!showPassword)}
@@ -217,7 +217,7 @@ export function PatientLoginPage() {
                   </button>
                 </div>
                 {passwordError && <p className="text-red-500 text-xs mt-1">{passwordError}</p>}
-                {!isAdmin && <p className="text-slate-400 text-xs mt-1">Minimum 8 caractères</p>}
+                {!isAdmin && <p className="text-slate-400 text-xs mt-1">Minimum 8 caractأ¨res</p>}
               </div>
 
               {generalError && <p className="text-red-500 text-sm text-center">{generalError}</p>}
@@ -228,12 +228,12 @@ export function PatientLoginPage() {
                     <input type="checkbox" className="rounded border-slate-300" />
                     <span className="text-slate-600">Se souvenir de moi</span>
                   </label>
-                  <Link to="/forgot-password" className="text-emerald-600 hover:text-emerald-700">Mot de passe oublié ?</Link>
+                  <Link to="/forgot-password" className="text-emerald-600 hover:text-emerald-700">Mot de passe oubliأ© ?</Link>
                 </div>
               )}
 
               <Button type="submit" className="w-full" disabled={submitting}>
-                {submitting ? "En cours..." : isAdmin ? "Se connecter" : isLogin ? "Se connecter" : "Créer mon compte"}
+                {submitting ? "En cours..." : isAdmin ? "Se connecter" : isLogin ? "Se connecter" : "Crأ©er mon compte"}
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </form>
@@ -243,7 +243,7 @@ export function PatientLoginPage() {
         <div className="text-center mt-6 space-y-2">
           {!isAdmin && (
             <p className="text-sm text-slate-500">
-              {isLogin ? "Pas encore de compte ?" : "Déjà inscrit ?"}{" "}
+              {isLogin ? "Pas encore de compte ?" : "Dأ©jأ  inscrit ?"}{" "}
               <button onClick={() => { setIsLogin(!isLogin); resetErrors(); }}
                 className="text-emerald-600 hover:text-emerald-700 font-medium">
                 {isLogin ? "S'inscrire" : "Se connecter"}

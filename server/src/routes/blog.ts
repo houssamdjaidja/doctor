@@ -57,7 +57,7 @@ router.get('/:id', async (req: Request, res: Response) => {
   }
 
   if (!post) {
-    res.status(404).json({ error: 'Article non trouvé' });
+    res.status(404).json({ error: 'Article non trouvأ©' });
     return;
   }
 
@@ -89,7 +89,7 @@ router.post('/', requireAdmin, async (req: Request, res: Response) => {
 router.put('/:id', requireAdmin, async (req: Request, res: Response) => {
   const existing: any = await get('SELECT * FROM blog_posts WHERE id = ?', req.params.id);
   if (!existing) {
-    res.status(404).json({ error: 'Article non trouvé' });
+    res.status(404).json({ error: 'Article non trouvأ©' });
     return;
   }
 
@@ -125,7 +125,7 @@ router.put('/:id', requireAdmin, async (req: Request, res: Response) => {
 router.delete('/:id', requireAdmin, async (req: Request, res: Response) => {
   const result = await run('DELETE FROM blog_posts WHERE id = ? RETURNING id', req.params.id);
   if (result.rowCount === 0) {
-    res.status(404).json({ error: 'Article non trouvé' });
+    res.status(404).json({ error: 'Article non trouvأ©' });
     return;
   }
   res.json({ success: true });

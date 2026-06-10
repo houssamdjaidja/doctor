@@ -14,8 +14,8 @@ import { cn } from "@/lib/utils";
 
 const navigation = [
   { name: "Accueil", href: "/" },
-  { name: "À Propos", href: "/about" },
-  { name: "Blog Santé", href: "/blog" },
+  { name: "أ€ Propos", href: "/about" },
+  { name: "Blog Santأ©", href: "/blog" },
   { name: "FAQ", href: "/faq" },
   { name: "Contact", href: "/contact" },
 ];
@@ -75,7 +75,7 @@ export function Header() {
                 <span className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                   Dr. Djaidja
                 </span>
-                <p className="text-xs text-slate-500 mt-0.5">Médecin Généraliste</p>
+                <p className="text-xs text-slate-500 mt-0.5">Mأ©decin Gأ©nأ©raliste</p>
               </div>
             </Link>
 

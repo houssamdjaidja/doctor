@@ -83,12 +83,12 @@ router.get('/public', async (req: AuthRequest, res: Response) => {
 router.get('/:id', optionalAuth, async (req: AuthRequest, res: Response) => {
   const appointment: any = await get('SELECT * FROM appointments WHERE id = ?', req.params.id);
   if (!appointment) {
-    res.status(404).json({ error: 'Rendez-vous non trouvé' });
+    res.status(404).json({ error: 'Rendez-vous non trouvأ©' });
     return;
   }
 
   if (req.userType === 'patient' && appointment.patient_id !== req.userId) {
-    res.status(403).json({ error: 'Accès refusé' });
+    res.status(403).json({ error: 'Accأ¨s refusأ©' });
     return;
   }
 
@@ -108,7 +108,7 @@ router.post('/', optionalAuth, async (req: AuthRequest, res: Response) => {
     date, timeSlot
   );
   if (existing) {
-    res.status(409).json({ error: 'Ce créneau est déjà réservé' });
+    res.status(409).json({ error: 'Ce crأ©neau est dأ©jأ  rأ©servأ©' });
     return;
   }
 
@@ -128,7 +128,7 @@ router.put('/:id', requireAdmin, async (req: AuthRequest, res: Response) => {
 
   const existing = await get('SELECT * FROM appointments WHERE id = ?', req.params.id);
   if (!existing) {
-    res.status(404).json({ error: 'Rendez-vous non trouvé' });
+    res.status(404).json({ error: 'Rendez-vous non trouvأ©' });
     return;
   }
 
@@ -149,7 +149,7 @@ router.put('/:id', requireAdmin, async (req: AuthRequest, res: Response) => {
 router.delete('/:id', requireAdmin, async (req: AuthRequest, res: Response) => {
   const result = await run('DELETE FROM appointments WHERE id = ? RETURNING id', req.params.id);
   if (result.rowCount === 0) {
-    res.status(404).json({ error: 'Rendez-vous non trouvé' });
+    res.status(404).json({ error: 'Rendez-vous non trouvأ©' });
     return;
   }
   res.json({ success: true });
@@ -158,7 +158,7 @@ router.delete('/:id', requireAdmin, async (req: AuthRequest, res: Response) => {
 router.patch('/:id/cancel', requirePatient, async (req: AuthRequest, res: Response) => {
   const appointment: any = await get('SELECT * FROM appointments WHERE id = ?', req.params.id);
   if (!appointment) {
-    res.status(404).json({ error: 'Rendez-vous non trouvé' });
+    res.status(404).json({ error: 'Rendez-vous non trouvأ©' });
     return;
   }
   if (appointment.patient_id !== req.userId) {

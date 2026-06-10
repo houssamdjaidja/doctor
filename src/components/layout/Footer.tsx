@@ -16,7 +16,7 @@ const quickLinks = [
   { name: "Accueil", href: "/" },
   { name: "A Propos", href: "/about" },
   { name: "Rendez-vous", href: "/appointment" },
-  { name: "Blog Santé", href: "/blog" },
+  { name: "Blog SantÃ©", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ]
 
@@ -41,11 +41,11 @@ export function Footer() {
               </div>
               <div>
                 <span className="text-xl font-bold">Dr. Djaidja</span>
-                <p className="text-xs text-slate-400">Médecin Généraliste</p>
+                <p className="text-xs text-slate-400">MÃ©decin GÃ©nÃ©raliste</p>
               </div>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
-              Votre santé est notre priorité. Nous offrons des soins médicaux de qualité
+              Votre santÃ© est notre prioritÃ©. Nous offrons des soins mÃ©dicaux de qualitÃ©
               dans un environnement chaleureux et professionnel.
             </p>
             <div className="flex gap-3">
@@ -87,7 +87,7 @@ export function Footer() {
                 <MapPin className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
                 <span className="text-slate-400 text-sm">
                   24 Rue Didouche Mourad<br />
-                  16000 Alger, Algérie
+                  16000 Alger, AlgÃ©rie
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -119,12 +119,12 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-slate-400 text-sm flex items-center gap-1">
-              © 2024 Dr. Djaidja. Tous droits réservés. Fait avec{" "}
+              Â© 2024 Dr. Djaidja. Tous droits rÃ©servÃ©s. Fait avec{" "}
               <Heart className="w-4 h-4 text-red-500 fill-current" /> pour vos soins.
             </p>
             <div className="flex gap-6 text-sm">
               <Link to="/privacy" className="text-slate-400 hover:text-emerald-400 transition-colors">
-                Politique de confidentialité
+                Politique de confidentialitÃ©
               </Link>
               <Link to="/terms" className="text-slate-400 hover:text-emerald-400 transition-colors">
                 Conditions d'utilisation

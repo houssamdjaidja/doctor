@@ -44,15 +44,15 @@ export function ForgotPasswordPage() {
             </div>
             <div className="text-left">
               <span className="text-xl font-bold text-slate-800">Dr. Djaidja</span>
-              <p className="text-xs text-slate-500">Mot de passe oublié</p>
+              <p className="text-xs text-slate-500">Mot de passe oubliأ©</p>
             </div>
           </Link>
           <div className="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-4">
             <Lock className="w-8 h-8 text-amber-600" />
           </div>
-          <h1 className="text-2xl font-bold text-slate-800 mb-2">Mot de passe oublié</h1>
+          <h1 className="text-2xl font-bold text-slate-800 mb-2">Mot de passe oubliأ©</h1>
           <p className="text-slate-600">
-            Entrez votre email, nous vous enverrons un code de réinitialisation
+            Entrez votre email, nous vous enverrons un code de rأ©initialisation
           </p>
         </motion.div>
 
@@ -81,7 +81,7 @@ export function ForgotPasswordPage() {
         <div className="text-center mt-6">
           <p className="text-sm text-slate-500">
             <Link to="/patient/login" className="text-emerald-600 hover:text-emerald-700 font-medium">
-              Retour à la connexion
+              Retour أ  la connexion
             </Link>
           </p>
         </div>

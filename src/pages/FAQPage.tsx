@@ -25,19 +25,19 @@ const faqData = [
     questions: [
       {
         question: "Comment prendre rendez-vous ?",
-        answer: "Vous pouvez prendre rendez-vous de plusieurs façons : en ligne via notre formulaire de prise de rendez-vous, par téléphone au +213 21 23 45 67, ou directement au cabinet. La prise de rendez-vous en ligne est disponible 24h/24.",
+        answer: "Vous pouvez prendre rendez-vous de plusieurs faأ§ons : en ligne via notre formulaire de prise de rendez-vous, par tأ©lأ©phone au +213 21 23 45 67, ou directement au cabinet. La prise de rendez-vous en ligne est disponible 24h/24.",
       },
       {
-        question: "Quels sont les délais pour obtenir un rendez-vous ?",
-        answer: "Nous nous efforçons de vous proposer un rendez-vous dans les meilleurs délais. En général, un rendez-vous est disponible sous 24 à 48 heures pour les consultations non urgentes. Pour les urgences, contactez-nous par téléphone.",
+        question: "Quels sont les dأ©lais pour obtenir un rendez-vous ?",
+        answer: "Nous nous efforأ§ons de vous proposer un rendez-vous dans les meilleurs dأ©lais. En gأ©nأ©ral, un rendez-vous est disponible sous 24 أ  48 heures pour les consultations non urgentes. Pour les urgences, contactez-nous par tأ©lأ©phone.",
       },
       {
         question: "Puis-je modifier ou annuler mon rendez-vous ?",
-        answer: "Oui, vous pouvez modifier ou annuler votre rendez-vous jusqu'à 24 heures avant l'heure prévue sans frais. Au-delà, une indemnité pourra être demandée. Vous pouvez le faire en ligne depuis votre espace patient ou par téléphone.",
+        answer: "Oui, vous pouvez modifier ou annuler votre rendez-vous jusqu'أ  24 heures avant l'heure prأ©vue sans frais. Au-delأ , une indemnitأ© pourra أھtre demandأ©e. Vous pouvez le faire en ligne depuis votre espace patient ou par tأ©lأ©phone.",
       },
       {
         question: "Dois-je arriver en avance pour mon rendez-vous ?",
-        answer: "Oui, nous vous recommandons d'arriver 10 à 15 minutes avant votre rendez-vous pour compléter les formalités administratives si nécessaire, surtout si c'est votre première consultation.",
+        answer: "Oui, nous vous recommandons d'arriver 10 أ  15 minutes avant votre rendez-vous pour complأ©ter les formalitأ©s administratives si nأ©cessaire, surtout si c'est votre premiأ¨re consultation.",
       },
     ],
   },
@@ -46,19 +46,19 @@ const faqData = [
     questions: [
       {
         question: "Quels sont les horaires d'ouverture du cabinet ?",
-        answer: "Le cabinet est ouvert du dimanche au jeudi de 8h00 à 18h00, et le samedi de 9h00 à 12h00. Nous sommes fermés le vendredi et les jours fériés.",
+        answer: "Le cabinet est ouvert du dimanche au jeudi de 8h00 أ  18h00, et le samedi de 9h00 أ  12h00. Nous sommes fermأ©s le vendredi et les jours fأ©riأ©s.",
       },
       {
         question: "Quels documents dois-je apporter pour ma consultation ?",
-        answer: "Pensez à apporter votre carte Chifa, votre carte de complémentaire santé (si vous en avez une), une pièce d'identité, et tous les documents médicaux pertinents (résultats d'analyses, ordonnances, comptes-rendus d'examens...).",
+        answer: "Pensez أ  apporter votre carte Chifa, votre carte de complأ©mentaire santأ© (si vous en avez une), une piأ¨ce d'identitأ©, et tous les documents mأ©dicaux pertinents (rأ©sultats d'analyses, ordonnances, comptes-rendus d'examens...).",
       },
       {
-        question: "Comment accéder au cabinet ?",
-        answer: "Le cabinet est situé au 24 Rue Didouche Mourad, 16000 Alger. Il est accessible en métro, tramway, bus et taxi. Le cabinet est accessible aux personnes à mobilité réduite.",
+        question: "Comment accأ©der au cabinet ?",
+        answer: "Le cabinet est situأ© au 24 Rue Didouche Mourad, 16000 Alger. Il est accessible en mأ©tro, tramway, bus et taxi. Le cabinet est accessible aux personnes أ  mobilitأ© rأ©duite.",
       },
       {
-        question: "Y a-t-il un parking à proximité ?",
-        answer: "Oui, un parking public se trouve à 2 minutes à pied du cabinet. Il est payant. Nous recommandons les transports en commun pour faciliter votre accès.",
+        question: "Y a-t-il un parking أ  proximitأ© ?",
+        answer: "Oui, un parking public se trouve أ  2 minutes أ  pied du cabinet. Il est payant. Nous recommandons les transports en commun pour faciliter votre accأ¨s.",
       },
     ],
   },
@@ -66,20 +66,20 @@ const faqData = [
     category: "payment",
     questions: [
       {
-        question: "Quels moyens de paiement sont acceptés ?",
-        answer: "Nous acceptons les paiements par carte bancaire, chèque, espèces et virement. Le paiement sans contact est disponible. Nous n'acceptons pas les paiements en plusieurs fois.",
+        question: "Quels moyens de paiement sont acceptأ©s ?",
+        answer: "Nous acceptons les paiements par carte bancaire, chأ¨que, espأ¨ces et virement. Le paiement sans contact est disponible. Nous n'acceptons pas les paiements en plusieurs fois.",
       },
       {
-        question: "Acceptez-vous la carte Chifa et les complémentaires santé ?",
-        answer: "Oui, nous acceptons la carte Chifa et les cartes de complémentaire santé pour le tiers payant. Vous ne payez que la part non remboursée. Pensez à mettre à jour votre carte Chifa régulièrement.",
+        question: "Acceptez-vous la carte Chifa et les complأ©mentaires santأ© ?",
+        answer: "Oui, nous acceptons la carte Chifa et les cartes de complأ©mentaire santأ© pour le tiers payant. Vous ne payez que la part non remboursأ©e. Pensez أ  mettre أ  jour votre carte Chifa rأ©guliأ¨rement.",
       },
       {
         question: "Quels sont les tarifs des consultations ?",
-        answer: "Les tarifs varient selon le type de consultation : 2 500 DA pour une consultation générale, 3 000 DA pour un suivi, 5 000 DA pour un bilan de santé complet. Ces tarifs sont conformes aux conventions et sont partiellement remboursés par la CNAS.",
+        answer: "Les tarifs varient selon le type de consultation : 2 500 DA pour une consultation gأ©nأ©rale, 3 000 DA pour un suivi, 5 000 DA pour un bilan de santأ© complet. Ces tarifs sont conformes aux conventions et sont partiellement remboursأ©s par la CNAS.",
       },
       {
-        question: "Proposez-vous des facilités de paiement ?",
-        answer: "Pour les patients en difficulté financière, nous pouvons étudier des solutions de paiement adaptées. N'hésitez pas à en parler lors de votre consultation. Nous acceptons également les dispositifs sociaux disponibles.",
+        question: "Proposez-vous des facilitأ©s de paiement ?",
+        answer: "Pour les patients en difficultأ© financiأ¨re, nous pouvons أ©tudier des solutions de paiement adaptأ©es. N'hأ©sitez pas أ  en parler lors de votre consultation. Nous acceptons أ©galement les dispositifs sociaux disponibles.",
       },
     ],
   },
@@ -104,11 +104,11 @@ export function FAQPage() {
             <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
               Questions{" "}
               <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                Fréquentes
+                Frأ©quentes
               </span>
             </h1>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Retrouvez les réponses aux questions les plus courantes. Si vous ne trouvez pas votre réponse, n'hésitez pas à nous contacter.
+              Retrouvez les rأ©ponses aux questions les plus courantes. Si vous ne trouvez pas votre rأ©ponse, n'hأ©sitez pas أ  nous contacter.
             </p>
           </motion.div>
         </div>
@@ -196,10 +196,10 @@ export function FAQPage() {
                 <Phone className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold text-slate-800 mb-2">
-                Vous n'avez pas trouvé votre réponse ?
+                Vous n'avez pas trouvأ© votre rأ©ponse ?
               </h3>
               <p className="text-slate-600 mb-6">
-                Notre équipe est disponible pour répondre à toutes vos questions.
+                Notre أ©quipe est disponible pour rأ©pondre أ  toutes vos questions.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link to="/contact">

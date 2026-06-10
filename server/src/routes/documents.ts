@@ -31,11 +31,11 @@ router.get('/:id/download', optionalAuth, async (req: AuthRequest, res: Response
   }
   const doc: any = await get('SELECT * FROM patient_documents WHERE id = ?', req.params.id);
   if (!doc) {
-    res.status(404).json({ error: 'Document non trouvé' });
+    res.status(404).json({ error: 'Document non trouvأ©' });
     return;
   }
   if (req.userType === 'patient' && doc.patient_id !== req.userId) {
-    res.status(403).json({ error: 'Accès refusé' });
+    res.status(403).json({ error: 'Accأ¨s refusأ©' });
     return;
   }
   res.json({
@@ -76,13 +76,13 @@ router.post('/', requirePatient, async (req: AuthRequest, res: Response) => {
 
   const ext = fileName.toLowerCase().slice(fileName.lastIndexOf('.'));
   if (BLOCKED_EXTENSIONS.includes(ext)) {
-    res.status(400).json({ error: 'Ce type de fichier n\'est pas autorisé' });
+    res.status(400).json({ error: 'Ce type de fichier n\'est pas autorisأ©' });
     return;
   }
 
   const mime = file_type || 'application/octet-stream';
   if (!ALLOWED_MIME_TYPES.includes(mime)) {
-    res.status(400).json({ error: 'Type de fichier non autorisé (PDF, images, DOC, XLS, TXT uniquement)' });
+    res.status(400).json({ error: 'Type de fichier non autorisأ© (PDF, images, DOC, XLS, TXT uniquement)' });
     return;
   }
 
@@ -107,11 +107,11 @@ router.post('/', requirePatient, async (req: AuthRequest, res: Response) => {
 router.delete('/:id', requirePatient, async (req: AuthRequest, res: Response) => {
   const doc: any = await get('SELECT * FROM patient_documents WHERE id = ?', req.params.id);
   if (!doc) {
-    res.status(404).json({ error: 'Document non trouvé' });
+    res.status(404).json({ error: 'Document non trouvأ©' });
     return;
   }
   if (req.userType === 'patient' && doc.patient_id !== req.userId) {
-    res.status(403).json({ error: 'Accès refusé' });
+    res.status(403).json({ error: 'Accأ¨s refusأ©' });
     return;
   }
   await run('DELETE FROM patient_documents WHERE id = ?', req.params.id);

@@ -106,7 +106,7 @@ export function PatientDashboardPage() {
     try {
       const updated = await api.updatePatientMe(editForm);
       setPatient(updated);
-      alert("Profil mis à jour");
+      alert("Profil mis أ  jour");
     } catch (e: any) { alert(e.message); }
     finally { setSaving(false); }
   }
@@ -169,11 +169,11 @@ export function PatientDashboardPage() {
 
   async function changePassword() {
     if (pwNew !== pwConfirm) { alert("Les mots de passe ne correspondent pas"); return; }
-    if (pwNew.length < 8) { alert("Le mot de passe doit contenir au moins 8 caractères"); return; }
+    if (pwNew.length < 8) { alert("Le mot de passe doit contenir au moins 8 caractأ¨res"); return; }
     setSaving(true);
     try {
       await api.changePassword(pwCurrent, pwNew);
-      alert("Mot de passe modifié avec succès");
+      alert("Mot de passe modifiأ© avec succأ¨s");
       setShowPassword(false); setPwCurrent(""); setPwNew(""); setPwConfirm("");
     } catch (e: any) { alert(e.message); }
     finally { setSaving(false); }
@@ -231,7 +231,7 @@ export function PatientDashboardPage() {
                   { id: "appointments", label: "Rendez-vous", icon: Calendar },
                   { id: "documents", label: "Documents", icon: FileText },
                   { id: "messages", label: "Messages", icon: MessageSquare, badge: unreadMessages },
-                  { id: "settings", label: "Paramètres", icon: Settings },
+                  { id: "settings", label: "Paramأ¨tres", icon: Settings },
                 ].map((item) => (
                   <button key={item.id} onClick={() => setActiveTab(item.id)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all relative ${activeTab === item.id ? "bg-emerald-600 text-white" : "text-slate-600 hover:bg-slate-100"}`}>
@@ -241,7 +241,7 @@ export function PatientDashboardPage() {
                 ))}
                 <hr className="my-2" />
                 <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-100 transition-all">
-                  <LogOut className="w-5 h-5" /> Déconnexion
+                  <LogOut className="w-5 h-5" /> Dأ©connexion
                 </button>
               </nav>
             </Card>
@@ -258,7 +258,7 @@ export function PatientDashboardPage() {
                   <Card variant="glass">
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center"><Calendar className="w-6 h-6 text-emerald-600" /></div>
-                      <div><p className="text-2xl font-bold text-slate-800">{upcomingAppointments.length}</p><p className="text-sm text-slate-500">RDV à venir</p></div>
+                      <div><p className="text-2xl font-bold text-slate-800">{upcomingAppointments.length}</p><p className="text-sm text-slate-500">RDV أ  venir</p></div>
                     </div>
                   </Card>
                   <Card variant="glass">
@@ -280,7 +280,7 @@ export function PatientDashboardPage() {
                     <Button variant="ghost" size="sm" onClick={() => { setShowPast(false); setActiveTab("appointments"); }}>Voir tout <ChevronRight className="w-4 h-4" /></Button>
                   </div>
                   {upcomingAppointments.length === 0 ? (
-                    <p className="text-slate-500 text-sm py-4 text-center">Aucun rendez-vous à venir</p>
+                    <p className="text-slate-500 text-sm py-4 text-center">Aucun rendez-vous أ  venir</p>
                   ) : (
                     <div className="space-y-3">
                       {upcomingAppointments.slice(0, 3).map((apt) => (
@@ -289,10 +289,10 @@ export function PatientDashboardPage() {
                             <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center"><Calendar className="w-6 h-6 text-emerald-600" /></div>
                             <div>
                               <p className="font-medium text-slate-800">{apt.motif || "Consultation"}</p>
-                              <div className="flex items-center gap-2 text-sm text-slate-500"><span>{apt.date}</span><span>•</span><span>{apt.time_slot}</span></div>
+                              <div className="flex items-center gap-2 text-sm text-slate-500"><span>{apt.date}</span><span>â€¢</span><span>{apt.time_slot}</span></div>
                             </div>
                           </div>
-                          <Badge variant={apt.status === "confirmed" ? "success" : "warning"}>{apt.status === "confirmed" ? "Confirmé" : "En attente"}</Badge>
+                          <Badge variant={apt.status === "confirmed" ? "success" : "warning"}>{apt.status === "confirmed" ? "Confirmأ©" : "En attente"}</Badge>
                         </button>
                       ))}
                     </div>
@@ -309,13 +309,13 @@ export function PatientDashboardPage() {
                 </div>
                 <div className="flex gap-2 mb-2">
                   <button onClick={() => setShowPast(false)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${!showPast ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600"}`}>À venir</button>
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${!showPast ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600"}`}>أ€ venir</button>
                   <button onClick={() => setShowPast(true)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${showPast ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600"}`}>Historique</button>
                 </div>
                 <Card variant="elevated">
                   {displayAppointments.length === 0 ? (
-                    <p className="text-slate-500 text-sm py-8 text-center">{showPast ? "Aucun historique" : "Aucun rendez-vous à venir"}</p>
+                    <p className="text-slate-500 text-sm py-8 text-center">{showPast ? "Aucun historique" : "Aucun rendez-vous أ  venir"}</p>
                   ) : (
                     <div className="space-y-3">
                       {displayAppointments.map((apt) => (
@@ -336,7 +336,7 @@ export function PatientDashboardPage() {
                               <button onClick={(e) => { e.stopPropagation(); cancelAppointment(apt.id); }} className="p-2 rounded-lg hover:bg-red-50 text-red-500 transition-colors" title="Annuler"><X className="w-4 h-4" /></button>
                             )}
                             <Badge variant={apt.status === "completed" || apt.status === "confirmed" ? "success" : apt.status === "cancelled" ? "default" : "warning"}>
-                              {apt.status === "completed" ? "Terminé" : apt.status === "confirmed" ? "Confirmé" : apt.status === "cancelled" ? "Annulé" : "En attente"}
+                              {apt.status === "completed" ? "Terminأ©" : apt.status === "confirmed" ? "Confirmأ©" : apt.status === "cancelled" ? "Annulأ©" : "En attente"}
                             </Badge>
                           </div>
                         </div>
@@ -364,11 +364,11 @@ export function PatientDashboardPage() {
                             <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center"><FileText className="w-6 h-6 text-blue-600" /></div>
                             <div>
                               <p className="font-medium text-slate-800">{doc.name}</p>
-                              <p className="text-xs text-slate-500">{(doc.file_size / 1024).toFixed(1)} Ko • {doc.created_at?.split(" ")[0]}</p>
+                              <p className="text-xs text-slate-500">{(doc.file_size / 1024).toFixed(1)} Ko â€¢ {doc.created_at?.split(" ")[0]}</p>
                             </div>
                           </div>
                           <div className="flex gap-1">
-                            <button onClick={() => downloadDocument(doc.id)} className="p-2 rounded-lg hover:bg-slate-100 text-emerald-600" title="Télécharger"><Download className="w-4 h-4" /></button>
+                            <button onClick={() => downloadDocument(doc.id)} className="p-2 rounded-lg hover:bg-slate-100 text-emerald-600" title="Tأ©lأ©charger"><Download className="w-4 h-4" /></button>
                             <button onClick={() => deleteDocument(doc.id)} className="p-2 rounded-lg hover:bg-red-50 text-red-500" title="Supprimer"><Trash2 className="w-4 h-4" /></button>
                           </div>
                         </div>
@@ -386,7 +386,7 @@ export function PatientDashboardPage() {
                   <Button onClick={() => setShowNewMsg(true)}><Plus className="w-4 h-4" /> Nouveau message</Button>
                 </div>
                 {messages.length === 0 ? (
-                  <Card variant="glass"><div className="py-8 text-center text-slate-500"><MessageSquare className="w-12 h-12 mx-auto mb-4 text-slate-400" /><p>Aucun message</p><p className="text-sm">Envoyez un message au médecin</p></div></Card>
+                  <Card variant="glass"><div className="py-8 text-center text-slate-500"><MessageSquare className="w-12 h-12 mx-auto mb-4 text-slate-400" /><p>Aucun message</p><p className="text-sm">Envoyez un message au mأ©decin</p></div></Card>
                 ) : (
                   <div className="space-y-4">
                     {messages.map((msg) => (
@@ -395,14 +395,14 @@ export function PatientDashboardPage() {
                         <div className="flex items-start justify-between mb-2">
                           <div>
                             <h3 className="font-semibold text-slate-800">{msg.subject}</h3>
-                            <p className="text-xs text-slate-500">{msg.created_at?.split(" ")[0]} à {msg.created_at?.split(" ")[1]?.slice(0, 5)}</p>
+                            <p className="text-xs text-slate-500">{msg.created_at?.split(" ")[0]} أ  {msg.created_at?.split(" ")[1]?.slice(0, 5)}</p>
                           </div>
                           {!msg.read_by_patient && <Badge variant="info">Nouveau</Badge>}
                         </div>
                         <p className="text-slate-600 text-sm mb-3 p-3 rounded-lg bg-slate-50">{msg.message}</p>
                         {msg.reply && (
                           <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200">
-                            <p className="text-xs text-emerald-600 font-medium mb-1">Réponse du Dr. Djaidja ({msg.reply_at?.split(" ")[0]})</p>
+                            <p className="text-xs text-emerald-600 font-medium mb-1">Rأ©ponse du Dr. Djaidja ({msg.reply_at?.split(" ")[0]})</p>
                             <p className="text-sm text-slate-700">{msg.reply}</p>
                           </div>
                         )}
@@ -415,14 +415,14 @@ export function PatientDashboardPage() {
 
             {activeTab === "settings" && (
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-                <h1 className="text-2xl font-bold text-slate-800">Paramètres</h1>
+                <h1 className="text-2xl font-bold text-slate-800">Paramأ¨tres</h1>
                 <Card variant="elevated">
                   <h2 className="text-lg font-semibold text-slate-800 mb-4">Informations personnelles</h2>
                   <div className="grid md:grid-cols-2 gap-4">
-                    <div><label className="block text-sm font-medium text-slate-700 mb-1">Prénom</label><Input value={editForm.firstName} onChange={(e) => setEditForm({ ...editForm, firstName: e.target.value })} /></div>
+                    <div><label className="block text-sm font-medium text-slate-700 mb-1">Prأ©nom</label><Input value={editForm.firstName} onChange={(e) => setEditForm({ ...editForm, firstName: e.target.value })} /></div>
                     <div><label className="block text-sm font-medium text-slate-700 mb-1">Nom</label><Input value={editForm.lastName} onChange={(e) => setEditForm({ ...editForm, lastName: e.target.value })} /></div>
                     <div><label className="block text-sm font-medium text-slate-700 mb-1">Email</label><Input value={patient?.email || ""} readOnly className="bg-slate-50 text-slate-500" /></div>
-                    <div><label className="block text-sm font-medium text-slate-700 mb-1">Téléphone</label><Input value={editForm.phone} onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })} /></div>
+                    <div><label className="block text-sm font-medium text-slate-700 mb-1">Tأ©lأ©phone</label><Input value={editForm.phone} onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })} /></div>
                   </div>
                   <Button className="mt-4" onClick={saveProfile} disabled={saving}>{saving ? "Enregistrement..." : "Enregistrer les modifications"}</Button>
                 </Card>
@@ -431,7 +431,7 @@ export function PatientDashboardPage() {
                     <h2 className="text-lg font-semibold text-slate-800">Mot de passe</h2>
                     <Button variant="secondary" size="sm" onClick={() => setShowPassword(true)}><Lock className="w-4 h-4" /> Modifier</Button>
                   </div>
-                  <p className="text-sm text-slate-500">Le mot de passe doit contenir au moins 8 caractères.</p>
+                  <p className="text-sm text-slate-500">Le mot de passe doit contenir au moins 8 caractأ¨res.</p>
                 </Card>
               </motion.div>
             )}
@@ -472,14 +472,14 @@ export function PatientDashboardPage() {
       </Modal>
 
       {/* Appointment Detail Modal */}
-      <Modal open={!!detailApt} onClose={() => setDetailApt(null)} title="Détail du rendez-vous">
+      <Modal open={!!detailApt} onClose={() => setDetailApt(null)} title="Dأ©tail du rendez-vous">
         {detailLoading ? (
           <p className="text-slate-500 text-center py-4">Chargement...</p>
         ) : detailApt ? (
           <div className="space-y-4">
             <div className="flex items-center gap-3 p-3 rounded-xl bg-emerald-50">
               <Badge variant={detailApt.status === "completed" || detailApt.status === "confirmed" ? "success" : detailApt.status === "cancelled" ? "default" : "warning"}>
-                {detailApt.status === "completed" ? "Terminé" : detailApt.status === "confirmed" ? "Confirmé" : detailApt.status === "cancelled" ? "Annulé" : "En attente"}
+                {detailApt.status === "completed" ? "Terminأ©" : detailApt.status === "confirmed" ? "Confirmأ©" : detailApt.status === "cancelled" ? "Annulأ©" : "En attente"}
               </Badge>
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -499,7 +499,7 @@ export function PatientDashboardPage() {
             <div className="grid grid-cols-2 gap-3">
               <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50">
                 <Phone className="w-4 h-4 text-emerald-600" />
-                <div><p className="text-xs text-slate-500">Téléphone</p><p className="text-sm font-medium">{detailApt.phone}</p></div>
+                <div><p className="text-xs text-slate-500">Tأ©lأ©phone</p><p className="text-sm font-medium">{detailApt.phone}</p></div>
               </div>
               {detailApt.email && (
                 <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50">
@@ -526,7 +526,7 @@ export function PatientDashboardPage() {
             )}
             <div className="flex items-start gap-2 p-3 rounded-xl bg-amber-50">
               <AlertCircle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
-              <p className="text-xs text-amber-800">Arrivez 10 min avant. Annulez 24h à l'avance en cas d'empêchement.</p>
+              <p className="text-xs text-amber-800">Arrivez 10 min avant. Annulez 24h أ  l'avance en cas d'empأھchement.</p>
             </div>
             {(detailApt.status === "pending" || detailApt.status === "confirmed") && (
               <Button onClick={async () => { if (window.confirm("Annuler ce rendez-vous ?")) { try { await api.cancelAppointment(detailApt.id); setAppointments(appointments.map((a) => (a.id === detailApt.id ? { ...a, status: "cancelled" } : a))); setDetailApt(null); } catch (e: any) { alert(e.message); } } }} className="w-full bg-red-600 hover:bg-red-700">

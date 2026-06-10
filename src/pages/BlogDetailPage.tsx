@@ -32,7 +32,7 @@ export function BlogDetailPage() {
     return (
       <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white flex items-center justify-center">
         <div className="text-center">
-          <p className="text-slate-500 mb-4">Article non trouvé</p>
+          <p className="text-slate-500 mb-4">Article non trouvأ©</p>
           <Link to="/blog"><Button variant="secondary"><ArrowLeft className="w-4 h-4" /> Retour au blog</Button></Link>
         </div>
       </div>
@@ -40,8 +40,8 @@ export function BlogDetailPage() {
   }
 
   const categories: Record<string, string> = {
-    prevention: "Prévention", nutrition: "Nutrition", general: "Santé générale",
-    news: "Actualités", advice: "Conseils santé", wellness: "Bien-être",
+    prevention: "Prأ©vention", nutrition: "Nutrition", general: "Santأ© gأ©nأ©rale",
+    news: "Actualitأ©s", advice: "Conseils santأ©", wellness: "Bien-أھtre",
   };
 
   return (

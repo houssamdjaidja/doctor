@@ -38,7 +38,7 @@ router.get('/', requireAdmin, async (req: Request, res: Response) => {
 router.put('/:id/read', requireAdmin, async (req: Request, res: Response) => {
   const existing = await get('SELECT * FROM contact_messages WHERE id = ?', req.params.id);
   if (!existing) {
-    res.status(404).json({ error: 'Message non trouvé' });
+    res.status(404).json({ error: 'Message non trouvأ©' });
     return;
   }
 
@@ -49,7 +49,7 @@ router.put('/:id/read', requireAdmin, async (req: Request, res: Response) => {
 router.delete('/:id', requireAdmin, async (req: Request, res: Response) => {
   const result = await run('DELETE FROM contact_messages WHERE id = ? RETURNING id', req.params.id);
   if (result.rowCount === 0) {
-    res.status(404).json({ error: 'Message non trouvé' });
+    res.status(404).json({ error: 'Message non trouvأ©' });
     return;
   }
   res.json({ success: true });

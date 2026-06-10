@@ -19,21 +19,21 @@ router.post('/register', async (req: AuthRequest, res: Response) => {
     return;
   }
   if (password.length < 8) {
-    res.status(400).json({ error: 'Le mot de passe doit contenir au moins 8 caractères' });
+    res.status(400).json({ error: 'Le mot de passe doit contenir au moins 8 caractأ¨res' });
     return;
   }
 
   const existing = await get('SELECT id, email_verified FROM patients WHERE email = ?', email);
   if (existing) {
     if (existing.email_verified) {
-      res.status(409).json({ error: 'Un compte avec cet email existe déjà' });
+      res.status(409).json({ error: 'Un compte avec cet email existe dأ©jأ ' });
       return;
     }
     const code = generateCode();
     await run('UPDATE patients SET first_name=?, last_name=?, phone=?, password_hash=?, verification_code=? WHERE email=?',
       firstName, lastName, phone, await bcrypt.hash(password, 12), code, email);
     sendVerificationCode(email, code).catch(err => console.error('[EMAIL] Failed to send:', err?.message));
-    res.json({ message: 'Code de vérification envoyé', email });
+    res.json({ message: 'Code de vأ©rification envoyأ©', email });
     return;
   }
 
@@ -46,7 +46,7 @@ router.post('/register', async (req: AuthRequest, res: Response) => {
 
   sendVerificationCode(email, code).catch(err => console.error('[EMAIL] Failed to send:', err?.message));
 
-  res.status(201).json({ message: 'Code de vérification envoyé', email });
+  res.status(201).json({ message: 'Code de vأ©rification envoyأ©', email });
 });
 
 router.post('/verify-email', async (req: AuthRequest, res: Response) => {
@@ -59,16 +59,16 @@ router.post('/verify-email', async (req: AuthRequest, res: Response) => {
 
   const patient: any = await get('SELECT * FROM patients WHERE email = ?', email);
   if (!patient) {
-    res.status(404).json({ error: 'Patient non trouvé' });
+    res.status(404).json({ error: 'Patient non trouvأ©' });
     return;
   }
   if (patient.email_verified) {
     const token = generateToken({ id: patient.id, type: 'patient' });
-    res.json({ message: 'Email déjà vérifié', token, patient: { id: patient.id, firstName: patient.first_name, lastName: patient.last_name, email: patient.email, phone: patient.phone } });
+    res.json({ message: 'Email dأ©jأ  vأ©rifiأ©', token, patient: { id: patient.id, firstName: patient.first_name, lastName: patient.last_name, email: patient.email, phone: patient.phone } });
     return;
   }
   if (patient.verification_code !== code) {
-    res.status(400).json({ error: 'Code de vérification incorrect' });
+    res.status(400).json({ error: 'Code de vأ©rification incorrect' });
     return;
   }
 
@@ -96,18 +96,18 @@ router.post('/resend-code', async (req: AuthRequest, res: Response) => {
 
   const patient: any = await get('SELECT * FROM patients WHERE email = ?', email);
   if (!patient) {
-    res.status(404).json({ error: 'Patient non trouvé' });
+    res.status(404).json({ error: 'Patient non trouvأ©' });
     return;
   }
   if (patient.email_verified) {
-    res.json({ message: 'Email déjà vérifié' });
+    res.json({ message: 'Email dأ©jأ  vأ©rifiأ©' });
     return;
   }
 
   const code = generateCode();
   await run('UPDATE patients SET verification_code = ? WHERE id = ?', code, patient.id);
   sendVerificationCode(email, code).catch(err => console.error('[EMAIL] Failed to send:', err?.message));
-  res.json({ message: 'Code de vérification renvoyé' });
+  res.json({ message: 'Code de vأ©rification renvoyأ©' });
 });
 
 router.post('/forgot-password', async (req: AuthRequest, res: Response) => {
@@ -119,7 +119,7 @@ router.post('/forgot-password', async (req: AuthRequest, res: Response) => {
 
   const patient: any = await get('SELECT * FROM patients WHERE email = ?', email);
   if (!patient) {
-    res.json({ message: 'Si cet email existe, un code de réinitialisation a été envoyé' });
+    res.json({ message: 'Si cet email existe, un code de rأ©initialisation a أ©tأ© envoyأ©' });
     return;
   }
 
@@ -127,7 +127,7 @@ router.post('/forgot-password', async (req: AuthRequest, res: Response) => {
   await run('UPDATE patients SET reset_code = ?, reset_code_expires = NOW() + INTERVAL \'15 minutes\' WHERE id = ?', code, patient.id);
   sendResetCode(email, code).catch(err => console.error('[EMAIL] Failed to send:', err?.message));
 
-  res.json({ message: 'Si cet email existe, un code de réinitialisation a été envoyé' });
+  res.json({ message: 'Si cet email existe, un code de rأ©initialisation a أ©tأ© envoyأ©' });
 });
 
 router.post('/reset-password', async (req: AuthRequest, res: Response) => {
@@ -138,30 +138,30 @@ router.post('/reset-password', async (req: AuthRequest, res: Response) => {
     return;
   }
   if (password.length < 8) {
-    res.status(400).json({ error: 'Le mot de passe doit contenir au moins 8 caractères' });
+    res.status(400).json({ error: 'Le mot de passe doit contenir au moins 8 caractأ¨res' });
     return;
   }
 
   const patient: any = await get('SELECT * FROM patients WHERE email = ?', email);
   if (!patient) {
-    res.status(400).json({ error: 'Code de réinitialisation incorrect ou expiré' });
+    res.status(400).json({ error: 'Code de rأ©initialisation incorrect ou expirأ©' });
     return;
   }
 
   if (!patient.reset_code || patient.reset_code !== code) {
-    res.status(400).json({ error: 'Code de réinitialisation incorrect ou expiré' });
+    res.status(400).json({ error: 'Code de rأ©initialisation incorrect ou expirأ©' });
     return;
   }
 
   if (patient.reset_code_expires && new Date(patient.reset_code_expires) < new Date()) {
-    res.status(400).json({ error: 'Code de réinitialisation expiré' });
+    res.status(400).json({ error: 'Code de rأ©initialisation expirأ©' });
     return;
   }
 
   const hash = await bcrypt.hash(password, 12);
   await run('UPDATE patients SET password_hash = ?, reset_code = NULL, reset_code_expires = NULL WHERE id = ?', hash, patient.id);
 
-  res.json({ message: 'Mot de passe réinitialisé avec succès' });
+  res.json({ message: 'Mot de passe rأ©initialisأ© avec succأ¨s' });
 });
 
 router.post('/login', async (req: AuthRequest, res: Response) => {
@@ -184,7 +184,7 @@ router.post('/login', async (req: AuthRequest, res: Response) => {
   }
 
   if (!patient.email_verified) {
-    res.status(403).json({ error: 'Veuillez vérifier votre email avant de vous connecter', code: 'EMAIL_NOT_VERIFIED', email: patient.email });
+    res.status(403).json({ error: 'Veuillez vأ©rifier votre email avant de vous connecter', code: 'EMAIL_NOT_VERIFIED', email: patient.email });
     return;
   }
 
@@ -236,7 +236,7 @@ router.post('/admin/login', async (req: AuthRequest, res: Response) => {
 router.get('/me', requirePatient, async (req: AuthRequest, res: Response) => {
   const patient: any = await get('SELECT id, first_name, last_name, email, phone, created_at FROM patients WHERE id = ?', req.userId);
   if (!patient) {
-    res.status(404).json({ error: 'Patient non trouvé' });
+    res.status(404).json({ error: 'Patient non trouvأ©' });
     return;
   }
   res.json({
@@ -256,7 +256,7 @@ router.put('/password', requirePatient, async (req: AuthRequest, res: Response) 
     return;
   }
   if (newPassword.length < 8) {
-    res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 8 caractères' });
+    res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 8 caractأ¨res' });
     return;
   }
   const patient: any = await get('SELECT * FROM patients WHERE id = ?', req.userId);
@@ -276,7 +276,7 @@ router.put('/admin/password', requireAdmin, async (req: AuthRequest, res: Respon
     return;
   }
   if (newPassword.length < 8) {
-    res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 8 caractères' });
+    res.status(400).json({ error: 'Le nouveau mot de passe doit contenir au moins 8 caractأ¨res' });
     return;
   }
   const admin: any = await get('SELECT * FROM admin_users WHERE id = ?', req.userId);

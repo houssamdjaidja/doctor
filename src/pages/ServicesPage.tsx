@@ -22,29 +22,29 @@ import { Button } from "@/components/ui/Button"
 const services = [
   {
     icon: Stethoscope,
-    title: "Consultation Générale",
-    description: "Examen médical complet incluant l'anamnèse, l'examen clinique et le diagnostic. Nous traitons tous types de problèmes de santé courants.",
+    title: "Consultation Gأ©nأ©rale",
+    description: "Examen mأ©dical complet incluant l'anamnأ¨se, l'examen clinique et le diagnostic. Nous traitons tous types de problأ¨mes de santأ© courants.",
     duration: "30 min",
     price: "2500 DA",
     features: [
       "Examen clinique complet",
-      "Diagnostic personnalisé",
-      "Ordonnance si nécessaire",
-      "Conseils de prévention",
+      "Diagnostic personnalisأ©",
+      "Ordonnance si nأ©cessaire",
+      "Conseils de prأ©vention",
     ],
     image: "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=400&h=300&fit=crop",
   },
   {
     icon: UserCheck,
-    title: "Suivi Médical",
-    description: "Accompagnement régulier pour les patients nécessitant un suivi médical continu. Idéal pour les maladies chroniques.",
+    title: "Suivi Mأ©dical",
+    description: "Accompagnement rأ©gulier pour les patients nأ©cessitant un suivi mأ©dical continu. Idأ©al pour les maladies chroniques.",
     duration: "45 min",
     price: "3000 DA",
     features: [
-      "Suivi personnalisé",
+      "Suivi personnalisأ©",
       "Ajustement des traitements",
-      "Examens réguliers",
-      "Coordination avec spécialistes",
+      "Examens rأ©guliers",
+      "Coordination avec spأ©cialistes",
     ],
     image: "https://images.unsplash.com/photo-157609116055073dba999ef?w=400&h=300&fit=crop",
   },
@@ -56,7 +56,7 @@ const services = [
     price: "Gratuit*",
     features: [
       "Vaccins obligatoires",
-      "Vaccins recommandés",
+      "Vaccins recommandأ©s",
       "Carnet de vaccination",
       "Rappels automatiques",
     ],
@@ -64,71 +64,71 @@ const services = [
   },
   {
     icon: ClipboardCheck,
-    title: "Contrôle de Santé",
-    description: "Bilan de santé complet incluant les examens de routine et les dépistages recommandés selon votre âge et antécédents.",
+    title: "Contrأ´le de Santأ©",
+    description: "Bilan de santأ© complet incluant les examens de routine et les dأ©pistages recommandأ©s selon votre أ¢ge et antأ©cأ©dents.",
     duration: "60 min",
     price: "5000 DA",
     features: [
       "Bilan complet",
       "Analyses sanguines",
-      "Dépistages ciblés",
-      "Rapport détaillé",
+      "Dأ©pistages ciblأ©s",
+      "Rapport dأ©taillأ©",
     ],
     image: "https://images.unsplash.com/photo-1579684385127-1ef15d508?w=400&h=300&fit=crop",
   },
   {
     icon: Activity,
-    title: "Examens Préventifs",
-    description: "Dépistages et examens de prévention pour détecter précocement les maladies et rester en bonne santé.",
+    title: "Examens Prأ©ventifs",
+    description: "Dأ©pistages et examens de prأ©vention pour dأ©tecter prأ©cocement les maladies et rester en bonne santأ©.",
     duration: "45 min",
     price: "3500 DA",
     features: [
-      "Dépistage cancer",
+      "Dأ©pistage cancer",
       "Bilan cardiovasculaire",
-      "Examens selon âge",
-      "Conseils personnalisés",
+      "Examens selon أ¢ge",
+      "Conseils personnalisأ©s",
     ],
     image: "https://images.unsplash.com/photo-1559757175-0eb30c063?w=400&h=300&fit=crop",
   },
   {
     icon: Heart,
     title: "Gestion Maladies Chroniques",
-    description: "Prise en charge complète des maladies chroniques : diabète, hypertension, asthme, etc.",
+    description: "Prise en charge complأ¨te des maladies chroniques : diabأ¨te, hypertension, asthme, etc.",
     duration: "45 min",
     price: "3000 DA",
     features: [
-      "Suivi régulier",
-      "Éducation thérapeutique",
-      "Coordination spécialistes",
-      "Plan de soins personnalisé",
+      "Suivi rأ©gulier",
+      "أ‰ducation thأ©rapeutique",
+      "Coordination spأ©cialistes",
+      "Plan de soins personnalisأ©",
     ],
     image: "https://images.unsplash.com/photo-1501172876-fa1923c5c528?w=400&h=300&fit=crop",
   },
   {
     icon: Pill,
-    title: "Conseils Médicamenteux",
-    description: "Revue de vos traitements, conseils sur les médicaments et optimisation de votre pharmacothérapie.",
+    title: "Conseils Mأ©dicamenteux",
+    description: "Revue de vos traitements, conseils sur les mأ©dicaments et optimisation de votre pharmacothأ©rapie.",
     duration: "20 min",
     price: "2000 DA",
     features: [
-      "Revue médicamenteuse",
-      "Interactions médicamenteuses",
+      "Revue mأ©dicamenteuse",
+      "Interactions mأ©dicamenteuses",
       "Optimisation traitement",
-      "Conseils personnalisés",
+      "Conseils personnalisأ©s",
     ],
     image: "https://images.unsplash.com/photo-1584306744-24d5c474f2ae?w=400&h=300&fit=crop",
   },
   {
     icon: Baby,
-    title: "Pédiatrie",
-    description: "Soins médicaux pour les enfants de 0 à 16 ans : consultations, vaccinations, suivi de croissance.",
+    title: "Pأ©diatrie",
+    description: "Soins mأ©dicaux pour les enfants de 0 أ  16 ans : consultations, vaccinations, suivi de croissance.",
     duration: "30 min",
     price: "2500 DA",
     features: [
       "Consultations enfant",
       "Suivi croissance",
       "Vaccinations",
-      "Certificats médicaux",
+      "Certificats mأ©dicaux",
     ],
     image: "https://images.unsplash.com/photo-1631898039984-fd5e658e12c9?w=400&h=300&fit=crop",
   },
@@ -147,14 +147,14 @@ export function ServicesPage() {
           >
             <Badge variant="success" className="mb-4">Nos Services</Badge>
             <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
-              Des soins médicaux{" "}
+              Des soins mأ©dicaux{" "}
               <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                 complets
               </span>
             </h1>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Nous offrons une large gamme de services médicaux pour répondre à tous vos besoins de santé,
-              du diagnostic à la prévention.
+              Nous offrons une large gamme de services mأ©dicaux pour rأ©pondre أ  tous vos besoins de santأ©,
+              du diagnostic أ  la prأ©vention.
             </p>
           </motion.div>
         </div>
@@ -216,7 +216,7 @@ export function ServicesPage() {
                     </div>
                     <Link to="/appointment">
                       <Button size="sm" variant="ghost">
-                        Réserver
+                        Rأ©server
                         <ArrowRight className="w-4 h-4" />
                       </Button>
                     </Link>
@@ -240,7 +240,7 @@ export function ServicesPage() {
               Besoin d'une consultation ?
             </h2>
             <p className="text-emerald-100 mb-8">
-              Prenez rendez-vous en ligne en quelques clics. Notre équipe vous accueille du lundi au samedi.
+              Prenez rendez-vous en ligne en quelques clics. Notre أ©quipe vous accueille du lundi au samedi.
             </p>
             <Link to="/appointment">
               <Button
@@ -259,8 +259,8 @@ export function ServicesPage() {
       <section className="py-12 bg-slate-50">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <p className="text-slate-500 text-sm">
-            * Les prix indiqués sont des tarifs de base. Ils peuvent varier selon les cas et sont partiellement
-            remboursés par la CNAS. Les vaccinations obligatoires sont gratuites.
+            * Les prix indiquأ©s sont des tarifs de base. Ils peuvent varier selon les cas et sont partiellement
+            remboursأ©s par la CNAS. Les vaccinations obligatoires sont gratuites.
           </p>
         </div>
       </section>

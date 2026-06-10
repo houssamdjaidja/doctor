@@ -234,13 +234,13 @@ export function PatientDashboardPage() {
                   { id: "settings", label: "Paramètres", icon: Settings },
                 ].map((item) => (
                   <button key={item.id} onClick={() => setActiveTab(item.id)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all relative ${activeTab === item.id ? "bg-emerald-600 text-white" : "text-slate-600 hover:bg-slate-100"}`}>
+                    className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all relative ${activeTab === item.id ? "bg-emerald-600 text-white" : "text-slate-600 hover:bg-slate-100"}`}>
                     <item.icon className="w-5 h-5" /> {item.label}
                     {(item as any).badge > 0 && <span className="ml-auto w-5 h-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center">{(item as any).badge}</span>}
                   </button>
                 ))}
                 <hr className="my-2" />
-                <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-100 transition-all">
+                <button onClick={handleLogout} className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-red-600 hover:bg-red-100 transition-all">
                   <LogOut className="w-5 h-5" /> Déconnexion
                 </button>
               </nav>

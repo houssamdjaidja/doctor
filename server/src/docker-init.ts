@@ -4,13 +4,13 @@ import bcrypt from 'bcryptjs';
 export async function seedData(): Promise<void> {
   const existing: any = await get("SELECT COUNT(*)::int as c FROM admin_users");
   if (existing.c === 0) {
-    const hash = await bcrypt.hash('admin123', 12);
-    await run('INSERT INTO admin_users (username, password_hash, display_name) VALUES (?, ?, ?)', 'admin', hash, 'Dr. Amine Benali');
+    const hash = await bcrypt.hash('doctor_2026_hs', 12);
+    await run('INSERT INTO admin_users (username, password_hash, display_name) VALUES (?, ?, ?)', 'doctor_msila', hash, 'Dr. Amine Benali');
     await run('INSERT INTO settings (key, value) VALUES (?, ?)', 'cabinet_name', 'Cabinet Dr. Benali');
     await run('INSERT INTO settings (key, value) VALUES (?, ?)', 'cabinet_email', 'contact@dr-benali.dz');
     await run('INSERT INTO settings (key, value) VALUES (?, ?)', 'cabinet_phone', '+213 21 23 45 67');
     await run('INSERT INTO settings (key, value) VALUES (?, ?)', 'cabinet_address', '24 Rue Didouche Mourad, 16000 Alger');
-    console.log('Admin user created (admin / admin123)');
+    console.log('Admin user created (doctor_msila / doctor_2026_hs)');
   } else {
     console.log('Admin user already exists');
   }

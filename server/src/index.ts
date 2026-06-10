@@ -65,14 +65,21 @@ app.use((err: any, _req: any, res: any, _next: any) => {
   res.status(500).json({ error: 'Erreur interne du serveur' });
 });
 
-initializeDatabase()
-  .then(async () => {
-    await seedData();
-    app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.error('Failed to initialize database:', err);
-    process.exit(1);
-  });
+async function start() {
+  for (let i = 1; i <= 10; i++) {
+    try {
+      await initializeDatabase();
+      await seedData();
+      app.listen(PORT, () => {
+        console.log(`Server running on http://localhost:${PORT}`);
+      });
+      return;
+    } catch (err: any) {
+      console.error(`Startup attempt ${i}/10 failed:`, err?.message);
+      if (i === 10) process.exit(1);
+      await new Promise(r => setTimeout(r, 3000));
+    }
+  }
+}
+
+start();

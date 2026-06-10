@@ -226,13 +226,12 @@ export function PatientDashboardPage() {
           <div className="lg:col-span-1">
             <Card variant="glass" hover={false} className="sticky top-24">
               <nav className="space-y-1">
-                {[
-                  { id: "overview", label: "Tableau de bord", icon: User },
-                  { id: "appointments", label: "Rendez-vous", icon: Calendar },
-                  { id: "documents", label: "Documents", icon: FileText },
-                  { id: "messages", label: "Messages", icon: MessageSquare, badge: unreadMessages },
-                  { id: "settings", label: "Paramètres", icon: Settings },
-                ].map((item) => (
+                  {[
+                    { id: "overview", label: "Tableau de bord", icon: User },
+                    { id: "appointments", label: "Rendez-vous", icon: Calendar },
+                    { id: "messages", label: "Messages", icon: MessageSquare, badge: unreadMessages },
+                    { id: "settings", label: "Paramètres", icon: Settings },
+                  ].map((item) => (
                   <button key={item.id} onClick={() => setActiveTab(item.id)}
                     className={`w-full flex items-center gap-4 px-4 py-3 rounded-xl transition-all relative ${activeTab === item.id ? "bg-emerald-600 text-white" : "text-slate-600 hover:bg-slate-100"}`}>
                     <item.icon className="w-5 h-5" /> {item.label}

@@ -5,6 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { initializeDatabase } from './database.js';
+import { seedData } from './docker-init.js';
 
 import authRoutes from './routes/auth.js';
 import appointmentRoutes from './routes/appointments.js';
@@ -65,7 +66,8 @@ app.use((err: any, _req: any, res: any, _next: any) => {
 });
 
 initializeDatabase()
-  .then(() => {
+  .then(async () => {
+    await seedData();
     app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
     });

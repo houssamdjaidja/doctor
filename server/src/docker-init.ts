@@ -1,9 +1,7 @@
 import { get, run, initializeDatabase } from './database.js';
 import bcrypt from 'bcryptjs';
 
-async function main() {
-  await initializeDatabase();
-
+export async function seedData(): Promise<void> {
   const existing: any = await get("SELECT COUNT(*)::int as c FROM admin_users");
   if (existing.c === 0) {
     const hash = await bcrypt.hash('admin123', 12);
@@ -19,9 +17,7 @@ async function main() {
 
   const blogCount: any = await get("SELECT COUNT(*)::int as c FROM blog_posts");
   if (blogCount.c < 7) {
-    // Delete existing blog posts
     await run('DELETE FROM blog_posts');
-    // Reset sequence
     await run("ALTER SEQUENCE blog_posts_id_seq RESTART WITH 1");
 
     const insertBlog = (
@@ -51,7 +47,11 @@ async function main() {
   } else {
     console.log('Blog posts already exist');
   }
+}
 
+async function main() {
+  await initializeDatabase();
+  await seedData();
   console.log('Database ready');
 }
 

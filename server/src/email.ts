@@ -1,7 +1,8 @@
 import nodemailer from 'nodemailer';
 
-const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY || '';
-const SENDGRID_FROM = process.env.SENDGRID_FROM || 'oh_djaidja@esi.dz';
+const BREVO_API_KEY = process.env.BREVO_API_KEY || '';
+const BREVO_FROM = process.env.BREVO_FROM || '';
+const BREVO_FROM_NAME = process.env.BREVO_FROM_NAME || 'Cabinet Dr. Djaidja';
 const RESEND_API_KEY = process.env.RESEND_API_KEY || '';
 const RESEND_FROM = process.env.RESEND_FROM || 'onboarding@resend.dev';
 const SMTP_HOST = process.env.SMTP_HOST || '';
@@ -25,30 +26,30 @@ function getTransporter(): nodemailer.Transporter | null {
   return transporter;
 }
 
-async function sendViaSendGrid(to: string, subject: string, text: string): Promise<boolean> {
-  if (!SENDGRID_API_KEY) return false;
+async function sendViaBrevo(to: string, subject: string, text: string): Promise<boolean> {
+  if (!BREVO_API_KEY || !BREVO_FROM) return false;
   try {
-    const res = await fetch('https://api.sendgrid.com/v3/mail/send', {
+    const res = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${SENDGRID_API_KEY}`,
+        'api-key': BREVO_API_KEY,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        personalizations: [{ to: [{ email: to }] }],
-        from: { email: SENDGRID_FROM },
+        sender: { email: BREVO_FROM, name: BREVO_FROM_NAME },
+        to: [{ email: to }],
         subject,
-        content: [{ type: 'text/plain', value: text }],
+        textContent: text,
       }),
     });
     if (!res.ok) {
       const body = await res.text();
-      console.error('[EMAIL] SendGrid error:', res.status, body);
+      console.error('[EMAIL] Brevo error:', res.status, body);
       return false;
     }
     return true;
   } catch (err: any) {
-    console.error('[EMAIL] SendGrid HTTP error:', err?.message);
+    console.error('[EMAIL] Brevo HTTP error:', err?.message);
     return false;
   }
 }
@@ -89,7 +90,7 @@ async function sendViaSMTP(to: string, subject: string, text: string): Promise<b
 }
 
 async function sendEmail(to: string, subject: string, text: string): Promise<boolean> {
-  if (await sendViaSendGrid(to, subject, text)) return true;
+  if (await sendViaBrevo(to, subject, text)) return true;
   if (await sendViaResend(to, subject, text)) return true;
   if (await sendViaSMTP(to, subject, text)) return true;
   console.log(`[EMAIL] ${subject} pour ${to}: ${text.match(/\d{6}/)?.[0] || '(code non trouvé)'}`);

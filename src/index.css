@@ -7,6 +7,14 @@
   --font-serif: 'Playfair Display', Georgia, serif;
 }
 
+/* Pointer cursor on all buttons and clickable elements */
+button, [role="button"], [type="button"], [type="submit"], [type="reset"] {
+  cursor: pointer;
+}
+button:disabled, [role="button"]:disabled, [type="button"]:disabled, [type="submit"]:disabled, [type="reset"]:disabled {
+  cursor: default;
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;

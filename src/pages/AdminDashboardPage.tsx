@@ -274,6 +274,10 @@ export function AdminDashboardPage() {
             <item.icon className="w-5 h-5" /> {item.label}
           </button>
         ))}
+        <button onClick={handleLogout}
+          className="flex-1 flex flex-col items-center gap-1 py-2 text-xs text-red-500">
+          <LogOut className="w-5 h-5" /> Déconnexion
+        </button>
       </nav>
 
       <main className="lg:ml-64 pb-16 lg:pb-0">
@@ -411,7 +415,6 @@ export function AdminDashboardPage() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
               <div className="flex items-center justify-between">
                 <h1 className="text-2xl font-bold text-slate-800">Gestion des rendez-vous</h1>
-                <Link to="/appointment"><Button><Plus className="w-4 h-4" /> Nouveau RDV</Button></Link>
               </div>
               <Card variant="elevated" hover={false}>
                 <div className="overflow-x-auto">

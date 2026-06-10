@@ -223,12 +223,13 @@ export function PatientDashboardPage() {
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-4 gap-8">
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 hidden lg:block">
             <Card variant="glass" hover={false} className="sticky top-24">
               <nav className="space-y-1">
                   {[
                     { id: "overview", label: "Tableau de bord", icon: User },
                     { id: "appointments", label: "Rendez-vous", icon: Calendar },
+                    { id: "documents", label: "Documents", icon: FileText },
                     { id: "messages", label: "Messages", icon: MessageSquare, badge: unreadMessages },
                     { id: "settings", label: "Paramètres", icon: Settings },
                   ].map((item) => (
@@ -246,7 +247,7 @@ export function PatientDashboardPage() {
             </Card>
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 pb-16 lg:pb-0">
             {activeTab === "overview" && (
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
                 <div>
@@ -437,6 +438,25 @@ export function PatientDashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* Mobile bottom nav */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-50 flex lg:hidden">
+        {[
+          { id: "overview", label: "Tableau de bord", icon: User },
+          { id: "appointments", label: "Rendez-vous", icon: Calendar },
+          { id: "documents", label: "Documents", icon: FileText },
+          { id: "messages", label: "Messages", icon: MessageSquare, badge: unreadMessages },
+        ].map((item) => (
+          <button key={item.id} onClick={() => setActiveTab(item.id)}
+            className={`flex-1 flex flex-col items-center gap-1 py-2 text-xs transition-all ${activeTab === item.id ? "text-emerald-600" : "text-slate-500"}`}>
+            <item.icon className="w-5 h-5" /> {item.label}
+          </button>
+        ))}
+        <button onClick={handleLogout}
+          className="flex-1 flex flex-col items-center gap-1 py-2 text-xs text-red-500">
+          <LogOut className="w-5 h-5" /> Déconnexion
+        </button>
+      </nav>
 
       {/* New Message Modal */}
       <Modal open={showNewMsg} onClose={() => setShowNewMsg(false)} title="Nouveau message">

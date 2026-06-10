@@ -32,7 +32,7 @@ services:
       - DB_USER=${DB_USER:-doctor}
       - DB_PASSWORD=${DB_PASSWORD:-doctor123}
       - DB_NAME=${DB_NAME:-doctor}
-    command: sh -c "npx tsx src/docker-init.ts && npx tsx src/index.ts"
+    command: npx tsx src/index.ts
 
   frontend:
     build:

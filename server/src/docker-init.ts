@@ -55,7 +55,10 @@ async function main() {
   console.log('Database ready');
 }
 
-main().catch((err) => {
-  console.error('Init failed:', err);
-  process.exit(1);
-});
+const isMainModule = process.argv[1]?.includes('docker-init');
+if (isMainModule) {
+  main().catch((err) => {
+    console.error('Init failed:', err);
+    process.exit(1);
+  });
+}

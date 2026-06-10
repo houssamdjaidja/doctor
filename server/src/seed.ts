@@ -32,7 +32,7 @@ async function main() {
 
   // Admin user
   const adminHash = await bcrypt.hash('admin123', 12);
-  await run('INSERT INTO admin_users (username, password_hash, display_name) VALUES (?, ?, ?)', 'admin', adminHash, 'Dr. Amine Benali');
+  await run('INSERT INTO admin_users (username, password_hash, display_name) VALUES (?, ?, ?)', 'admin', adminHash, 'Dr. Djaidja');
 
   // Patients
   const patientHash = await bcrypt.hash('password123', 12);
@@ -84,7 +84,7 @@ async function main() {
   for (const b of blogs) {
     await run(
       'INSERT INTO blog_posts (title, slug, excerpt, content, category, image_url, author, published, featured, views) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-      b.title, b.slug, b.excerpt, b.content, b.category, b.image_url, 'Dr. Amine Benali', b.published, b.featured, b.views
+      b.title, b.slug, b.excerpt, b.content, b.category, b.image_url, 'Dr. Djaidja', b.published, b.featured, b.views
     );
   }
 
@@ -128,7 +128,7 @@ async function main() {
   );
   await run(
     'INSERT INTO patient_messages (patient_id, subject, message, reply, reply_at, read_by_admin, read_by_patient) VALUES (?, ?, ?, ?, NOW(), TRUE, TRUE) RETURNING id',
-    patientIds[1], 'Demande de renouvellement', 'Bonjour Dr. Benali, pourriez-vous renouveler mon ordonnance ? Merci.',
+    patientIds[1], 'Demande de renouvellement', 'Bonjour Dr. Djaidja, pourriez-vous renouveler mon ordonnance ? Merci.',
     'Bonjour Pierre, votre ordonnance a été renouvelée. Vous pouvez passer au cabinet pour la récupérer.'
   );
 
@@ -141,8 +141,8 @@ async function main() {
 
   // Settings
   const settings = [
-    { k: 'cabinet_name', v: 'Cabinet Dr. Benali' },
-    { k: 'cabinet_email', v: 'contact@dr-benali.dz' },
+    { k: 'cabinet_name', v: 'Cabinet Dr. Djaidja' },
+    { k: 'cabinet_email', v: 'contact@dr-djaidja.dz' },
     { k: 'cabinet_phone', v: '+213 21 23 45 67' },
     { k: 'cabinet_address', v: '24 Rue Didouche Mourad, 16000 Alger' },
   ];

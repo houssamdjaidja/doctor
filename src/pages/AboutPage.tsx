@@ -1,4 +1,4 @@
-ï»¿import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Award,
   GraduationCap,
@@ -18,88 +18,88 @@ import { Link } from "react-router-dom";
 const education = [
   {
     year: "2000",
-    title: "Doctorat en MÃ©decine",
-    institution: "UniversitÃ© d'Alger 1",
+    title: "Doctorat en Médecine",
+    institution: "Université d'Alger 1",
   },
   {
     year: "2002",
-    title: "SpÃ©cialisation en MÃ©decine GÃ©nÃ©rale",
+    title: "Spécialisation en Médecine Générale",
     institution: "CHU Mustapha Pacha, Alger",
   },
   {
     year: "2005",
-    title: "DiplÃ´me en SantÃ© Publique",
-    institution: "Institut National de SantÃ© Publique",
+    title: "Diplôme en Santé Publique",
+    institution: "Institut National de Santé Publique",
   },
   {
     year: "2010",
-    title: "Formation en TÃ©lÃ©mÃ©decine",
-    institution: "UniversitÃ© d'Oran 1 Ahmed Ben Bella",
+    title: "Formation en Télémédecine",
+    institution: "Université d'Oran 1 Ahmed Ben Bella",
   },
 ];
 
 const certifications = [
-  "Conseil RÃ©gional de l'Ordre des MÃ©decins d'Alger",
-  "DiplÃ´me de MÃ©decine GÃ©nÃ©rale",
-  "Formation continue agrÃ©Ã©e par les autoritÃ©s sanitaires algÃ©riennes",
-  "Formation continue accrÃ©ditÃ©e",
+  "Conseil Régional de l'Ordre des Médecins d'Alger",
+  "Diplôme de Médecine Générale",
+  "Formation continue agréée par les autorités sanitaires algériennes",
+  "Formation continue accréditée",
   "Conventionnement CNAS/CASNOS",
 ];
 
 const experience = [
   {
-    period: "2015 - PrÃ©sent",
-    role: "MÃ©decin GÃ©nÃ©raliste",
-    location: "Cabinet mÃ©dical privÃ©, Alger",
-    description: "Consultations, suivi des patients chroniques, prÃ©vention et Ã©ducation thÃ©rapeutique.",
+    period: "2015 - Présent",
+    role: "Médecin Généraliste",
+    location: "Cabinet médical privé, Alger",
+    description: "Consultations, suivi des patients chroniques, prévention et éducation thérapeutique.",
   },
   {
     period: "2008 - 2015",
-    role: "MÃ©decin AttachÃ©",
+    role: "Médecin Attaché",
     location: "CHU Mustapha Pacha, Alger",
-    description: "Service de mÃ©decine interne, urgences et consultations spÃ©cialisÃ©es.",
+    description: "Service de médecine interne, urgences et consultations spécialisées.",
   },
   {
     period: "2002 - 2008",
-    role: "MÃ©decin GÃ©nÃ©raliste",
-    location: "Centre de santÃ©, Blida",
-    description: "MÃ©decine de ville, suivi de patients poly-pathologiques.",
+    role: "Médecin Généraliste",
+    location: "Centre de santé, Blida",
+    description: "Médecine de ville, suivi de patients poly-pathologiques.",
   },
 ];
 
 const languages = [
-  { name: "FranÃ§ais", level: "Natif" },
-  { name: "Anglais", level: "IntermÃ©diaire" },
+  { name: "Français", level: "Natif" },
+  { name: "Anglais", level: "Intermédiaire" },
   { name: "Arabe", level: "Natif" },
 ];
 
 const associations = [
-  "SociÃ©tÃ© AlgÃ©rienne de MÃ©decine GÃ©nÃ©rale",
-  "Association des MÃ©decins GÃ©nÃ©ralistes d'Alger",
-  "CollÃ¨ge AlgÃ©rien de MÃ©decine GÃ©nÃ©rale",
-  "RÃ©seau de SantÃ© Alger Centre",
+  "Société Algérienne de Médecine Générale",
+  "Association des Médecins Généralistes d'Alger",
+  "Collège Algérien de Médecine Générale",
+  "Réseau de Santé Alger Centre",
 ];
 
 const values = [
   {
     icon: Heart,
     title: "Bienveillance",
-    description: "Ã‰coute attentive et prise en charge personnalisÃ©e de chaque patient.",
+    description: "Ecoute attentive et prise en charge personnalisée de chaque patient.",
   },
   {
     icon: Users,
-    title: "ProximitÃ©",
-    description: "DisponibilitÃ© et accessibilitÃ© pour tous vos besoins de santÃ©.",
+    title: "Proximité",
+    description: "Disponibilité et accessibilité pour tous vos besoins de santé.",
   },
   {
     icon: Award,
     title: "Excellence",
-    description: "Formation continue et pratiques basÃ©es sur les derniÃ¨res recommandations.",
+    description: "Formation continue et pratiques basées sur les dernières recommandations.",
   },
   {
     icon: Stethoscope,
-    title: "Ã‰thique",
-    description: "Respect du secret mÃ©dical et des principes dÃ©ontologiques.",
+    title: "Ethique",
+    description: "Respect du secret médical et des principes déontologiques.",
   },
 ];
 
@@ -115,17 +115,17 @@ export function AboutPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <Badge variant="success" className="mb-4">Ã€ Propos</Badge>
+              <Badge variant="success" className="mb-4">A Propos</Badge>
               <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
                 Dr. Amine{" "}
                 <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                   Benali
                 </span>
               </h1>
-              <p className="text-xl text-slate-600 mb-4">MÃ©decin GÃ©nÃ©raliste</p>
+              <p className="text-xl text-slate-600 mb-4">Médecin Généraliste</p>
               <p className="text-slate-600 leading-relaxed mb-8">
-                Fort de plus de 20 ans d'expÃ©rience, je m'engage Ã  offrir des soins mÃ©dicaux de qualitÃ©,
-                alliant expertise scientifique et approche humaine. Ma prioritÃ© : votre santÃ© et votre bien-Ãªtre.
+                Fort de plus de 20 ans d'expérience, je m'engage à offrir des soins médicaux de qualité,
+                alliant expertise scientifique et approche humaine. Ma priorité : votre santé et votre bien-être.
               </p>
               <div className="flex gap-4">
                 <Link to="/appointment">
@@ -149,7 +149,7 @@ export function AboutPage() {
               <div className="rounded-3xl overflow-hidden shadow-2xl shadow-emerald-200">
                 <img
                   src="/doctor.png"
-                  alt="Dr. Amine Benali"
+                  alt="Dr. Djaidja"
                   className="w-full h-[500px] object-cover"
                 />
               </div>
@@ -157,7 +157,7 @@ export function AboutPage() {
               <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl p-4 shadow-xl shadow-slate-200/50 border border-slate-100 flex gap-8">
                 <div className="text-center">
                   <p className="text-2xl font-bold text-emerald-600">20+</p>
-                  <p className="text-xs text-slate-500">AnnÃ©es</p>
+                  <p className="text-xs text-slate-500">Années</p>
                 </div>
                 <div className="text-center border-l border-slate-100 px-4">
                   <p className="text-2xl font-bold text-emerald-600">15K+</p>
@@ -184,7 +184,7 @@ export function AboutPage() {
           >
             <Badge variant="success" className="mb-4">Mes Valeurs</Badge>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
-              Une mÃ©decine centrÃ©e sur le patient
+              Une médecine centrée sur le patient
             </h2>
           </motion.div>
 
@@ -224,7 +224,7 @@ export function AboutPage() {
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                   <GraduationCap className="w-6 h-6 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold text-slate-800">Formation AcadÃ©mique</h2>
+                <h2 className="text-2xl font-bold text-slate-800">Formation Académique</h2>
               </div>
               <div className="space-y-4">
                 {education.map((item, index) => (
@@ -255,7 +255,7 @@ export function AboutPage() {
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                   <Briefcase className="w-6 h-6 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold text-slate-800">ExpÃ©rience Professionnelle</h2>
+                <h2 className="text-2xl font-bold text-slate-800">Expérience Professionnelle</h2>
               </div>
               <div className="space-y-6">
                 {experience.map((item, index) => (
@@ -294,7 +294,7 @@ export function AboutPage() {
               <Card variant="elevated">
                 <div className="flex items-center gap-3 mb-6">
                   <Award className="w-6 h-6 text-emerald-600" />
-                  <h2 className="text-xl font-bold text-slate-800">DiplÃ´mes & Certifications</h2>
+                  <h2 className="text-xl font-bold text-slate-800">Diplômes & Certifications</h2>
                 </div>
                 <div className="grid md:grid-cols-2 gap-3">
                   {certifications.map((cert, index) => (
@@ -317,7 +317,7 @@ export function AboutPage() {
               <Card variant="elevated">
                 <div className="flex items-center gap-3 mb-6">
                   <Globe className="w-6 h-6 text-emerald-600" />
-                  <h2 className="text-xl font-bold text-slate-800">Langues ParlÃ©es</h2>
+                  <h2 className="text-xl font-bold text-slate-800">Langues Parlées</h2>
                 </div>
                 <div className="space-y-3">
                   {languages.map((lang, index) => (
@@ -343,7 +343,7 @@ export function AboutPage() {
             <Card variant="glass">
               <div className="flex items-center gap-3 mb-6">
                 <Users className="w-6 h-6 text-emerald-600" />
-                <h2 className="text-xl font-bold text-slate-800">Associations MÃ©dicales</h2>
+                <h2 className="text-xl font-bold text-slate-800">Associations Médicales</h2>
               </div>
               <div className="flex flex-wrap gap-3">
                 {associations.map((assoc, index) => (

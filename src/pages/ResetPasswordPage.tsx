@@ -83,7 +83,7 @@ export function ResetPasswordPage() {
               <Stethoscope className="w-6 h-6 text-white" />
             </div>
             <div className="text-left">
-              <span className="text-xl font-bold text-slate-800">Dr. Benali</span>
+              <span className="text-xl font-bold text-slate-800">Dr. Djaidja</span>
               <p className="text-xs text-slate-500">Nouveau mot de passe</p>
             </div>
           </Link>

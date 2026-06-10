@@ -5,9 +5,9 @@ export async function seedData(): Promise<void> {
   const existing: any = await get("SELECT COUNT(*)::int as c FROM admin_users");
   if (existing.c === 0) {
     const hash = await bcrypt.hash('doctor_2026_hs', 12);
-    await run('INSERT INTO admin_users (username, password_hash, display_name) VALUES (?, ?, ?)', 'doctor_msila', hash, 'Dr. Amine Benali');
-    await run('INSERT INTO settings (key, value) VALUES (?, ?)', 'cabinet_name', 'Cabinet Dr. Benali');
-    await run('INSERT INTO settings (key, value) VALUES (?, ?)', 'cabinet_email', 'contact@dr-benali.dz');
+    await run('INSERT INTO admin_users (username, password_hash, display_name) VALUES (?, ?, ?)', 'doctor_msila', hash, 'Dr. Djaidja');
+    await run('INSERT INTO settings (key, value) VALUES (?, ?)', 'cabinet_name', 'Cabinet Dr. Djaidja');
+    await run('INSERT INTO settings (key, value) VALUES (?, ?)', 'cabinet_email', 'contact@dr-djaidja.dz');
     await run('INSERT INTO settings (key, value) VALUES (?, ?)', 'cabinet_phone', '+213 21 23 45 67');
     await run('INSERT INTO settings (key, value) VALUES (?, ?)', 'cabinet_address', '24 Rue Didouche Mourad, 16000 Alger');
     console.log('Admin user created (doctor_msila / doctor_2026_hs)');
@@ -41,7 +41,7 @@ export async function seedData(): Promise<void> {
       { title: 'Les superaliments : mythe ou réalité ?', slug: 'superaliments-mythe-realite', excerpt: 'On entend beaucoup parler de superaliments. Mais que valent-ils vraiment ?', content: 'Lorem ipsum dolor sit amet.', category: 'nutrition', image_url: 'https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=600&h=400&fit=crop', published: true, featured: false, views: 312 },
     ];
     for (const b of blogs) {
-      await insertBlog(b.title, b.slug, b.excerpt, b.content, b.category, b.image_url, 'Dr. Amine Benali', b.published, b.featured, b.views);
+      await insertBlog(b.title, b.slug, b.excerpt, b.content, b.category, b.image_url, 'Dr. Djaidja', b.published, b.featured, b.views);
     }
     console.log('Blog posts seeded');
   } else {

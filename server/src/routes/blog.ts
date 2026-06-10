@@ -79,7 +79,7 @@ router.post('/', requireAdmin, async (req: Request, res: Response) => {
     `INSERT INTO blog_posts (title, slug, excerpt, content, category, image_url, author, published, featured)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`,
     title, slug, excerpt || '', content || '', category || 'general',
-    imageUrl || '', author || 'Dr. Amine Benali',
+    imageUrl || '', author || 'Dr. Djaidja',
     published ? true : false, featured ? true : false
   );
 

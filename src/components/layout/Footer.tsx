@@ -1,4 +1,4 @@
-ï»¿import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import {
   Stethoscope,
   Phone,
@@ -14,9 +14,9 @@ import {
 
 const quickLinks = [
   { name: "Accueil", href: "/" },
-  { name: "Ã€ Propos", href: "/about" },
+  { name: "A Propos", href: "/about" },
   { name: "Rendez-vous", href: "/appointment" },
-  { name: "Blog SantÃ©", href: "/blog" },
+  { name: "Blog Santé", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ]
 
@@ -40,12 +40,12 @@ export function Footer() {
                 <Stethoscope className="w-6 h-6 text-white" />
               </div>
               <div>
-                <span className="text-xl font-bold">Dr. Benali</span>
-                <p className="text-xs text-slate-400">MÃ©decin GÃ©nÃ©raliste</p>
+                <span className="text-xl font-bold">Dr. Djaidja</span>
+                <p className="text-xs text-slate-400">Médecin Généraliste</p>
               </div>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
-              Votre santÃ© est notre prioritÃ©. Nous offrons des soins mÃ©dicaux de qualitÃ©
+              Votre santé est notre priorité. Nous offrons des soins médicaux de qualité
               dans un environnement chaleureux et professionnel.
             </p>
             <div className="flex gap-3">
@@ -87,7 +87,7 @@ export function Footer() {
                 <MapPin className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
                 <span className="text-slate-400 text-sm">
                   24 Rue Didouche Mourad<br />
-                  16000 Alger, AlgÃ©rie
+                  16000 Alger, Algérie
                 </span>
               </li>
               <li className="flex items-center gap-3">
@@ -98,8 +98,8 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-emerald-400" />
-                <a href="mailto:contact@dr-benali.dz" className="text-slate-400 text-sm hover:text-emerald-400 transition-colors">
-                  contact@dr-benali.dz
+                <a href="mailto:contact@dr-djaidja.dz" className="text-slate-400 text-sm hover:text-emerald-400 transition-colors">
+                  contact@dr-djaidja.dz
                 </a>
               </li>
               <li className="flex items-start gap-3">
@@ -119,12 +119,12 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-slate-400 text-sm flex items-center gap-1">
-              Â© 2024 Dr. Benali. Tous droits rÃ©servÃ©s. Fait avec{" "}
+              © 2024 Dr. Djaidja. Tous droits réservés. Fait avec{" "}
               <Heart className="w-4 h-4 text-red-500 fill-current" /> pour vos soins.
             </p>
             <div className="flex gap-6 text-sm">
               <Link to="/privacy" className="text-slate-400 hover:text-emerald-400 transition-colors">
-                Politique de confidentialitÃ©
+                Politique de confidentialité
               </Link>
               <Link to="/terms" className="text-slate-400 hover:text-emerald-400 transition-colors">
                 Conditions d'utilisation

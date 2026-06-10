@@ -43,9 +43,9 @@ export function Header() {
               <Phone className="w-4 h-4" />
               +213 21 23 45 67
             </a>
-            <a href="mailto:contact@dr-benali.dz" className="flex items-center gap-2 hover:text-emerald-200 transition-colors">
+            <a href="mailto:contact@dr-djaidja.dz" className="flex items-center gap-2 hover:text-emerald-200 transition-colors">
               <Mail className="w-4 h-4" />
-              contact@dr-benali.dz
+              contact@dr-djaidja.dz
             </a>
           </div>
           <div className="flex items-center gap-2">
@@ -73,7 +73,7 @@ export function Header() {
               </div>
               <div>
                 <span className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                  Dr. Benali
+                  Dr. Djaidja
                 </span>
                 <p className="text-xs text-slate-500 mt-0.5">Médecin Généraliste</p>
               </div>

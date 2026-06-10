@@ -5,7 +5,7 @@ const SMTP_HOST = process.env.SMTP_HOST || '';
 const SMTP_PORT = parseInt(process.env.SMTP_PORT || '587', 10);
 const SMTP_USER = process.env.SMTP_USER || '';
 const SMTP_PASS = process.env.SMTP_PASS || '';
-const FROM_ADDRESS = process.env.SMTP_FROM || 'noreply@dr-benali.dz';
+const FROM_ADDRESS = process.env.SMTP_FROM || 'noreply@dr-djaidja.dz';
 
 let transporter: nodemailer.Transporter | null = null;
 
@@ -64,11 +64,11 @@ async function sendEmail(to: string, subject: string, text: string): Promise<voi
 }
 
 export async function sendVerificationCode(email: string, code: string): Promise<void> {
-  await sendEmail(email, 'Vérification de votre email - Dr. Benali',
-    `Bonjour,\n\nVotre code de vérification est : ${code}\n\nCe code expire dans 15 minutes.\n\nCordialement,\nDr. Amine Benali`);
+  await sendEmail(email, 'Vérification de votre email - Dr. Djaidja',
+    `Bonjour,\n\nVotre code de vérification est : ${code}\n\nCe code expire dans 15 minutes.\n\nCordialement,\nDr. Djaidja`);
 }
 
 export async function sendResetCode(email: string, code: string): Promise<void> {
-  await sendEmail(email, 'Réinitialisation de mot de passe - Dr. Benali',
-    `Bonjour,\n\nVotre code de réinitialisation de mot de passe est : ${code}\n\nCe code expire dans 15 minutes.\n\nSi vous n'avez pas demandé cette réinitialisation, ignorez cet email.\n\nCordialement,\nDr. Amine Benali`);
+  await sendEmail(email, 'Réinitialisation de mot de passe - Dr. Djaidja',
+    `Bonjour,\n\nVotre code de réinitialisation de mot de passe est : ${code}\n\nCe code expire dans 15 minutes.\n\nSi vous n'avez pas demandé cette réinitialisation, ignorez cet email.\n\nCordialement,\nDr. Djaidja`);
 }

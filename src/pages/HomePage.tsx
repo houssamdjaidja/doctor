@@ -60,7 +60,7 @@ export function HomePage() {
                 </span>
               </h1>
               <p className="text-lg text-slate-600 mb-8 leading-relaxed max-w-xl">
-                Le Dr. Benali vous accueille dans un cabinet moderne et chaleureux pour vous offrir
+                Le Dr. Djaidja vous accueille dans un cabinet moderne et chaleureux pour vous offrir
                 des soins médicaux de qualité. Prenez rendez-vous en ligne en quelques clics.
               </p>
               <div className="flex flex-wrap gap-4 mb-8">
@@ -94,7 +94,7 @@ export function HomePage() {
               <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-emerald-200">
                 <img
                   src="/doctor.png"
-                  alt="Dr. Benali - Médecin Généraliste"
+                  alt="Dr. Djaidja - Médecin Généraliste"
                   className="w-full h-[500px] object-cover"
                   onError={(e) => {
                     // Fallback if image fails to load
@@ -115,7 +115,7 @@ export function HomePage() {
                     <Award className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <p className="font-semibold text-slate-800">Dr. Amine Benali</p>
+                    <p className="font-semibold text-slate-800">Dr. Djaidja</p>
                     <p className="text-sm text-slate-500">Médecin Généraliste</p>
                   </div>
                 </div>

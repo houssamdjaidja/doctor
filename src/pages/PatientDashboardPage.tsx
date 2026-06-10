@@ -203,7 +203,7 @@ export function PatientDashboardPage() {
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
                   <Stethoscope className="w-5 h-5 text-white" />
                 </div>
-                <span className="text-lg font-bold text-slate-800">Dr. Benali</span>
+                <span className="text-lg font-bold text-slate-800">Dr. Djaidja</span>
               </Link>
             </div>
             <div className="flex items-center gap-4">
@@ -402,7 +402,7 @@ export function PatientDashboardPage() {
                         <p className="text-slate-600 text-sm mb-3 p-3 rounded-lg bg-slate-50">{msg.message}</p>
                         {msg.reply && (
                           <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200">
-                            <p className="text-xs text-emerald-600 font-medium mb-1">Réponse du Dr. Benali ({msg.reply_at?.split(" ")[0]})</p>
+                            <p className="text-xs text-emerald-600 font-medium mb-1">Réponse du Dr. Djaidja ({msg.reply_at?.split(" ")[0]})</p>
                             <p className="text-sm text-slate-700">{msg.reply}</p>
                           </div>
                         )}
@@ -510,7 +510,7 @@ export function PatientDashboardPage() {
             </div>
             <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50">
               <MapPin className="w-4 h-4 text-emerald-600" />
-              <div><p className="text-xs text-slate-500">Cabinet</p><p className="text-sm font-medium">Dr. Benali</p></div>
+              <div><p className="text-xs text-slate-500">Cabinet</p><p className="text-sm font-medium">Dr. Djaidja</p></div>
             </div>
             {detailApt.motif && (
               <div className="p-3 rounded-xl bg-slate-50">

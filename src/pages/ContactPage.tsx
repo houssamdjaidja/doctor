@@ -1,4 +1,4 @@
-ï»¿/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -24,7 +24,7 @@ import { api } from "@/lib/api";
 const contactInfo = [
   {
     icon: Phone,
-    title: "TÃ©lÃ©phone",
+    title: "Téléphone",
     content: "+213 21 23 45 67",
     link: "tel:+21321234567",
     description: "Dim-Jeu: 8h-18h, Sam: 9h-12h",
@@ -32,16 +32,16 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    content: "contact@dr-benali.dz",
-    link: "mailto:contact@dr-benali.dz",
-    description: "RÃ©ponse sous 24h",
+    content: "contact@dr-djaidja.dz",
+    link: "mailto:contact@dr-djaidja.dz",
+    description: "Réponse sous 24h",
   },
   {
     icon: MapPin,
     title: "Adresse",
     content: "24 Rue Didouche Mourad, 16000 Alger",
     link: "https://maps.google.com/?q=24+Rue+Didouche+Mourad+Alger+Algerie",
-    description: "Alger Centre, proche mÃ©tro et tramway",
+    description: "Alger Centre, proche métro et tramway",
   },
 ];
 
@@ -51,7 +51,7 @@ const workingHours = [
     { day: "Mardi", hours: "8h00 - 18h00" },
     { day: "Mercredi", hours: "8h00 - 18h00" },
     { day: "Jeudi", hours: "8h00 - 18h00" },
-    { day: "Vendredi", hours: "FermÃ©" },
+    { day: "Vendredi", hours: "Fermé" },
     { day: "Samedi", hours: "9h00 - 12h00" },
   ];
 
@@ -98,7 +98,7 @@ export function ContactPage() {
               Nous <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Contacter</span>
             </h1>
             <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Une question ? Besoin d'informations ? Notre Ã©quipe est Ã  votre disposition pour vous rÃ©pondre.
+              Une question ? Besoin d'informations ? Notre équipe est à votre disposition pour vous répondre.
             </p>
           </motion.div>
         </div>
@@ -150,7 +150,7 @@ export function ContactPage() {
                     {workingHours.map((item) => (
                       <div key={item.day} className="flex justify-between text-sm">
                         <span className="text-slate-600">{item.day}</span>
-                        <span className={item.hours === "FermÃ©" ? "text-red-500" : "text-slate-800 font-medium"}>{item.hours}</span>
+                        <span className={item.hours === "Fermé" ? "text-red-500" : "text-slate-800 font-medium"}>{item.hours}</span>
                       </div>
                     ))}
                   </div>
@@ -165,8 +165,8 @@ export function ContactPage() {
                   <div className="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
                     <CheckCircle className="w-10 h-10 text-emerald-600" />
                   </div>
-                  <h2 className="text-2xl font-bold text-slate-800 mb-4">Message envoyÃ© !</h2>
-                  <p className="text-slate-600 mb-6">Merci pour votre message. Nous vous rÃ©pondrons dans les plus brefs dÃ©lais.</p>
+                  <h2 className="text-2xl font-bold text-slate-800 mb-4">Message envoyé !</h2>
+                  <p className="text-slate-600 mb-6">Merci pour votre message. Nous vous répondrons dans les plus brefs délais.</p>
                   <Button onClick={() => { setSubmitted(false); setFormData({ name: "", email: "", phone: "", subject: "", message: "" }); }}>
                     Envoyer un autre message
                   </Button>
@@ -192,7 +192,7 @@ export function ContactPage() {
                     </div>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-1">TÃ©lÃ©phone</label>
+                        <label className="block text-sm font-medium text-slate-700 mb-1">Téléphone</label>
                         <Input type="tel" placeholder="06 12 34 56 78" value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })} />
                       </div>
@@ -200,7 +200,7 @@ export function ContactPage() {
                         <label className="block text-sm font-medium text-slate-700 mb-1">Sujet *</label>
                         <select className="flex h-12 w-full rounded-xl border border-slate-200 bg-white/80 backdrop-blur-sm px-4 py-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400"
                           value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} required>
-                          <option value="">SÃ©lectionnez un sujet</option>
+                          <option value="">Sélectionnez un sujet</option>
                           <option value="appointment">Prise de rendez-vous</option>
                           <option value="information">Demande d'information</option>
                           <option value="billing">Question sur la facturation</option>
@@ -231,7 +231,7 @@ export function ContactPage() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} className="text-center mb-8">
             <Badge variant="success" className="mb-4">Localisation</Badge>
-            <h2 className="text-2xl font-bold text-slate-800">OÃ¹ nous trouver ?</h2>
+            <h2 className="text-2xl font-bold text-slate-800">Où nous trouver ?</h2>
           </motion.div>
           <Card variant="glass" className="overflow-hidden p-0">
             <div className="h-96">

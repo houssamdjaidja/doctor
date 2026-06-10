@@ -100,8 +100,8 @@ export function AdminDashboardPage() {
         setStats(s); setPatients(p); setBlogArticles(b);
         setAppointments(a); setMessages(m); setPatientMsgs(pm); setSettings(sett);
         setSettingsForm({
-          clinic_name: sett.clinic_name || "Cabinet Dr. Benali",
-          email: sett.email || "contact@dr-benali.dz",
+          clinic_name: sett.clinic_name || "Cabinet Dr. Djaidja",
+          email: sett.email || "contact@dr-djaidja.dz",
           phone: sett.phone || "+213 21 23 45 67",
           address: sett.address || "24 Rue Didouche Mourad, 16000 Alger",
         });
@@ -248,7 +248,7 @@ export function AdminDashboardPage() {
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
             <Stethoscope className="w-5 h-5 text-white" />
           </div>
-          <div><span className="font-bold">Dr. Benali</span><p className="text-xs text-slate-400">Administration</p></div>
+          <div><span className="font-bold">Dr. Djaidja</span><p className="text-xs text-slate-400">Administration</p></div>
         </div>
         <nav className="space-y-1">
           {nav.map((item) => (
@@ -768,7 +768,7 @@ function BlogForm({ article, onSave, saving }: { article?: any; onSave: (data: a
   const [category, setCategory] = useState(article?.category || "general");
   const [excerpt, setExcerpt] = useState(article?.excerpt || "");
   const [content, setContent] = useState(article?.content || "");
-  const [author, setAuthor] = useState(article?.author || "Dr. Amine Benali");
+  const [author, setAuthor] = useState(article?.author || "Dr. Djaidja");
   const [imageUrl, setImageUrl] = useState(article?.image_url || "");
   const [published, setPublished] = useState(!!article?.published);
   const [featured, setFeatured] = useState(!!article?.featured);

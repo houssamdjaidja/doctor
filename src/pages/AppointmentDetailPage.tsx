@@ -145,7 +145,7 @@ export function AppointmentDetailPage() {
                 <MapPin className="w-5 h-5 text-emerald-600 flex-shrink-0" />
                 <div>
                   <p className="text-sm text-slate-500">Cabinet</p>
-                  <p className="font-medium text-slate-800">Dr. Benali</p>
+                  <p className="font-medium text-slate-800">Dr. Djaidja</p>
                 </div>
               </div>
             </div>

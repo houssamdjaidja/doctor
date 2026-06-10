@@ -75,7 +75,7 @@ export async function initializeDatabase(): Promise<void> {
       content TEXT NOT NULL DEFAULT '',
       category TEXT NOT NULL DEFAULT 'general',
       image_url TEXT NOT NULL DEFAULT '',
-      author TEXT NOT NULL DEFAULT 'Dr. Amine Benali',
+      author TEXT NOT NULL DEFAULT 'Dr. Djaidja',
       published BOOLEAN NOT NULL DEFAULT FALSE,
       featured BOOLEAN NOT NULL DEFAULT FALSE,
       views INTEGER NOT NULL DEFAULT 0,

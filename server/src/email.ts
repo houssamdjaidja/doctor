@@ -57,18 +57,19 @@ async function sendViaSMTP(to: string, subject: string, text: string): Promise<b
   }
 }
 
-async function sendEmail(to: string, subject: string, text: string): Promise<void> {
-  if (await sendViaResend(to, subject, text)) return;
-  if (await sendViaSMTP(to, subject, text)) return;
+async function sendEmail(to: string, subject: string, text: string): Promise<boolean> {
+  if (await sendViaResend(to, subject, text)) return true;
+  if (await sendViaSMTP(to, subject, text)) return true;
   console.log(`[EMAIL] ${subject} pour ${to}: ${text.match(/\d{6}/)?.[0] || '(code non trouvé)'}`);
+  return false;
 }
 
-export async function sendVerificationCode(email: string, code: string): Promise<void> {
-  await sendEmail(email, 'Vérification de votre email - Dr. Djaidja',
+export async function sendVerificationCode(email: string, code: string): Promise<boolean> {
+  return sendEmail(email, 'Vérification de votre email - Dr. Djaidja',
     `Bonjour,\n\nVotre code de vérification est : ${code}\n\nCe code expire dans 15 minutes.\n\nCordialement,\nDr. Djaidja`);
 }
 
-export async function sendResetCode(email: string, code: string): Promise<void> {
-  await sendEmail(email, 'Réinitialisation de mot de passe - Dr. Djaidja',
+export async function sendResetCode(email: string, code: string): Promise<boolean> {
+  return sendEmail(email, 'Réinitialisation de mot de passe - Dr. Djaidja',
     `Bonjour,\n\nVotre code de réinitialisation de mot de passe est : ${code}\n\nCe code expire dans 15 minutes.\n\nSi vous n'avez pas demandé cette réinitialisation, ignorez cet email.\n\nCordialement,\nDr. Djaidja`);
 }

@@ -20,11 +20,11 @@ export const api = {
   login: (email: string, password: string) =>
     request<{ token: string; patient: any }>('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }),
   register: (data: { firstName: string; lastName: string; email: string; phone: string; password: string }) =>
-    request<{ message: string; email: string }>('/auth/register', { method: 'POST', body: JSON.stringify(data) }),
+    request<{ message: string; email: string; debug_code?: string }>('/auth/register', { method: 'POST', body: JSON.stringify(data) }),
   verifyEmail: (email: string, code: string) =>
     request<{ token: string; patient: any }>('/auth/verify-email', { method: 'POST', body: JSON.stringify({ email, code }) }),
   resendCode: (email: string) =>
-    request<{ message: string }>('/auth/resend-code', { method: 'POST', body: JSON.stringify({ email }) }),
+    request<{ message: string; debug_code?: string }>('/auth/resend-code', { method: 'POST', body: JSON.stringify({ email }) }),
   forgotPassword: (email: string) =>
     request<{ message: string }>('/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email }) }),
   resetPassword: (email: string, code: string, password: string) =>

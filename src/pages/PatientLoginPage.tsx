@@ -95,14 +95,14 @@ export function PatientLoginPage() {
           throw err;
         }
       } else {
-        await api.register({
+        const reg = await api.register({
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
           phone: formData.phone,
           password: formData.password,
         });
-        navigate(`/verify-email?email=${encodeURIComponent(formData.email)}`);
+        navigate(`/verify-email?email=${encodeURIComponent(formData.email)}${reg.debug_code ? `&debug_code=${reg.debug_code}` : ""}`);
       }
     } catch (err: any) {
       setGeneralError(err.message);

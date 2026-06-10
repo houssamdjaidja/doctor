@@ -32,8 +32,8 @@ router.post('/register', async (req: AuthRequest, res: Response) => {
     const code = generateCode();
     await run('UPDATE patients SET first_name=?, last_name=?, phone=?, password_hash=?, verification_code=? WHERE email=?',
       firstName, lastName, phone, await bcrypt.hash(password, 12), code, email);
-    sendVerificationCode(email, code).catch(err => console.error('[EMAIL] Failed to send:', err?.message));
-    res.json({ message: 'Code de vérification envoyé', email });
+    const sent = await sendVerificationCode(email, code);
+    res.json({ message: 'Code de vérification envoyé', email, ...(sent ? {} : { debug_code: code }) });
     return;
   }
 
@@ -44,9 +44,9 @@ router.post('/register', async (req: AuthRequest, res: Response) => {
     firstName, lastName, email, phone, hash, code
   );
 
-  sendVerificationCode(email, code).catch(err => console.error('[EMAIL] Failed to send:', err?.message));
+  const sent = await sendVerificationCode(email, code);
 
-  res.status(201).json({ message: 'Code de vérification envoyé', email });
+  res.status(201).json({ message: 'Code de vérification envoyé', email, ...(sent ? {} : { debug_code: code }) });
 });
 
 router.post('/verify-email', async (req: AuthRequest, res: Response) => {
@@ -106,8 +106,8 @@ router.post('/resend-code', async (req: AuthRequest, res: Response) => {
 
   const code = generateCode();
   await run('UPDATE patients SET verification_code = ? WHERE id = ?', code, patient.id);
-  sendVerificationCode(email, code).catch(err => console.error('[EMAIL] Failed to send:', err?.message));
-  res.json({ message: 'Code de vérification renvoyé' });
+  const sent = await sendVerificationCode(email, code);
+  res.json({ message: 'Code de vérification renvoyé', ...(sent ? {} : { debug_code: code }) });
 });
 
 router.post('/forgot-password', async (req: AuthRequest, res: Response) => {
@@ -125,9 +125,9 @@ router.post('/forgot-password', async (req: AuthRequest, res: Response) => {
 
   const code = generateCode();
   await run('UPDATE patients SET reset_code = ?, reset_code_expires = NOW() + INTERVAL \'15 minutes\' WHERE id = ?', code, patient.id);
-  sendResetCode(email, code).catch(err => console.error('[EMAIL] Failed to send:', err?.message));
+  const sent = await sendResetCode(email, code);
 
-  res.json({ message: 'Si cet email existe, un code de réinitialisation a été envoyé' });
+  res.json({ message: 'Si cet email existe, un code de réinitialisation a été envoyé', ...(sent ? {} : { debug_code: code }) });
 });
 
 router.post('/reset-password', async (req: AuthRequest, res: Response) => {

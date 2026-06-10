@@ -148,6 +148,17 @@ export async function initializeDatabase(): Promise<void> {
       FOREIGN KEY (patient_id) REFERENCES patients(id) ON DELETE CASCADE
     );
 
+    CREATE TABLE IF NOT EXISTS pending_registrations (
+      id SERIAL PRIMARY KEY,
+      first_name TEXT NOT NULL,
+      last_name TEXT NOT NULL,
+      email TEXT NOT NULL UNIQUE,
+      phone TEXT NOT NULL,
+      password_hash TEXT NOT NULL,
+      verification_code TEXT NOT NULL,
+      created_at TIMESTAMP NOT NULL DEFAULT NOW()
+    );
+
     ALTER TABLE patients ADD COLUMN IF NOT EXISTS email_verified BOOLEAN NOT NULL DEFAULT FALSE;
     ALTER TABLE patients ADD COLUMN IF NOT EXISTS verification_code TEXT DEFAULT NULL;
     ALTER TABLE patients ADD COLUMN IF NOT EXISTS reset_code TEXT DEFAULT NULL;

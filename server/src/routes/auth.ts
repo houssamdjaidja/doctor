@@ -23,30 +23,24 @@ router.post('/register', async (req: AuthRequest, res: Response) => {
     return;
   }
 
-  const existing = await get('SELECT id, email_verified FROM patients WHERE email = ?', email);
+  const existing = await get('SELECT id FROM patients WHERE email = ?', email);
   if (existing) {
-    if (existing.email_verified) {
-      res.status(409).json({ error: 'Un compte avec cet email existe déjà' });
-      return;
-    }
-    const code = generateCode();
-    await run('UPDATE patients SET first_name=?, last_name=?, phone=?, password_hash=?, verification_code=? WHERE email=?',
-      firstName, lastName, phone, await bcrypt.hash(password, 12), code, email);
-    const sent = await sendVerificationCode(email, code);
-    res.json({ message: 'Code de vérification envoyé', email, ...(sent ? {} : { debug_code: code }) });
+    res.status(409).json({ error: 'Un compte avec cet email existe déjà' });
     return;
   }
 
   const code = generateCode();
   const hash = await bcrypt.hash(password, 12);
-  const result = await run(
-    "INSERT INTO patients (first_name, last_name, email, phone, password_hash, verification_code) VALUES (?, ?, ?, ?, ?, ?) RETURNING id",
+  await run(
+    `INSERT INTO pending_registrations (first_name, last_name, email, phone, password_hash, verification_code)
+     VALUES (?, ?, ?, ?, ?, ?)
+     ON CONFLICT (email) DO UPDATE SET first_name=EXCLUDED.first_name, last_name=EXCLUDED.last_name, phone=EXCLUDED.phone, password_hash=EXCLUDED.password_hash, verification_code=EXCLUDED.verification_code, created_at=NOW()`,
     firstName, lastName, email, phone, hash, code
   );
 
-  const sent = await sendVerificationCode(email, code);
+  await sendVerificationCode(email, code);
 
-  res.status(201).json({ message: 'Code de vérification envoyé', email, ...(sent ? {} : { debug_code: code }) });
+  res.json({ message: 'Code de vérification envoyé', email });
 });
 
 router.post('/verify-email', async (req: AuthRequest, res: Response) => {
@@ -57,32 +51,34 @@ router.post('/verify-email', async (req: AuthRequest, res: Response) => {
     return;
   }
 
-  const patient: any = await get('SELECT * FROM patients WHERE email = ?', email);
-  if (!patient) {
-    res.status(404).json({ error: 'Patient non trouvé' });
+  const pending: any = await get('SELECT * FROM pending_registrations WHERE email = ?', email);
+  if (!pending) {
+    res.status(400).json({ error: 'Aucune inscription en attente pour cet email' });
     return;
   }
-  if (patient.email_verified) {
-    const token = generateToken({ id: patient.id, type: 'patient' });
-    res.json({ message: 'Email déjà vérifié', token, patient: { id: patient.id, firstName: patient.first_name, lastName: patient.last_name, email: patient.email, phone: patient.phone } });
-    return;
-  }
-  if (patient.verification_code !== code) {
+  if (pending.verification_code !== code) {
     res.status(400).json({ error: 'Code de vérification incorrect' });
     return;
   }
 
-  await run('UPDATE patients SET email_verified = TRUE, verification_code = NULL WHERE id = ?', patient.id);
+  const result = await run(
+    `INSERT INTO patients (first_name, last_name, email, phone, password_hash)
+     VALUES (?, ?, ?, ?, ?) RETURNING id`,
+    pending.first_name, pending.last_name, pending.email, pending.phone, pending.password_hash
+  );
 
+  await run('DELETE FROM pending_registrations WHERE id = ?', pending.id);
+
+  const patient = result.rows[0];
   const token = generateToken({ id: patient.id, type: 'patient' });
   res.json({
     token,
     patient: {
       id: patient.id,
-      firstName: patient.first_name,
-      lastName: patient.last_name,
-      email: patient.email,
-      phone: patient.phone,
+      firstName: pending.first_name,
+      lastName: pending.last_name,
+      email: pending.email,
+      phone: pending.phone,
     },
   });
 });
@@ -94,20 +90,16 @@ router.post('/resend-code', async (req: AuthRequest, res: Response) => {
     return;
   }
 
-  const patient: any = await get('SELECT * FROM patients WHERE email = ?', email);
-  if (!patient) {
-    res.status(404).json({ error: 'Patient non trouvé' });
-    return;
-  }
-  if (patient.email_verified) {
-    res.json({ message: 'Email déjà vérifié' });
+  const pending: any = await get('SELECT * FROM pending_registrations WHERE email = ?', email);
+  if (!pending) {
+    res.status(404).json({ error: 'Aucune inscription en attente pour cet email' });
     return;
   }
 
   const code = generateCode();
-  await run('UPDATE patients SET verification_code = ? WHERE id = ?', code, patient.id);
-  const sent = await sendVerificationCode(email, code);
-  res.json({ message: 'Code de vérification renvoyé', ...(sent ? {} : { debug_code: code }) });
+  await run('UPDATE pending_registrations SET verification_code = ? WHERE id = ?', code, pending.id);
+  await sendVerificationCode(email, code);
+  res.json({ message: 'Code de vérification renvoyé' });
 });
 
 router.post('/forgot-password', async (req: AuthRequest, res: Response) => {
@@ -125,9 +117,9 @@ router.post('/forgot-password', async (req: AuthRequest, res: Response) => {
 
   const code = generateCode();
   await run('UPDATE patients SET reset_code = ?, reset_code_expires = NOW() + INTERVAL \'15 minutes\' WHERE id = ?', code, patient.id);
-  const sent = await sendResetCode(email, code);
+  await sendResetCode(email, code);
 
-  res.json({ message: 'Si cet email existe, un code de réinitialisation a été envoyé', ...(sent ? {} : { debug_code: code }) });
+  res.json({ message: 'Si cet email existe, un code de réinitialisation a été envoyé' });
 });
 
 router.post('/reset-password', async (req: AuthRequest, res: Response) => {
@@ -174,17 +166,17 @@ router.post('/login', async (req: AuthRequest, res: Response) => {
 
   const patient: any = await get('SELECT * FROM patients WHERE email = ?', email);
   if (!patient) {
+    const pending = await get('SELECT password_hash FROM pending_registrations WHERE email = ?', email);
+    if (pending) {
+      res.status(403).json({ error: 'Veuillez vérifier votre email avant de vous connecter', code: 'EMAIL_NOT_VERIFIED', email });
+      return;
+    }
     res.status(401).json({ error: 'Email ou mot de passe incorrect' });
     return;
   }
 
   if (!(await bcrypt.compare(password, patient.password_hash))) {
     res.status(401).json({ error: 'Email ou mot de passe incorrect' });
-    return;
-  }
-
-  if (!patient.email_verified) {
-    res.status(403).json({ error: 'Veuillez vérifier votre email avant de vous connecter', code: 'EMAIL_NOT_VERIFIED', email: patient.email });
     return;
   }
 

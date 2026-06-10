@@ -44,7 +44,7 @@ export function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md relative">
-        <Link to="/" className="absolute -top-12 left-0 p-2 rounded-xl hover:bg-white/60 transition-colors">
+        <Link to="/" className="absolute -top-12 left-0 p-3 sm:p-2 rounded-xl hover:bg-white/60 transition-colors">
           <ArrowLeft className="w-5 h-5 text-slate-600" />
         </Link>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
@@ -84,7 +84,7 @@ export function AdminLoginPage() {
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
                   <button type="button" onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+                     className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-slate-400 hover:text-slate-600">
                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
                 </div>

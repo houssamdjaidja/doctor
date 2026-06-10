@@ -43,7 +43,7 @@ function Modal({ open, onClose, title, children }: { open: boolean; onClose: () 
             onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between p-6 border-b border-slate-100">
               <h2 className="text-lg font-semibold text-slate-800">{title}</h2>
-              <button onClick={onClose} className="p-2 rounded-lg hover:bg-slate-100">
+              <button onClick={onClose} className="p-3 sm:p-2 rounded-lg hover:bg-slate-100">
                 <X className="w-5 h-5 text-slate-500" />
               </button>
             </div>
@@ -284,7 +284,7 @@ export function AdminDashboardPage() {
         <header className="bg-white border-b border-slate-200 sticky top-0 z-40">
           <div className="px-4 md:px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link to="/" className="p-2 rounded-xl hover:bg-slate-100 transition-colors">
+              <Link to="/" className="p-3 sm:p-2 rounded-xl hover:bg-slate-100 transition-colors">
                 <ArrowLeft className="w-5 h-5 text-slate-600" />
               </Link>
               <div className="relative">
@@ -294,7 +294,7 @@ export function AdminDashboardPage() {
             </div>
             <div className="flex items-center gap-4">
               <div className="relative">
-                <button onClick={() => setShowNotifications(!showNotifications)} className="relative p-2 rounded-lg hover:bg-slate-100">
+                <button onClick={() => setShowNotifications(!showNotifications)} className="relative p-3 sm:p-2 rounded-lg hover:bg-slate-100">
                   <Bell className="w-5 h-5 text-slate-600" />
                   {(stats?.stats?.unreadMessages > 0 || patientMsgs.some((m: any) => !m.read_by_admin)) && <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />}
                 </button>
@@ -441,7 +441,7 @@ export function AdminDashboardPage() {
                           <td className="py-3 px-4 text-slate-600">{apt.motif || "Consultation"}</td>
                           <td className="py-3 px-4">
                             <select value={apt.status} onChange={(e) => { e.stopPropagation(); updateAppointmentStatus(apt.id, e.target.value); }}
-                              className="rounded-lg border border-slate-200 px-2 py-1 text-sm bg-white">
+                              className="rounded-lg border border-slate-200 px-2 py-2.5 text-sm bg-white">
                               <option value="pending">En attente</option>
                               <option value="confirmed">Confirmé</option>
                               <option value="in-progress">En cours</option>
@@ -452,7 +452,7 @@ export function AdminDashboardPage() {
                           <td className="py-3 px-4">
                             <div className="flex items-center gap-2">
                               <button onClick={(e) => { e.stopPropagation(); viewAppointmentDetail(apt); }}
-                                className="p-2 rounded-lg hover:bg-slate-100 text-blue-600"><Eye className="w-4 h-4" /></button>
+                                 className="p-3 sm:p-2 rounded-lg hover:bg-slate-100 text-blue-600"><Eye className="w-4 h-4" /></button>
                               <button onClick={(e) => { e.stopPropagation(); updateAppointmentStatus(apt.id, "cancelled"); }}
                                 className="text-red-500 hover:text-red-700 text-sm font-medium">Annuler</button>
                             </div>
@@ -553,8 +553,8 @@ export function AdminDashboardPage() {
                           </td>
                           <td className="py-3 px-4">
                             <div className="flex items-center gap-2">
-                              <button onClick={() => setBlogModal({ mode: "edit", article })} className="p-2 rounded-lg hover:bg-slate-100 text-blue-600"><Edit3 className="w-4 h-4" /></button>
-                              <button onClick={() => setDeleteId(article.id)} className="p-2 rounded-lg hover:bg-slate-100 text-red-500"><Trash2 className="w-4 h-4" /></button>
+                              <button onClick={() => setBlogModal({ mode: "edit", article })} className="p-3 sm:p-2 rounded-lg hover:bg-slate-100 text-blue-600"><Edit3 className="w-4 h-4" /></button>
+                              <button onClick={() => setDeleteId(article.id)} className="p-3 sm:p-2 rounded-lg hover:bg-slate-100 text-red-500"><Trash2 className="w-4 h-4" /></button>
                             </div>
                           </td>
                         </tr>
@@ -630,7 +630,7 @@ export function AdminDashboardPage() {
                           </div>
                           {!msg.reply && (
                             <button onClick={() => setReplyModal({ id: msg.id, patientName: `${msg.first_name} ${msg.last_name}` })}
-                              className="p-2 rounded-lg hover:bg-emerald-100 text-emerald-600"><Reply className="w-4 h-4" /></button>
+                              className="p-3 sm:p-2 rounded-lg hover:bg-emerald-100 text-emerald-600"><Reply className="w-4 h-4" /></button>
                           )}
                         </div>
                         <p className="text-sm text-slate-600 p-3 rounded-lg bg-white border border-slate-100">{msg.message}</p>
@@ -751,7 +751,7 @@ export function AdminDashboardPage() {
                         <p className="text-xs text-slate-400">{doc.file_type} — {Math.ceil(doc.file_size / 1024)} Ko</p>
                       </div>
                       <button onClick={() => downloadPatientDoc(doc)}
-                        className="p-2 rounded-lg hover:bg-slate-200 text-blue-600">
+                         className="p-3 sm:p-2 rounded-lg hover:bg-slate-200 text-blue-600">
                         <Download className="w-4 h-4" />
                       </button>
                     </div>

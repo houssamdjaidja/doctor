@@ -48,7 +48,7 @@ export function BlogDetailPage() {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <article className="max-w-4xl mx-auto px-4 py-12">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <Link to="/blog" className="inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-medium mb-8">
+          <Link to="/blog" className="inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-700 font-medium mb-8 p-2 -ml-2">
             <ArrowLeft className="w-4 h-4" /> Retour au blog
           </Link>
 

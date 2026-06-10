@@ -124,7 +124,7 @@ export function PatientLoginPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md relative">
-        <Link to="/" className="absolute -top-12 left-0 p-2 rounded-xl hover:bg-white/60 transition-colors">
+        <Link to="/" className="absolute -top-12 left-0 p-3 sm:p-2 rounded-xl hover:bg-white/60 transition-colors">
           <ArrowLeft className="w-5 h-5 text-slate-600" />
         </Link>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
@@ -150,11 +150,11 @@ export function PatientLoginPage() {
             {!isAdmin && (
               <div className="flex gap-2 mb-6">
                 <button onClick={() => { setIsLogin(true); resetErrors(); }}
-                  className={`flex-1 py-2 rounded-lg font-medium transition-all ${isLogin ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}>
-                  Connexion
-                </button>
-                <button onClick={() => { setIsLogin(false); resetErrors(); }}
-                  className={`flex-1 py-2 rounded-lg font-medium transition-all ${!isLogin ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}>
+                  className={`flex-1 py-3 rounded-lg font-medium transition-all ${isLogin ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}>
+                   Connexion
+                 </button>
+                 <button onClick={() => { setIsLogin(false); resetErrors(); }}
+                   className={`flex-1 py-3 rounded-lg font-medium transition-all ${!isLogin ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}>
                   Inscription
                 </button>
               </div>
@@ -211,8 +211,8 @@ export function PatientLoginPage() {
                   <Input type={showPassword ? "text" : "password"} placeholder="••••••••"
                     className={`pl-10 pr-10 ${passwordError ? "border-red-500" : ""}`}
                     value={formData.password} onChange={handlePasswordChange} />
-                  <button type="button" onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
+         <button type="button" onClick={() => setShowPassword(!showPassword)}
+                     className="absolute right-3 top-1/2 -translate-y-1/2 p-2 text-slate-400 hover:text-slate-600">
                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
                 </div>

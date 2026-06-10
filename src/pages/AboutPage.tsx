@@ -117,7 +117,7 @@ export function AboutPage() {
             >
               <Badge variant="success" className="mb-4">À Propos</Badge>
               <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
-                Dr. Amine{" "}
+                Dr.{" "}
                 <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
                   Djaidja
                 </span>
@@ -156,7 +156,7 @@ export function AboutPage() {
                 />
               </div>
               {/* Stats Overlay */}
-              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl p-4 shadow-xl shadow-slate-200/50 border border-slate-100 flex gap-8">
+              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white rounded-2xl p-3 sm:p-4 shadow-xl shadow-slate-200/50 border border-slate-100 flex gap-4 sm:gap-8">
                 <div className="text-center">
                   <p className="text-2xl font-bold text-emerald-600">20+</p>
                   <p className="text-xs text-slate-500">Années</p>

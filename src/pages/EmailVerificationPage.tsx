@@ -52,7 +52,7 @@ export function EmailVerificationPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md relative">
-        <Link to="/patient/login" className="absolute -top-12 left-0 p-2 rounded-xl hover:bg-white/60 transition-colors">
+        <Link to="/patient/login" className="absolute -top-12 left-0 p-3 sm:p-2 rounded-xl hover:bg-white/60 transition-colors">
           <ArrowLeft className="w-5 h-5 text-slate-600" />
         </Link>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
@@ -104,7 +104,7 @@ export function EmailVerificationPage() {
           <p className="text-sm text-slate-500">
             Vous n'avez pas reçu le code ?{" "}
             <button onClick={handleResend} disabled={submitting}
-              className="text-emerald-600 hover:text-emerald-700 font-medium inline-flex items-center gap-1">
+              className="text-emerald-600 hover:text-emerald-700 font-medium inline-flex items-center gap-1 p-2 -ml-2">
               <RefreshCw className="w-3 h-3" /> Renvoyer
             </button>
           </p>

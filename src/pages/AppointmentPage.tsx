@@ -193,7 +193,7 @@ export function AppointmentPage() {
       <section className="relative py-16 bg-gradient-to-br from-emerald-50 via-white to-teal-50">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <button onClick={() => navigate(-1)} className="absolute top-6 left-6 p-2 rounded-xl hover:bg-white/60 transition-colors">
+            <button onClick={() => navigate(-1)} className="absolute top-6 left-6 p-3 sm:p-2 rounded-xl hover:bg-white/60 transition-colors">
               <ArrowLeft className="w-5 h-5 text-slate-600" />
             </button>
             <Badge variant="success" className="mb-4">Rendez-vous</Badge>

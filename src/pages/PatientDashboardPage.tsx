@@ -24,7 +24,7 @@ function Modal({ open, onClose, title, children }: { open: boolean; onClose: () 
             onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between p-6 border-b border-slate-100">
               <h2 className="text-lg font-semibold text-slate-800">{title}</h2>
-              <button onClick={onClose} className="p-2 rounded-lg hover:bg-slate-100"><X className="w-5 h-5 text-slate-500" /></button>
+              <button onClick={onClose} className="p-3 sm:p-2 rounded-lg hover:bg-slate-100"><X className="w-5 h-5 text-slate-500" /></button>
             </div>
             <div className="p-6">{children}</div>
           </motion.div>
@@ -196,7 +196,7 @@ export function PatientDashboardPage() {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Link to="/" className="p-2 rounded-xl hover:bg-slate-100 transition-colors">
+              <Link to="/" className="p-3 sm:p-2 rounded-xl hover:bg-slate-100 transition-colors">
                 <ArrowLeft className="w-5 h-5 text-slate-600" />
               </Link>
               <Link to="/" className="flex items-center gap-3">
@@ -309,9 +309,9 @@ export function PatientDashboardPage() {
                 </div>
                 <div className="flex gap-2 mb-2">
                   <button onClick={() => setShowPast(false)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${!showPast ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600"}`}>À venir</button>
+                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${!showPast ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600"}`}>À venir</button>
                   <button onClick={() => setShowPast(true)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${showPast ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600"}`}>Historique</button>
+                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${showPast ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600"}`}>Historique</button>
                 </div>
                 <Card variant="elevated">
                   {displayAppointments.length === 0 ? (
@@ -333,7 +333,7 @@ export function PatientDashboardPage() {
                           </div>
                           <div className="flex items-center gap-2">
                             {!showPast && (apt.status === "pending" || apt.status === "confirmed") && (
-                              <button onClick={(e) => { e.stopPropagation(); cancelAppointment(apt.id); }} className="p-2 rounded-lg hover:bg-red-50 text-red-500 transition-colors" title="Annuler"><X className="w-4 h-4" /></button>
+                              <button onClick={(e) => { e.stopPropagation(); cancelAppointment(apt.id); }} className="p-3 sm:p-2 rounded-lg hover:bg-red-50 text-red-500 transition-colors" title="Annuler"><X className="w-4 h-4" /></button>
                             )}
                             <Badge variant={apt.status === "completed" || apt.status === "confirmed" ? "success" : apt.status === "cancelled" ? "default" : "warning"}>
                               {apt.status === "completed" ? "Terminé" : apt.status === "confirmed" ? "Confirmé" : apt.status === "cancelled" ? "Annulé" : "En attente"}
@@ -368,8 +368,8 @@ export function PatientDashboardPage() {
                             </div>
                           </div>
                           <div className="flex gap-1">
-                            <button onClick={() => downloadDocument(doc.id)} className="p-2 rounded-lg hover:bg-slate-100 text-emerald-600" title="Télécharger"><Download className="w-4 h-4" /></button>
-                            <button onClick={() => deleteDocument(doc.id)} className="p-2 rounded-lg hover:bg-red-50 text-red-500" title="Supprimer"><Trash2 className="w-4 h-4" /></button>
+                            <button onClick={() => downloadDocument(doc.id)} className="p-3 sm:p-2 rounded-lg hover:bg-slate-100 text-emerald-600" title="Télécharger"><Download className="w-4 h-4" /></button>
+                            <button onClick={() => deleteDocument(doc.id)} className="p-3 sm:p-2 rounded-lg hover:bg-red-50 text-red-500" title="Supprimer"><Trash2 className="w-4 h-4" /></button>
                           </div>
                         </div>
                       </Card>

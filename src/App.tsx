@@ -32,6 +32,8 @@ import { AppointmentDetailPage } from "@/pages/AppointmentDetailPage"
 import { EmailVerificationPage } from "@/pages/EmailVerificationPage"
 import { ForgotPasswordPage } from "@/pages/ForgotPasswordPage"
 import { ResetPasswordPage } from "@/pages/ResetPasswordPage"
+import { PrivacyPolicyPage } from "@/pages/PrivacyPolicyPage"
+import { TermsPage } from "@/pages/TermsPage"
 
 function App() {
   return (
@@ -48,6 +50,10 @@ function App() {
           <Route path="/faq" element={<GuestRoute><><Header /><main><FAQPage /></main><Footer /></></GuestRoute>} />
           <Route path="/contact" element={<GuestRoute><><Header /><main><ContactPage /></main><Footer /></></GuestRoute>} />
           <Route path="/emergency" element={<GuestRoute><><Header /><main><EmergencyPage /></main><Footer /></></GuestRoute>} />
+
+          {/* Legal pages */}
+          <Route path="/privacy" element={<GuestRoute><><Header /><main><PrivacyPolicyPage /></main><Footer /></></GuestRoute>} />
+          <Route path="/terms" element={<GuestRoute><><Header /><main><TermsPage /></main><Footer /></></GuestRoute>} />
 
          
 

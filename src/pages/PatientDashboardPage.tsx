@@ -6,6 +6,7 @@ import {
   Calendar, FileText, MessageSquare, User, Settings, Bell,
   ChevronRight, Stethoscope, LogOut, X, Send, Upload, Download,
   Trash2, Plus, Lock, ArrowLeft, Clock, Phone, Mail, MapPin, AlertCircle,
+  CheckCircle, ChevronLeft,
 } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -65,6 +66,54 @@ export function PatientDashboardPage() {
   // Appointment detail modal
   const [detailApt, setDetailApt] = useState<any>(null);
   const [detailLoading, setDetailLoading] = useState(false);
+
+  // Booking flow
+  const [showBooking, setShowBooking] = useState(false);
+  const [bookStep, setBookStep] = useState(1);
+  const [bookDate, setBookDate] = useState<string | null>(null);
+  const [bookTime, setBookTime] = useState<string | null>(null);
+  const [bookMotif, setBookMotif] = useState("");
+  const [bookNotes, setBookNotes] = useState("");
+  const [bookError, setBookError] = useState("");
+  const [bookSubmitting, setBookSubmitting] = useState(false);
+  const [bookSuccess, setBookSuccess] = useState(false);
+  const [availableSlots, setAvailableSlots] = useState<string[]>([]);
+  const [loadingSlots, setLoadingSlots] = useState(false);
+
+  const timeSlots = [
+    "08:00", "08:30", "09:00", "09:30",
+    "10:00", "10:30", "11:00", "11:30",
+    "14:00", "14:30", "15:00", "15:30",
+    "16:00", "16:30", "17:00", "17:30",
+  ];
+
+  const motifs = [
+    "Consultation générale",
+    "Suivi médical",
+    "Vaccination",
+    "Contrôle de santé",
+    "Renouvellement ordonnance",
+    "Autre",
+  ];
+
+  const bookingDates = Array.from({ length: 14 }, (_, i) => {
+    const date = new Date();
+    date.setDate(date.getDate() + i + 1);
+    return date;
+  });
+
+  const fetchAvailableSlots = async (dateStr: string) => {
+    setLoadingSlots(true);
+    setBookTime(null);
+    try {
+      const res = await api.getAvailableSlots(dateStr);
+      setAvailableSlots(res.available);
+    } catch {
+      setAvailableSlots([]);
+    } finally {
+      setLoadingSlots(false);
+    }
+  };
 
   function loadAll() {
     Promise.all([
@@ -301,11 +350,11 @@ export function PatientDashboardPage() {
               </motion.div>
             )}
 
-            {activeTab === "appointments" && (
+            {activeTab === "appointments" && !showBooking && (
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
                 <div className="flex items-center justify-between">
                   <h1 className="text-2xl font-bold text-slate-800">Mes rendez-vous</h1>
-                  <Link to="/appointment"><Button size="sm"><Calendar className="w-4 h-4" /> Nouveau RDV</Button></Link>
+                  <Button size="sm" onClick={() => setShowBooking(true)}><Calendar className="w-4 h-4" /> Nouveau RDV</Button>
                 </div>
                 <div className="flex gap-2 mb-2">
                   <button onClick={() => setShowPast(false)}
@@ -344,6 +393,196 @@ export function PatientDashboardPage() {
                     </div>
                   )}
                 </Card>
+              </motion.div>
+            )}
+
+            {activeTab === "appointments" && showBooking && (
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <div className="flex items-center justify-between mb-6">
+                  <h1 className="text-2xl font-bold text-slate-800">Nouveau rendez-vous</h1>
+                  <button onClick={() => { setShowBooking(false); setBookStep(1); setBookDate(null); setBookTime(null); setBookMotif(""); setBookNotes(""); setBookSuccess(false); }}
+                    className="p-3 sm:p-2 rounded-lg hover:bg-slate-100"><ArrowLeft className="w-5 h-5 text-slate-600" /></button>
+                </div>
+
+                {bookSuccess ? (
+                  <Card variant="elevated" className="text-center py-12">
+                    <div className="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
+                      <CheckCircle className="w-10 h-10 text-emerald-600" />
+                    </div>
+                    <h2 className="text-2xl font-bold text-slate-800 mb-4">Rendez-vous confirmé !</h2>
+                    <div className="bg-slate-50 rounded-xl p-4 mb-6 inline-block text-left">
+                      <div className="flex items-center gap-3 mb-2"><Calendar className="w-5 h-5 text-emerald-600" /><span className="font-medium">{bookDate}</span></div>
+                      <div className="flex items-center gap-3"><Clock className="w-5 h-5 text-emerald-600" /><span>{bookTime}</span></div>
+                    </div>
+                    <Button onClick={() => { setShowBooking(false); setBookStep(1); setBookDate(null); setBookTime(null); setBookMotif(""); setBookNotes(""); setBookSuccess(false); loadAll(); }}>
+                      Retour à mes rendez-vous
+                    </Button>
+                  </Card>
+                ) : (
+                  <>
+                    <div className="flex items-center gap-2 mb-6">
+                      {[1, 2, 3].map((s) => (
+                        <div key={s} className="flex items-center">
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all duration-300 ${bookStep >= s ? "bg-emerald-600 text-white" : "bg-slate-200 text-slate-500"}`}>
+                            {bookStep > s ? <CheckCircle className="w-5 h-5" /> : s}
+                          </div>
+                          {s < 3 && <div className={`w-16 md:w-24 h-1 mx-1 rounded transition-all duration-300 ${bookStep > s ? "bg-emerald-600" : "bg-slate-200"}`} />}
+                        </div>
+                      ))}
+                    </div>
+
+                    {bookStep === 1 && (
+                      <Card variant="glass" className="mb-6">
+                        <h2 className="text-xl font-semibold text-slate-800 mb-6 flex items-center gap-2"><Calendar className="w-5 h-5 text-emerald-600" /> Choisissez une date</h2>
+                        <div className="grid grid-cols-3 md:grid-cols-7 gap-3">
+                          {bookingDates.map((date) => {
+                            const dateStr = date.toLocaleDateString("fr-FR", { weekday: "short", day: "numeric", month: "short" });
+                            const isWeekend = date.getDay() === 5;
+                            const dateValue = date.toISOString().split("T")[0];
+                            return (
+                              <button key={dateValue} onClick={() => { if (!isWeekend) { setBookDate(dateStr); fetchAvailableSlots(dateStr); } }} disabled={isWeekend}
+                                className={`p-3 rounded-xl text-center transition-all duration-200 ${isWeekend ? "bg-slate-100 text-slate-400 cursor-not-allowed" : bookDate === dateStr ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200" : "bg-white border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50"}`}>
+                                <div className="text-xs font-medium">{date.toLocaleDateString("fr-FR", { weekday: "short" })}</div>
+                                <div className="text-lg font-bold">{date.getDate()}</div>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </Card>
+                    )}
+
+                    {bookStep === 1 && (
+                      <Card variant="glass" className="mb-6">
+                        <h2 className="text-xl font-semibold text-slate-800 mb-6 flex items-center gap-2"><Clock className="w-5 h-5 text-emerald-600" /> Choisissez une heure</h2>
+                        {!bookDate ? (
+                          <p className="text-slate-400 text-center py-4">Sélectionnez d'abord une date</p>
+                        ) : loadingSlots ? (
+                          <p className="text-slate-400 text-center py-4">Chargement des créneaux...</p>
+                        ) : (
+                          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-8 gap-2 md:gap-3">
+                            {timeSlots.map((time) => {
+                              const isAvailable = availableSlots.includes(time);
+                              return (
+                                <button key={time} onClick={() => isAvailable && setBookTime(time)} disabled={!isAvailable}
+                                  className={`p-3 rounded-xl text-center font-medium transition-all duration-200 ${bookTime === time ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200" : isAvailable ? "bg-white border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50" : "bg-slate-100 text-slate-400 line-through cursor-not-allowed"}`}>
+                                  {time}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </Card>
+                    )}
+
+                    {bookStep === 1 && (
+                      <div className="flex justify-end">
+                        <Button onClick={() => setBookStep(2)} disabled={!bookDate || !bookTime}>
+                          Continuer <ChevronRight className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    )}
+
+                    {bookStep === 2 && (
+                      <Card variant="glass">
+                        <h2 className="text-xl font-semibold text-slate-800 mb-6 flex items-center gap-2"><User className="w-5 h-5 text-emerald-600" /> Vos informations</h2>
+                        <div className="space-y-4">
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-sm font-medium text-slate-700 mb-1">Prénom</label>
+                              <Input value={patient?.first_name || ""} disabled className="bg-slate-50" />
+                            </div>
+                            <div>
+                              <label className="block text-sm font-medium text-slate-700 mb-1">Nom</label>
+                              <Input value={patient?.last_name || ""} disabled className="bg-slate-50" />
+                            </div>
+                          </div>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-sm font-medium text-slate-700 mb-1">Téléphone</label>
+                              <Input value={patient?.phone || ""} disabled className="bg-slate-50" />
+                            </div>
+                            <div>
+                              <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                              <Input value={patient?.email || ""} disabled className="bg-slate-50" />
+                            </div>
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-1">Motif de consultation</label>
+                            <select value={bookMotif} onChange={(e) => setBookMotif(e.target.value)}
+                              className="flex h-12 w-full rounded-xl border border-slate-200 bg-white/80 backdrop-blur-sm px-4 py-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400">
+                              <option value="">-- Sélectionnez ou laissez vide --</option>
+                              {motifs.map((m) => <option key={m} value={m}>{m}</option>)}
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-slate-700 mb-1">Notes complémentaires</label>
+                            <textarea value={bookNotes} onChange={(e) => setBookNotes(e.target.value)} placeholder="Décrivez brièvement vos symptômes ou questions..."
+                              className="flex min-h-[100px] w-full rounded-xl border border-slate-200 bg-white/80 backdrop-blur-sm px-4 py-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-400" />
+                          </div>
+                        </div>
+                      </Card>
+                    )}
+
+                    {bookStep === 2 && (
+                      <div className="flex justify-between mt-6">
+                        <Button variant="secondary" onClick={() => setBookStep(1)}><ChevronLeft className="w-4 h-4" /> Retour</Button>
+                        <Button onClick={() => setBookStep(3)}>Continuer <ChevronRight className="w-4 h-4" /></Button>
+                      </div>
+                    )}
+
+                    {bookStep === 3 && (
+                      <>
+                        <Card variant="glass">
+                          <h2 className="text-xl font-semibold text-slate-800 mb-6 flex items-center gap-2"><CheckCircle className="w-5 h-5 text-emerald-600" /> Récapitulatif</h2>
+                          <div className="space-y-4 mb-6">
+                            <div className="bg-slate-50 rounded-xl p-4">
+                              <h3 className="font-medium text-slate-800 mb-3">Détails du rendez-vous</h3>
+                              <div className="grid md:grid-cols-2 gap-4 text-sm">
+                                <div className="flex items-center gap-2 text-slate-600"><Calendar className="w-4 h-4 text-emerald-600" /><span>{bookDate}</span></div>
+                                <div className="flex items-center gap-2 text-slate-600"><Clock className="w-4 h-4 text-emerald-600" /><span>{bookTime}</span></div>
+                              </div>
+                            </div>
+                            <div className="bg-slate-50 rounded-xl p-4">
+                              <h3 className="font-medium text-slate-800 mb-3">Vos informations</h3>
+                              <div className="grid md:grid-cols-2 gap-2 text-sm text-slate-600">
+                                <p><strong>Nom:</strong> {patient?.first_name} {patient?.last_name}</p>
+                                <p><strong>Téléphone:</strong> {patient?.phone}</p>
+                                {bookMotif && <p><strong>Motif:</strong> {bookMotif}</p>}
+                              </div>
+                              {bookNotes && <p className="mt-2 text-sm text-slate-600"><strong>Notes:</strong> {bookNotes}</p>}
+                            </div>
+                          </div>
+                          {bookError && <p className="text-red-500 text-sm mb-4">{bookError}</p>}
+                          <div className="bg-emerald-50 rounded-xl p-4 mb-6 flex items-start gap-3">
+                            <AlertCircle className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+                            <div className="text-sm text-emerald-800">
+                              <p className="font-medium mb-1">Important</p>
+                              <p>En confirmant ce rendez-vous, vous acceptez notre politique d'annulation. Merci d'arriver 10 minutes avant l'heure prévue.</p>
+                            </div>
+                          </div>
+                        </Card>
+                        <div className="flex justify-between mt-6">
+                          <Button variant="secondary" onClick={() => setBookStep(2)}><ChevronLeft className="w-4 h-4" /> Modifier</Button>
+                          <Button onClick={async () => {
+                            setBookSubmitting(true); setBookError("");
+                            try {
+                              await api.createAppointment({
+                                firstName: patient?.first_name, lastName: patient?.last_name,
+                                phone: patient?.phone, email: patient?.email,
+                                date: bookDate, timeSlot: bookTime,
+                                motif: bookMotif, notes: bookNotes,
+                              });
+                              setBookSuccess(true);
+                            } catch (err: any) { setBookError(err.message); }
+                            finally { setBookSubmitting(false); }
+                          }} disabled={bookSubmitting}>
+                            <CheckCircle className="w-4 h-4" /> {bookSubmitting ? "En cours..." : "Confirmer le rendez-vous"}
+                          </Button>
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
               </motion.div>
             )}
 

@@ -455,7 +455,7 @@ export function AdminDashboardPage() {
                           <td className="py-3 px-4 text-slate-600">{apt.date} {apt.time_slot}</td>
                           <td className="py-3 px-4 text-slate-600">{apt.motif || "Consultation"}</td>
                           <td className="py-3 px-4">
-                            <select value={apt.status} onChange={(e) => { e.stopPropagation(); updateAppointmentStatus(apt.id, e.target.value); }}
+                            <select value={apt.status} onClick={(e) => e.stopPropagation()} onChange={(e) => { e.stopPropagation(); updateAppointmentStatus(apt.id, e.target.value); }}
                               className="rounded-lg border border-slate-200 px-2 py-2.5 text-sm bg-white">
                               <option value="pending">En attente</option>
                               <option value="confirmed">Confirmé</option>

@@ -178,12 +178,10 @@ export function AdminDashboardPage() {
   }
 
   async function confirmAllAppointments() {
-    if (!window.confirm("Confirmer tous les rendez-vous en attente ?")) return;
     try {
-      const res = await api.confirmAll();
-      if (res.count === 0) { alert("Aucun rendez-vous en attente"); return; }
+      await api.confirmAll();
       loadAll();
-    } catch (e: any) { alert(e.message); }
+    } catch { }
   }
 
   async function saveSettings() {

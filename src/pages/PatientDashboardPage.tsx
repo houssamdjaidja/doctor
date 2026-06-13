@@ -79,6 +79,7 @@ export function PatientDashboardPage() {
   const [bookSuccess, setBookSuccess] = useState(false);
   const [availableSlots, setAvailableSlots] = useState<string[]>([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
+  const [bookDateValue, setBookDateValue] = useState<string | null>(null);
 
   const timeSlots = [
     "08:00", "08:30", "09:00", "09:30",
@@ -98,7 +99,7 @@ export function PatientDashboardPage() {
 
   const bookingDates = Array.from({ length: 14 }, (_, i) => {
     const date = new Date();
-    date.setDate(date.getDate() + i + 1);
+    date.setDate(date.getDate() + i);
     return date;
   });
 
@@ -400,7 +401,7 @@ export function PatientDashboardPage() {
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                 <div className="flex items-center justify-between mb-6">
                   <h1 className="text-2xl font-bold text-slate-800">Nouveau rendez-vous</h1>
-                  <button onClick={() => { setShowBooking(false); setBookStep(1); setBookDate(null); setBookTime(null); setBookMotif(""); setBookNotes(""); setBookSuccess(false); }}
+                  <button onClick={() => { setShowBooking(false); setBookStep(1); setBookDate(null); setBookDateValue(null); setBookTime(null); setBookMotif(""); setBookNotes(""); setBookSuccess(false); }}
                     className="p-3 sm:p-2 rounded-lg hover:bg-slate-100"><ArrowLeft className="w-5 h-5 text-slate-600" /></button>
                 </div>
 
@@ -414,7 +415,7 @@ export function PatientDashboardPage() {
                       <div className="flex items-center gap-3 mb-2"><Calendar className="w-5 h-5 text-emerald-600" /><span className="font-medium">{bookDate}</span></div>
                       <div className="flex items-center gap-3"><Clock className="w-5 h-5 text-emerald-600" /><span>{bookTime}</span></div>
                     </div>
-                    <Button onClick={() => { setShowBooking(false); setBookStep(1); setBookDate(null); setBookTime(null); setBookMotif(""); setBookNotes(""); setBookSuccess(false); loadAll(); }}>
+                    <Button onClick={() => { setShowBooking(false); setBookStep(1); setBookDate(null); setBookDateValue(null); setBookTime(null); setBookMotif(""); setBookNotes(""); setBookSuccess(false); loadAll(); }}>
                       Retour à mes rendez-vous
                     </Button>
                   </Card>
@@ -435,13 +436,17 @@ export function PatientDashboardPage() {
                       <Card variant="glass" className="mb-6">
                         <h2 className="text-xl font-semibold text-slate-800 mb-6 flex items-center gap-2"><Calendar className="w-5 h-5 text-emerald-600" /> Choisissez une date</h2>
                         <div className="grid grid-cols-3 md:grid-cols-7 gap-3">
-                          {bookingDates.map((date) => {
+                           {bookingDates.map((date) => {
                             const dateStr = date.toLocaleDateString("fr-FR", { weekday: "short", day: "numeric", month: "short" });
                             const isWeekend = date.getDay() === 5;
                             const dateValue = date.toISOString().split("T")[0];
+                            const now = new Date();
+                            const isToday = date.toDateString() === now.toDateString();
+                            const isFullyPast = isToday && (now.getHours() > 17 || (now.getHours() === 17 && now.getMinutes() > 30));
+                            const isDisabled = isWeekend || isFullyPast;
                             return (
-                              <button key={dateValue} onClick={() => { if (!isWeekend) { setBookDate(dateStr); fetchAvailableSlots(dateStr); } }} disabled={isWeekend}
-                                className={`p-3 rounded-xl text-center transition-all duration-200 ${isWeekend ? "bg-slate-100 text-slate-400 cursor-not-allowed" : bookDate === dateStr ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200" : "bg-white border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50"}`}>
+                              <button key={dateValue} onClick={() => { if (!isDisabled) { setBookDate(dateStr); setBookDateValue(dateValue); fetchAvailableSlots(dateStr); } }} disabled={isDisabled}
+                                className={`p-3 rounded-xl text-center transition-all duration-200 ${isDisabled ? "bg-slate-100 text-slate-400 cursor-not-allowed" : bookDate === dateStr ? "bg-emerald-600 text-white shadow-lg shadow-emerald-200" : "bg-white border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50"}`}>
                                 <div className="text-xs font-medium">{date.toLocaleDateString("fr-FR", { weekday: "short" })}</div>
                                 <div className="text-lg font-bold">{date.getDate()}</div>
                               </button>
@@ -460,7 +465,12 @@ export function PatientDashboardPage() {
                           <p className="text-slate-400 text-center py-4">Chargement des créneaux...</p>
                         ) : (
                           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-8 gap-2 md:gap-3">
-                            {timeSlots.map((time) => {
+                            {timeSlots.filter((time) => {
+                              if (bookDateValue !== new Date().toISOString().split("T")[0]) return true;
+                              const [h, m] = time.split(':').map(Number);
+                              const now = new Date();
+                              return h > now.getHours() || (h === now.getHours() && m > now.getMinutes());
+                            }).map((time) => {
                               const isAvailable = availableSlots.includes(time);
                               return (
                                 <button key={time} onClick={() => isAvailable && setBookTime(time)} disabled={!isAvailable}

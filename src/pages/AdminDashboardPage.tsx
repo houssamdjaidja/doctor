@@ -79,7 +79,15 @@ export function AdminDashboardPage() {
   const [selectedApt, setSelectedApt] = useState<any>(null);
   const [patientDocs, setPatientDocs] = useState<any[]>([]);
   const [loadingDocs, setLoadingDocs] = useState(false);
+  const [aptFilter, setAptFilter] = useState<"active" | "history">("active");
   const navigate = useNavigate();
+
+  const todayStr = new Date().toISOString().split("T")[0];
+  const filteredAppointments = aptFilter === "active"
+    ? appointments.filter((a) => a.date >= todayStr && ["pending","confirmed","in-progress"].includes(a.status))
+    : appointments.filter((a) => a.date < todayStr || ["completed","cancelled"].includes(a.status));
+  const activeCount = appointments.filter((a) => a.date >= todayStr && ["pending","confirmed","in-progress"].includes(a.status)).length;
+  const historyCount = appointments.filter((a) => a.date < todayStr || ["completed","cancelled"].includes(a.status)).length;
 
   function loadAll() {
     Promise.all([
@@ -411,6 +419,16 @@ export function AdminDashboardPage() {
               <div className="flex items-center justify-between">
                 <h1 className="text-2xl font-bold text-slate-800">Gestion des rendez-vous</h1>
               </div>
+              <div className="flex gap-2">
+                <button onClick={() => setAptFilter("active")}
+                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${aptFilter === "active" ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600"}`}>
+                  Actifs ({activeCount})
+                </button>
+                <button onClick={() => setAptFilter("history")}
+                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${aptFilter === "history" ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600"}`}>
+                  Historique ({historyCount})
+                </button>
+              </div>
               <Card variant="elevated" hover={false}>
                 <div className="overflow-x-auto">
                   <table className="w-full">
@@ -424,7 +442,9 @@ export function AdminDashboardPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {appointments.map((apt) => (
+                      {filteredAppointments.length === 0 ? (
+                        <tr><td colSpan={5} className="py-8 text-center text-slate-500">{aptFilter === "active" ? "Aucun rendez-vous actif" : "Aucun historique"}</td></tr>
+                      ) : filteredAppointments.map((apt) => (
                         <tr key={apt.id} className="border-b border-slate-100 hover:bg-slate-50 cursor-pointer"
                           onClick={() => viewAppointmentDetail(apt)}>
                           <td className="py-3 px-4">
@@ -454,9 +474,6 @@ export function AdminDashboardPage() {
                           </td>
                         </tr>
                       ))}
-                      {appointments.length === 0 && (
-                        <tr><td colSpan={5} className="py-8 text-center text-slate-500">Aucun rendez-vous</td></tr>
-                      )}
                     </tbody>
                   </table>
                 </div>

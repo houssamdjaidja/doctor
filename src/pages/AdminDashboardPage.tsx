@@ -177,6 +177,15 @@ export function AdminDashboardPage() {
     } catch (e: any) { alert(e.message); }
   }
 
+  async function confirmAllAppointments() {
+    if (!window.confirm("Confirmer tous les rendez-vous en attente ?")) return;
+    try {
+      const res = await api.confirmAll();
+      if (res.count === 0) { alert("Aucun rendez-vous en attente"); return; }
+      loadAll();
+    } catch (e: any) { alert(e.message); }
+  }
+
   async function saveSettings() {
     setSaving(true);
     try {
@@ -419,15 +428,23 @@ export function AdminDashboardPage() {
               <div className="flex items-center justify-between">
                 <h1 className="text-2xl font-bold text-slate-800">Gestion des rendez-vous</h1>
               </div>
-              <div className="flex gap-2">
-                <button onClick={() => setAptFilter("active")}
-                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${aptFilter === "active" ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600"}`}>
-                  Actifs ({activeCount})
-                </button>
-                <button onClick={() => setAptFilter("history")}
-                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${aptFilter === "history" ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600"}`}>
-                  Historique ({historyCount})
-                </button>
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex gap-2">
+                  <button onClick={() => setAptFilter("active")}
+                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${aptFilter === "active" ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600"}`}>
+                    Actifs ({activeCount})
+                  </button>
+                  <button onClick={() => setAptFilter("history")}
+                    className={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${aptFilter === "history" ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-600"}`}>
+                    Historique ({historyCount})
+                  </button>
+                </div>
+                {aptFilter === "active" && activeCount > 0 && (
+                  <button onClick={confirmAllAppointments}
+                    className="px-4 py-3 rounded-lg text-sm font-medium bg-emerald-600 text-white hover:bg-emerald-700 transition-colors">
+                    Confirmer tout
+                  </button>
+                )}
               </div>
               <Card variant="elevated" hover={false}>
                 <div className="overflow-x-auto">

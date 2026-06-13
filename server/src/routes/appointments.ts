@@ -146,6 +146,13 @@ router.put('/:id', requireAdmin, async (req: AuthRequest, res: Response) => {
   res.json(updated);
 });
 
+router.patch('/confirm-all', requireAdmin, async (_req: AuthRequest, res: Response) => {
+  const result = await run(
+    "UPDATE appointments SET status = 'confirmed' WHERE status = 'pending' RETURNING id"
+  );
+  res.json({ count: result.rowCount || 0 });
+});
+
 router.delete('/:id', requireAdmin, async (req: AuthRequest, res: Response) => {
   const result = await run('DELETE FROM appointments WHERE id = ? RETURNING id', req.params.id);
   if (result.rowCount === 0) {

@@ -51,6 +51,8 @@ export const api = {
     request<any>(`/appointments/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
   cancelAppointment: (id: number) =>
     request<any>(`/appointments/${id}/cancel`, { method: 'PATCH' }),
+  confirmAll: () =>
+    request<{ count: number }>('/appointments/confirm-all', { method: 'PATCH' }),
 
   // Blog
   getBlogPosts: (params?: Record<string, string>) => {
